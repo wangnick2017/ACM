@@ -4,37 +4,21 @@
 #include "vector.h"
 class User
 {
-private:
+public:
 	stl::string<20> ID, name, password, email, phone;
 	int privilege;
-public:
 	User()
 	{
 		privilege = 0;
 	}
-	void setID(const stl::string<20> &s)
+	User operator=(const User &other)
 	{
-		ID = s;
-	}
-	void setName(const stl::string<20> &s)
-	{
-		name = s;
-	}
-	void setPassword(const stl::string<20> &s)
-	{
-		password = s;
-	}
-	void setEmail(const stl::string<20> &s)
-	{
-		email = s;
-	}
-	void setPhone(const stl::string<20> &s)
-	{
-		phone = s;
-	}
-	void setPrivilege(const int &x)
-	{
-		privilege = x;
+		ID = other.ID;
+		name = other.name;
+		password = other.password;
+		email = other.email;
+		phone = other.phone;
+		privilege = other.privilege;
 	}
 };
 #endif

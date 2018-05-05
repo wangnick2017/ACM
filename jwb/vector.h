@@ -79,8 +79,6 @@ namespace stl
 			int operator-(const iterator &rhs) const
 			{
 				//TODO
-				if (ptr != rhs.ptr)
-					throw invalid_iterator();
 				return index - rhs.index;
 			}
 			iterator operator+=(const int &n)
@@ -191,8 +189,6 @@ namespace stl
 			}
 			int operator-(const const_iterator &rhs) const
 			{
-				if (ptr != rhs.ptr)
-					throw invalid_iterator();
 				return index - rhs.index;
 			}
 			const_iterator operator+=(const int &n)
@@ -252,12 +248,12 @@ namespace stl
 		* TODO Constructs
 		* Atleast three: default constructor, copy constructor and a constructor for std::vector
 		*/
-		vector(int initSize = 10)
+		vector(int initSize = 100)
 		{
 			if (data != nullptr)
 				clear();
 			data = (T*) ::operator new[](sizeof(T) * initSize);
-			maxSize = 10;
+			maxSize = initSize;
 			currentLength = 0;
 		}
 		vector(const vector &other)
@@ -296,14 +292,10 @@ namespace stl
 		*/
 		T & at(const size_t &pos)
 		{
-			if (pos < 0 || pos >= currentLength)
-				throw index_out_of_bound();
 			return data[pos];
 		}
 		const T & at(const size_t &pos) const
 		{
-			if (pos < 0 || pos >= currentLength)
-				throw index_out_of_bound();
 			return data[pos];
 		}
 		/**
@@ -314,14 +306,10 @@ namespace stl
 		*/
 		T & operator[](const size_t &pos)
 		{
-			if (pos < 0 || pos >= currentLength)
-				throw index_out_of_bound();
 			return data[pos];
 		}
 		const T & operator[](const size_t &pos) const
 		{
-			if (pos < 0 || pos >= currentLength)
-				throw index_out_of_bound();
 			return data[pos];
 		}
 		/**
@@ -330,8 +318,6 @@ namespace stl
 		*/
 		const T & front() const
 		{
-			if (currentLength == 0)
-				throw container_is_empty();
 			return data[0];
 		}
 		/**
@@ -340,8 +326,6 @@ namespace stl
 		*/
 		const T & back() const
 		{
-			if (currentLength == 0)
-				throw container_is_empty();
 			return data[currentLength - 1];
 		}
 		/**
@@ -420,8 +404,6 @@ namespace stl
 		*/
 		iterator insert(const size_t &ind, const T &value)
 		{
-			if (ind > currentLength)
-				throw index_out_of_bound();
 			if (currentLength == maxSize)
 				doubleSpace();
 			new(data + currentLength) T(data[currentLength - 1]);
@@ -450,8 +432,6 @@ namespace stl
 		*/
 		iterator erase(const size_t &ind)
 		{
-			if (ind >= currentLength)
-				throw index_out_of_bound();
 			for (size_t i = ind; i < currentLength; ++i)
 				data[i] = data[i + 1];
 			--currentLength;
