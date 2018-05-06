@@ -53,7 +53,7 @@ namespace stl
 			data[num] = '\0';
 		}*/
 		template<int s1>
-		string<size> operator=(const string<s1> &s)
+		string<size> &operator=(const string<s1> &s)
 		{
 			len = size < s.length() ? size : s.length();
 			for (int i = 0; i < len; i++)
@@ -61,7 +61,7 @@ namespace stl
 			data[len] = '\0';
 			return *this;
 		}
-		string<size> operator=(char *s)
+		string<size> &operator=(char *s)
 		{
 			len = size < (int)strlen(s) ? size : (int)strlen(s);
 			for (int i = 0; i < len; i++)

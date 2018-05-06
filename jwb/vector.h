@@ -10,7 +10,8 @@ namespace stl
 	* store data in a successive memory and support random access.
 	*/
 	template<typename T>
-	class vector {
+	class vector 
+	{
 	private:
 		T * data;
 		size_t currentLength;

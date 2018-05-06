@@ -11,6 +11,15 @@ public:
 	{
 		privilege = 0;
 	}
+	User(const User &other)
+	{
+		ID = other.ID;
+		name = other.name;
+		password = other.password;
+		email = other.email;
+		phone = other.phone;
+		privilege = other.privilege;
+	}
 	User operator=(const User &other)
 	{
 		ID = other.ID;

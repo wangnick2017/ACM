@@ -5,7 +5,11 @@
 #include "pair.h"
 int main()
 {
-	
+	stl::string<10> a;
+	{
+		stl::string<10> b("gzp");
+		a = b;
+	}
 	system("pause");
 	return 0;
 }
