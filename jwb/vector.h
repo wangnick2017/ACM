@@ -1,15 +1,8 @@
 #ifndef VECTOR_HPP
 #define VECTOR_HPP
-#include <climits>
-#include <cstddef>
-
 namespace stl 
 {
-	/**
-	* a data container like std::vector
-	* store data in a successive memory and support random access.
-	*/
-	template<typename T>
+	template<class T>
 	class vector 
 	{
 	private:
@@ -20,12 +13,10 @@ namespace stl
 		{
 			T *tmp = data;
 			maxSize *= 2;
-			data = (T*) ::operator new[](sizeof(T) * maxSize);
+			data = new T[maxSize];
 			for (size_t i = 0; i < currentLength; ++i)
-				new(data + i) T(tmp[i]);
-			for (int i = 0; i < maxSize / 2; ++i)
-				tmp[i].~T();
-			::operator delete[](tmp);
+				data[i] = tmp[i];
+			delete[] tmp;
 		}
 
 	public:
@@ -249,22 +240,20 @@ namespace stl
 		* TODO Constructs
 		* Atleast three: default constructor, copy constructor and a constructor for std::vector
 		*/
-		vector(int initSize = 100)
+		vector(int initSize = 1000)
 		{
-			if (data != nullptr)
-				clear();
-			data = (T*) ::operator new[](sizeof(T) * initSize);
+			data = new T[initSize];
 			maxSize = initSize;
 			currentLength = 0;
 		}
 		vector(const vector &other)
 		{
-			if (data != nullptr)
+			if (data)
 				clear();
-			data = (T*) ::operator new[](sizeof(T) * other.size());
+			data = new T[other.size()];
 			maxSize = currentLength = other.size();
 			for (size_t i = 0; i < other.size(); ++i)
-				new(data + i) T(other.data[i]);
+				data [i] = other.data[i];
 		}
 
 		/**
@@ -279,12 +268,15 @@ namespace stl
 		*/
 		vector &operator=(const vector &other)
 		{
-			if (data != nullptr)
+			
+			if (this == &other)
+				return;
+			if (data)
 				clear();
-			data = (T*) ::operator new[](sizeof(T) * other.size());
+			data = new T[other.size()];
 			maxSize = currentLength = other.size();
 			for (size_t i = 0; i < other.size(); ++i)
-				new(data + i) T(other.data[i]);
+				data [i] = other.data[i];
 			return *this;
 		}
 		/**
@@ -377,9 +369,7 @@ namespace stl
 		*/
 		void clear()
 		{
-			for (int i = 0;i < currentLength; ++i)
-				data[i].~T();
-			::operator delete[](data);
+			delete[]data;
 			maxSize = currentLength = 0;
 		}
 		/**
@@ -390,8 +380,7 @@ namespace stl
 		{
 			if (currentLength == maxSize)
 				doubleSpace();
-			new(data + currentLength) T(data[currentLength - 1]);
-			for (size_t i = currentLength - 1; i > pos.index; --i)
+			for (size_t i = currentLength; i > pos.index; --i)
 				data[i] = data[i - 1];
 			data[pos.index] = value;
 			++currentLength;
@@ -407,8 +396,7 @@ namespace stl
 		{
 			if (currentLength == maxSize)
 				doubleSpace();
-			new(data + currentLength) T(data[currentLength - 1]);
-			for (size_t i = currentLength - 1; i > ind; --i)
+			for (size_t i = currentLength; i > ind; --i)
 				data[i] = data[i - 1];
 			data[ind] = value;
 			++currentLength;
@@ -445,7 +433,7 @@ namespace stl
 		{
 			if (currentLength == maxSize)
 				doubleSpace();
-			new(data + currentLength) T(value);
+			data[currentLength] = value;
 			++currentLength;
 		}
 		/**
@@ -454,8 +442,6 @@ namespace stl
 		*/
 		void pop_back()
 		{
-			if (currentLength == 0)
-				throw container_is_empty();
 			--currentLength;
 		}
 	};
