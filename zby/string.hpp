@@ -8,9 +8,8 @@
 using namespace std;
 
 template <int size>
-class tstring {
+struct tstring {
 
-public:
 	char m[size];
 	int len = 0;
 
@@ -49,7 +48,7 @@ public:
 		return (*this);
 	}
 
-	int getLen() {
+	int getLen() const {
 		return len;
 	}
 
@@ -69,17 +68,13 @@ public:
 		for(int i = 0; i < len; i++) m[i] = b[i];
 	}
 
-	operator bool () const {
-		return len != 0;
-	}
-
 	operator string () const {
 		string ret = "";
 		for(int i = 0; i < len; i++) ret += m[i];
 			return ret;
 	}
 
-	char operator [] (int pos) {
+	char operator [] (int pos) const {
 		if (pos > len) return '\0';
 		return m[pos];
 	}
@@ -122,11 +117,20 @@ public:
 		for(int i = 0; i < len; i++) {
 			if (m[i] != b[i]) return false;
 		}
-		return  true;
+		return true;
 	}
 
 	template <int s2>
-	bool operator < (tstring<s2> &b) {
+	bool operator != (tstring<s2> &b) {
+		if (b.getLen() != len) return true;
+		for(int i = 0; i < len; i++) {
+			if (m[i] != b[i]) return true;
+		}
+		return false;
+	}
+
+	template <int s2>
+	bool operator < (const tstring<s2> &b) {
 		int tlen = min(len, b.getLen());
 		for(int i = 0; i < tlen; i++) {
 			if (m[i] < b[i]) return true;
@@ -137,5 +141,27 @@ public:
 	}
 
 };
+
+class cmp{
+public:
+
+	template <int s1, int s2>
+	bool operator() (const tstring<s1> &a, const tstring<s2> &b){
+		int tlen = min(a.getLen(), b.getLen());
+		for(int i = 0; i < tlen; i++) {
+			if (a[i] < b[i]) return true;
+			if (a[i] > b[i]) return false;
+		}
+		if (a.getLen() < b.getLen()) return true;
+		return  false;
+	}
+
+};
+
+string fill_to(string b, int tar) {
+	string ret = b;
+	while (ret.length() < tar) ret = '0' + ret;
+	return ret;
+}
 
 #endif

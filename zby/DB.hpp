@@ -38,8 +38,17 @@ public:
         tree->findR(l, r, vec);
     }
 
-    size_t size() {
+    void findRangeData(const K &l, const K &r, sjtu::vector<D> &vec){
+        tree->findRD(l, r, vec);
+    }
+
+    size_t size() const{
         return tree->size();
+    }
+
+    //warning!
+    void trunc(){
+        tree->trunc();
     }
 };
 #endif

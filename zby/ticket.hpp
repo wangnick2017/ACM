@@ -3,19 +3,19 @@
 #include "string.hpp"
 
 struct Ticket {
-	tstring<20> trainID, catalog;
-	int left[5], ticketNum;
-	double price[5];
-	tstring<40> ticketKind[5];
-	tstring<40> locFrom, locTo;
-	tstring<10> dateFrom, dateTo;
-	tstring<5> timeFrom, timeTo;
+	tstring<20> trainID;
+	int ticketNum;
+	tstring<10> date;
+	int start, end, kind;
+	int ticketID;
 };
 
 struct tic {
-	int a[60];
+	int a[5][60];
 	tic() {
-		for(int i = 0; i < 60; i++) a[i] = 2000;
+		for(int i = 0; i < 5; i++) 
+			for(int j = 0; j < 60; j++) 
+				a[i][j] = 2000;
 	}
 };
 
