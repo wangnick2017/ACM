@@ -148,11 +148,6 @@ public:
 			delete ret2.first;
 			return 0;
 		}
-                if (ret2.first->privilege == 2) {
-                    delete ret1.first;
-                    delete ret2.first;
-                    return 0;
-                }
 		ret2.first->privilege = pri;
 		userDB.modify(ret2.first->id, *(ret2.first));
 		delete ret1.first;
@@ -372,6 +367,7 @@ public:
 		for(int i = 0; i < 20; i++) tid.m[i] = 127;
 		route2 += (string) tid;
 		routeDB.findRange(route1, route2, tvec);
+                //printf("%d\n", tvec.size());
 		tstring<80> troute;
 		troute += (string)loc1; troute += (string)loc2;
 		int tl = troute.len;
@@ -380,10 +376,10 @@ public:
 		for (int i = 0; i < tvec.size(); i++) {
 			tstring<20> rid;
 			string tmp;
-			rid.len = tvec[i].len - tl;
+                        rid.len = tvec[i].len - tl;
 			for(int j = tl; j < tvec[i].len; j++) rid.m[j - tl] = tvec[i].m[j];
 			auto res = trainDB.find(rid);
-			if(!res.second) continue;
+                        if (!res.second) continue;
 			bool flag = false;
 			for(int j = 0; j < cata.len; j++) {
 				if (cata[j] == res.first->catalog) {
@@ -397,13 +393,13 @@ public:
 			int tl, tr;
 			for (int j = 0; j < res.first->stationNum; j++) {
 				if (res.first->sta[j].name == loc1) {
-					tmp += (string)add_date(date, res.first->sta[j].ts.date); tmp += ' ';
+                                        tmp += (string)add_date(date, res.first->sta[j].ts.date); tmp += ' ';
 					tmp += (string)res.first->sta[j].t_start; tmp += ' ';
 					tmp += (string)loc2; tmp += ' ';
 					tl = j;
 				}
 				if (res.first->sta[j].name == loc2) {
-					tmp += (string)add_date(date, res.first->sta[j].ts.date); tmp += ' ';
+                                        tmp += (string)add_date(date, res.first->sta[j].ts.date); tmp += ' ';
 					tmp += (string)res.first->sta[j].t_arrive; tmp += ' ';
 					tr = j;
 					break;
@@ -491,7 +487,7 @@ public:
 			mytime tt; tt = mt;
 			for (int j = 0; j < res.first->stationNum; j++) {
 				if (res.first->sta[j].name == loc1) {
-					if (res.first->sta[j].ts > mt) {
+                                        if (res.first->sta[j].ts < mt) {
 						tt.date++;
 					}
 				}
@@ -501,7 +497,7 @@ public:
 					tt.date += res.first->sta[j].ta.date;
 				}
 			}
-			if (mt < ans) {
+                        if (tt < ans) {
 				ans = mt;
 				ansid = rid;
 			}
@@ -557,13 +553,13 @@ public:
 		mytime foo;
 		for (int j = 0; j < res.first->stationNum; j++) {
 			if (res.first->sta[j].name == loc1) {
-				tmp += (string)add_date(date, res.first->sta[j].ts.date); tmp += ' ';
+                                tmp += (string)add_date(date, res.first->sta[j].ts.date); tmp += ' ';
 				tmp += (string)res.first->sta[j].t_start; tmp += ' ';
 				tmp += (string)tloc; tmp += ' ';
 				tl = j;
 			}
 			if (res.first->sta[j].name == tloc) {
-				tmp += (string)add_date(date, res.first->sta[j].ts.date); tmp += ' ';
+                                tmp += (string)add_date(date, res.first->sta[j].ts.date); tmp += ' ';
 				tmp += (string)res.first->sta[j].t_arrive; tmp += ' ';
 				foo = res.first->sta[j].ta;
 				tr = j;
@@ -604,7 +600,7 @@ public:
 			if (res.first->sta[j].name == tloc) {
 				int date_add = 0;
 				if (res.first->sta[j].ts < foo) date_add = 1;
-				tmp += (string)add_date(date, res.first->sta[j].ts.date + date_add); tmp += ' ';
+                                tmp += (string)add_date(date, res.first->sta[j].ts.date); tmp += ' ';
 				tmp += (string)res.first->sta[j].t_start; tmp += ' ';
 				tmp += (string)loc2; tmp += ' ';
 				tl = j;
@@ -612,7 +608,7 @@ public:
 			if (res.first->sta[j].name == loc2) {
 				int date_add = 0;
 				if (res.first->sta[j].ts < foo) date_add = 1;
-				tmp += (string)add_date(date, res.first->sta[j].ts.date + date_add); tmp += ' ';
+                                tmp += (string)add_date(date, res.first->sta[j].ts.date); tmp += ' ';
 				tmp += (string)res.first->sta[j].t_arrive; tmp += ' ';
 				tr = j;
 				break;
