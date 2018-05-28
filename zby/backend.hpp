@@ -331,7 +331,7 @@ public:
 		string ret = ta;
 		if (tb) {
 			if (ret[8] == '3' && ret[9] == '0') {
-				ret[8] = 0; ret[9] = '1';
+                                ret[8] = '0'; ret[9] = '1';
 				ret[6]++;
 				return ret;
 			}
