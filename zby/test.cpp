@@ -15,7 +15,9 @@ int main(){
     Backend tmp;
     tmp.init();
     char op[50];
+    char *res = nullptr;
     while (1) {
+        res = nullptr;
         scanf("%s", op);
         if (eqv(op, "register")) printf("%d\n", tmp.regist());
         else if (eqv(op, "login")) printf("%d\n", tmp.login());
@@ -33,12 +35,24 @@ int main(){
         else if (eqv(op, "modify_train")) printf("%d\n", tmp.modify_train());
         else if (eqv(op, "sale_train")) printf("%d\n", tmp.sale_train());
         else if (eqv(op, "delete_train")) printf("%d\n", tmp.delete_train());
-        else if (eqv(op, "query_train")) printf("%s", tmp.query_train());
-        else if (eqv(op, "query_ticket")) printf("%s", tmp.query_ticket());
+        else if (eqv(op, "query_train")){
+            res = tmp.query_train();
+            printf("%s", res);
+        }
+        else if (eqv(op, "query_ticket")){
+            res = tmp.query_ticket();
+            printf("%s", res);
+        }
         else if (eqv(op, "buy_ticket")) printf("%d\n", tmp.buy_ticket());
-        else if (eqv(op, "query_order")) printf("%s", tmp.query_order());
+        else if (eqv(op, "query_order")){
+            res =  tmp.query_order();
+            printf("%s", res);
+        }
         else if (eqv(op, "refund_ticket")) printf("%d\n", tmp.refund_ticket());
-        else if (eqv(op, "query_transfer")) printf("%s", tmp.query_transfer());
+        else if (eqv(op, "query_transfer")){
+            res = tmp.query_transfer();
+            printf("%s", res);
+        }
         else if (eqv(op, "clean")) {
             tmp.clear();
             printf("1\n");
@@ -47,6 +61,11 @@ int main(){
             printf("BYE\n");
             break;
         }
+        if(res){
+            delete [] res;
+            res = nullptr;
+        }
+         fflush(stdout);
     }
     return 0;
 }

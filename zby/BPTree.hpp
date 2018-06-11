@@ -4,16 +4,15 @@
 #include <iostream>
 #include <cstring>
 #include "queue.h"
-#include <assert.h>
 #include "vector.hpp"
 #include "dbException.hpp"
 #define IOB std::ios_base::in | std::ios_base::out | std::ios_base::binary
 #define TIOB std::ios_base::trunc | std::ios_base::in | std::ios_base::out | std::ios_base::binary
-#define OFFSET_TYPE unsigned long long
+#define OFFSET_TYPE unsigned long
+#define MAX_BUFFER_SIZE 4096
+#define MAX_BLOCK_SIZE ((((MAX_BUFFER_SIZE - sizeof(char) - 3 * sizeof(OFFSET_TYPE) - sizeof(short)) / (sizeof(treeData))) >> 1) << 1)
 //file io
-const OFFSET_TYPE MAX_FILENAME_LEN = 30;
-const OFFSET_TYPE MAX_BLOCK_SIZE = 256;
-const OFFSET_TYPE FIRST_NODE_OFFSET = MAX_FILENAME_LEN * sizeof(char) * 2 + 2 * sizeof( OFFSET_TYPE );
+const OFFSET_TYPE MAX_FILENAME_LEN = 25;
 const OFFSET_TYPE INVALID_OFFSET = -1;
 //node type
 const int INTERN_NODE = 1;
@@ -33,6 +32,7 @@ const char DB_SUFFIX[10] = ".ksxdb";
 const char IDX_SUFFIX[10] = ".ksxidx";
 const char IDX_MGR_SUFFIX[10] = ".idxmgr";
 const char DB_MGR_SUFFIX[10] = ".dbmgr";
+char rwBuffer[MAX_BUFFER_SIZE];
 
 template<typename A, typename B>
 struct mypair{
@@ -71,8 +71,8 @@ private:
         BPTNode() = default;
         BPTNode(const int &ndt):nodeType(ndt){}
         //DATA
-        int nodeType = DELETED;
-        OFFSET_TYPE sz = 0;
+        char nodeType = DELETED;
+        short sz = 0;
         OFFSET_TYPE nodeOffset = INVALID_OFFSET;
         OFFSET_TYPE nextNode = INVALID_OFFSET;
         OFFSET_TYPE prevNode = INVALID_OFFSET;
@@ -135,58 +135,56 @@ private:
 
     //Dont forget to DELETE afte using allocNewNode()!
     BPTNode *allocNode(const int &nodeType){
-        if(fmgr.is_open()) fmgr.close();
+        if(fmgr.fail()) fmgr.close();
         BPTNode *tmp = new BPTNode(nodeType);
-        OFFSET_TYPE offset = 0;
-        fmgr.open(idxFileMgr, IOB);
-        if(!QidxMgr.empty()){
-            offset = QidxMgr.front();
-            QidxMgr.pop();
-            tmp->nodeOffset = offset;
-            writeNode(tmp, tmp->nodeOffset);
-            return tmp;
-        }
-        else{
-            writeNode(tmp);
-            return tmp;
-        }
-        delete tmp;
-        tmp = nullptr;
+        writeNode(tmp);
         return tmp;
     }
 
     inline bool deleteNode(BPTNode *p, OFFSET_TYPE offset){
-        QidxMgr.push(offset);
+        //QidxMgr.push(offset);
         return 1;
     }
 
     bool writeIdx(){
-        if(fidx.is_open()) fidx.close();
-        fidx.open(idxFileName, IOB);
-        fidx.write(idxFileName, sizeof(char) * MAX_FILENAME_LEN);
-        fidx.write(dbFileName, sizeof(char) * MAX_FILENAME_LEN);
-        fidx.write((const char*)&dataSize, sizeof( OFFSET_TYPE ));
-        fidx.write((const char*)&rootOffset, sizeof( OFFSET_TYPE ));
-        fidx.close();
+        if(!fidx.is_open()) fidx.open(idxFileName, IOB);
+        fidx.seekp(0);
+        OFFSET_TYPE pos = 0;
+        memcpy(&(rwBuffer[pos]), idxFileName, sizeof(char) * MAX_FILENAME_LEN);
+        pos += sizeof(char) * MAX_FILENAME_LEN;
+        memcpy(&(rwBuffer[pos]), dbFileName, sizeof(char) * MAX_FILENAME_LEN);
+        pos += sizeof(char) * MAX_FILENAME_LEN;
+        memcpy(&(rwBuffer[pos]), &dataSize, sizeof(OFFSET_TYPE));
+        pos += sizeof(OFFSET_TYPE);
+        memcpy(&(rwBuffer[pos]), &rootOffset, sizeof(OFFSET_TYPE));
+        fidx.write(rwBuffer, MAX_BUFFER_SIZE);
+        fidx.flush();
         return 1;
     }
 
     bool readIdx(){
-        if(fidx.is_open()) fidx.close();
-        fidx.open(idxFileName, IOB);
+        if(!fidx.is_open()) fidx.open(idxFileName, IOB);
         char tmp[MAX_FILENAME_LEN];
-        OFFSET_TYPE offset = 0;
-        fidx.read(tmp, sizeof(char) * MAX_FILENAME_LEN);
+        OFFSET_TYPE pos = 0;
+        fidx.seekg(0);
+        fidx.read(rwBuffer, sizeof(char) * MAX_BUFFER_SIZE);
+        fidx.flush();
+        memcpy(tmp, &(rwBuffer[pos]), sizeof(char) * MAX_FILENAME_LEN);
         if(strcmp(idxFileName, tmp) != 0) throw fileNotMatch();
         strcpy(idxFileName, tmp);
+        pos += sizeof(char) * MAX_FILENAME_LEN;
+        memcpy(dbFileName, &(rwBuffer[pos]), sizeof(char) * MAX_FILENAME_LEN);
+        pos += sizeof(char) * MAX_FILENAME_LEN;
+        memcpy((char*)&dataSize, &(rwBuffer[pos]),sizeof(OFFSET_TYPE));
+        pos += sizeof(OFFSET_TYPE);
+        memcpy((char*)&rootOffset, &(rwBuffer[pos]),sizeof(OFFSET_TYPE));
+        /*fidx.read(tmp, sizeof(char) * MAX_FILENAME_LEN);
         fidx.read(dbFileName, sizeof(char) * MAX_FILENAME_LEN);
         fidx.read((char*)&dataSize, sizeof( OFFSET_TYPE ));
-        fidx.read((char*)&rootOffset, sizeof( OFFSET_TYPE ));
-        fidx.close();
-
+        fidx.read((char*)&rootOffset, sizeof( OFFSET_TYPE ));*/
         //I will read mgr file into Q here
-        OFFSET_TYPE fsize = 0;
-        fmgr.open(idxFileMgr, IOB);
+       // OFFSET_TYPE fsize = 0;
+       /* fmgr.open(idxFileMgr, IOB);
         fmgr.seekg(0, std::ios_base::end);
         fsize = fmgr.tellg();
         fmgr.seekg(0);
@@ -207,29 +205,23 @@ private:
                 QdbMgr.push(offset);
             }
         }
-        fmgr.close();
+        fmgr.close();*/
         return 1;
     }
 
     //dont forget to delete after use readNode()!
     BPTNode *readNode(OFFSET_TYPE offset){
-        if(fidx.is_open() || fidx.fail()) fidx.close();
-        fidx.open(idxFileName, IOB);
+        if(!fidx.is_open()) fidx.open(idxFileName, IOB);
         if(!fidx.is_open() || fidx.fail() ) return nullptr;
         BPTNode *tmp = new BPTNode;
         fidx.seekg(offset);
-        fidx.read((char*)&(tmp->nodeType), sizeof(int));
-        fidx.read((char*)&(tmp->nextNode), sizeof( OFFSET_TYPE ));
-        fidx.read((char*)&(tmp->prevNode), sizeof( OFFSET_TYPE ));
-        fidx.read((char*)&(tmp->sz), sizeof( OFFSET_TYPE ));
-        fidx.read((char*)&(tmp->nodeOffset), sizeof( OFFSET_TYPE ));
-        fidx.read((char*)(tmp->data), sizeof(treeData) * MAX_BLOCK_SIZE);
-        fidx.close();
+        fidx.read(rwBuffer, sizeof(char) * MAX_BUFFER_SIZE);
+        memcpy(tmp, rwBuffer, sizeof(BPTNode));
         return tmp;
     }
     bool writeNode(BPTNode *p, OFFSET_TYPE offset = 0){
-        if(fidx.is_open() || fidx.fail()) fidx.close();
-        fidx.open(idxFileName, IOB);
+        if(fidx.fail()) fidx.close();
+        if(!fidx.is_open()) fidx.open(idxFileName, IOB);
         if(offset == 0){
             fidx.seekg(0, std::ios_base::end);
             offset = fidx.tellg();
@@ -240,13 +232,9 @@ private:
             return 0;
         }
         fidx.seekp(offset);
-        fidx.write((const char*)&(p->nodeType), sizeof(int));
-        fidx.write((const char*)&(p->nextNode), sizeof( OFFSET_TYPE ));
-        fidx.write((const char*)&(p->prevNode), sizeof( OFFSET_TYPE ));
-        fidx.write((const char*)&(p->sz), sizeof( OFFSET_TYPE ));
-        fidx.write((const char*)&(p->nodeOffset), sizeof( OFFSET_TYPE ));
-        fidx.write((const char*)(p->data), sizeof(treeData) * MAX_BLOCK_SIZE);
-        fidx.close();
+        memcpy(rwBuffer, p, sizeof(BPTNode));
+        fidx.write(rwBuffer, sizeof(char) * MAX_BUFFER_SIZE);
+        fidx.flush();
         return 1;
     }
 
@@ -262,18 +250,18 @@ private:
 
    T *readData(OFFSET_TYPE offset){
         T *tmp = new T();
-        if(fdb.fail() || fdb.is_open()) fdb.close();
-        fdb.open(dbFileName, IOB);
+        if(fdb.fail()) fdb.close();
+        if(!fdb.is_open()) fdb.open(dbFileName, IOB);
         fdb.seekg(offset);
         fdb.read((char*)tmp, sizeof(T));
-        fdb.close();
         return tmp;
    }
 
    OFFSET_TYPE writeData(const T *dataPtr){
-       if(fdb.is_open() || fdb.fail()) fdb.close();
+       if(sizeof(T) <= sizeof(char)) return -1;
+       if(fdb.fail()) fdb.close();
+       if(!fdb.is_open()) fdb.open(dbFileName, IOB);
        OFFSET_TYPE offset = 0;
-       fdb.open(dbFileName, IOB);
        if(!fdb) return 0;
        if(!QdbMgr.empty()){
             offset = QdbMgr.front();
@@ -285,21 +273,21 @@ private:
        }
        fdb.seekp(offset);
        fdb.write((const char*)dataPtr, sizeof(T));
-       fdb.close();
+       fdb.flush();
        return offset;
    }
 
    OFFSET_TYPE modData(const T *dataPtr, const OFFSET_TYPE &offset){
-       if(fdb.is_open() || fdb.fail()) fdb.close();
-       fdb.open(dbFileName, IOB);
+       if(fdb.fail()) fdb.close();
+       if(!fdb.is_open()) fdb.open(dbFileName, IOB);
        if(fdb.fail()) return INVALID_OFFSET;
        fdb.seekp(offset);
        fdb.write((const char*)dataPtr, sizeof(T));
-       fdb.close();
+       fdb.flush();
        return offset;
    }
 
-   bool deleteData(OFFSET_TYPE offset){
+   inline bool deleteData(OFFSET_TYPE offset){
        //DBG
        /*OFFSET_TYPE p = -1;
        fdb.close();
@@ -307,7 +295,7 @@ private:
        fdb.seekp(offset);
        fdb.write((char*)&p, sizeof( OFFSET_TYPE ));
        fdb.close();*/
-       QdbMgr.push(offset);
+       //QdbMgr.push(offset);
        return 1;
    }
 
@@ -347,7 +335,6 @@ private:
     }
     //merge with right
     bool mergeNode(BPTNode *l, BPTNode *r){
-        if(l == nullptr || r == nullptr || l->sz + r->sz >= MAX_BLOCK_SIZE) assert(0);
         for(OFFSET_TYPE i = 0; i < r->sz; ++i) l->data[l->sz + i] = r->data[i];
         l->nextNode = r->nextNode;
         if(r->nextNode != (OFFSET_TYPE)(-1)){
@@ -517,8 +504,10 @@ private:
            BPTNode *btmp = readNode(st->data[pos].data);
            retVal dtmp = treeInsert(k, dta, btmp);
            if(dtmp.status == NOTHING){
-               st->data[pos].k = dtmp.retDta.k;
-               writeNode(st, st->nodeOffset);
+               if(keyCompare(st->data[pos].k, dtmp.retDta.k) != 2){
+                    st->data[pos].k = dtmp.retDta.k;
+                    writeNode(st, st->nodeOffset);
+               }
                retVal itmp = retVal(st->data[0], NOTHING);
                delete st;
                st = nullptr;
@@ -787,16 +776,13 @@ private:
 
    }
 
-   void treeFindRange(const Key &kl, const Key &kr, const BPTNode *st, sjtu::vector<Key> &vec){
+   void treeFindRange(const Key &kl, const Key &kr, const BPTNode *&st, sjtu::vector<Key> &vec){
        if(keyCompare(kl, kr) == 0){
-           delete st;
-           st = nullptr;
            return;
        }
        const BPTNode *tmpn = nullptr;
        //T *dtaptr = nullptr;
        OFFSET_TYPE pos = 0;
-       bool sonflag = 0;
        if(st->nodeType == LEAF_NODE){
            pos = binSearchForRange(st, kl);
            while(1){
@@ -818,25 +804,21 @@ private:
        else{
            pos = binSearch(st, kl);
            tmpn = readNode(st->data[pos].data);
-           if(tmpn->nodeType == LEAF_NODE) sonflag = 1;
            treeFindRange(kl, kr, tmpn, vec);
-           if(!sonflag) delete tmpn;
+           if(tmpn) delete tmpn;
            tmpn = nullptr;
            return;
        }
    }
 
 
-   void treeFindRangeForData(const Key &kl, const Key &kr, const BPTNode *st, sjtu::vector<T> &vec){
+   void treeFindRangeForData(const Key &kl, const Key &kr, const BPTNode *&st, sjtu::vector<T> &vec){
        if(keyCompare(kl, kr) == 0){
-            delete st;
-            st = nullptr;
             return;
        }
        const BPTNode *tmpn = nullptr;
        T *dtaptr = nullptr;
        OFFSET_TYPE pos = 0;
-       bool sonflag = 0;
        if(st->nodeType == LEAF_NODE){
            pos = binSearchForRange(st, kl);
            if(pos == -1){
@@ -868,9 +850,8 @@ private:
        else{
            pos = binSearch(st, kl);
            tmpn = readNode(st->data[pos].data);
-           if(tmpn->nodeType == LEAF_NODE) sonflag = 1;
            treeFindRangeForData(kl, kr, tmpn, vec);
-           if(!sonflag) delete tmpn;
+           if(tmpn) delete tmpn;
            tmpn = nullptr;
            return;
        }
@@ -941,15 +922,13 @@ public:
         importIdxFile(sizeof(T));
     }
 
-    BPTree() = default;
-
     ~BPTree(){
         if(currentNode) delete currentNode;
         currentNode = nullptr;
         OFFSET_TYPE offset = 0;
 
         //Dump Q into files
-        if(fmgr.is_open() || fmgr.fail()) fmgr.close();
+       /* if(fmgr.is_open() || fmgr.fail()) fmgr.close();
         fmgr.open(idxFileMgr, TIOB);
         while(!QidxMgr.empty()){
             offset = QidxMgr.front();
@@ -963,8 +942,11 @@ public:
             fmgr.write((char*)&offset, sizeof( OFFSET_TYPE ));
             QdbMgr.pop();
         }
-        fmgr.close();
+        fmgr.close();*/
         writeIdx();
+        fidx.close();
+        fdb.close();
+        fmgr.close();
     }
     //Insert, Remove, Find
     bool insertData(const Key &k, const T &dta){
@@ -1031,7 +1013,7 @@ public:
         changeToRoot();
         const BPTNode *fst = currentNode;
         treeFindRange(kl, kr, fst, vec);
-        currentNode = nullptr;
+        if(fst == nullptr) currentNode = nullptr;
     }
 
     void findRD(const Key &kl, const Key &kr, sjtu::vector<T> &vec){
@@ -1039,7 +1021,7 @@ public:
         changeToRoot();
         const BPTNode *fst = currentNode;
         treeFindRangeForData(kl, kr, fst, vec);
-        currentNode = nullptr;
+        if(fst == nullptr) currentNode = nullptr;
     }
 
     void dfs(){

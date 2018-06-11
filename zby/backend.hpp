@@ -8,6 +8,7 @@
 #include "tokenscanner.hpp"
 #include "DB.hpp"
 #include "time.hpp"
+#include "fvector.h"
 #include <cstring>
 #include <string>
 
@@ -15,7 +16,7 @@
 
 class Backend {
 private:
-	DB<int, User> userDB;
+    fvector<int, User> userDB;
 	DB<tstring<20>, Train, cmp> trainDB;
 	DB<tstring<60>, char, cmp> routeDB;
 	DB<tstring<40>, Ticket, cmp> ticketDB;
@@ -39,6 +40,9 @@ public:
 			tmp.ticketID = 0;
 			ticketDB.insert(foo, tmp);
 		}
+                else{
+                    delete bar.first;
+                }
 	}
 
 	void clear() {
@@ -73,7 +77,7 @@ public:
 		int id = buffer.geti();
 		tstring<20> pwd;
 		pwd = buffer.gets();
-		auto ret = userDB.find(id);
+                auto ret = userDB.find(id - 2018);
 		if (!ret.second) {
 			return 0;
 		}
@@ -88,7 +92,7 @@ public:
 	}
 
 	char *query_profile(int id) {
-		auto ret = userDB.find(id);
+                auto ret = userDB.find(id - 2018);
 		if (!ret.second) {
 			char *st = new char[2];
 			st[0] = '0';
@@ -116,7 +120,7 @@ public:
 		char *tmsg = msg;
 		buffer.set(tmsg);
 		int id = buffer.geti();
-		auto res = userDB.find(id);
+                auto res = userDB.find(id - 2018);
 		if (!res.second) return 0;
 		User user;
 		user.name = buffer.gets();
@@ -125,14 +129,14 @@ public:
 		user.phone = buffer.gets();
 		user.id = id;
 		user.privilege = res.first->privilege;
-		userDB.modify(id, user);
+                userDB.modify(id - 2018, user);
 		delete res.first;
 		return 1;
 	}
 
 	int modify_privilege(int id1, int id2, int pri) {
-		auto ret1 = userDB.find(id1);
-		auto ret2 = userDB.find(id2);
+                auto ret1 = userDB.find(id1 - 2018);
+                auto ret2 = userDB.find(id2 - 2018);
 		if (!ret1.second || !ret2.second) {
 			if (ret1.second) delete ret1.first;
 			if (ret2.second) delete ret2.first;
@@ -149,7 +153,7 @@ public:
 			return 0;
 		}
 		ret2.first->privilege = pri;
-		userDB.modify(ret2.first->id, *(ret2.first));
+                userDB.modify(ret2.first->id - 2018, *(ret2.first));
 		delete ret1.first;
 		delete ret2.first;
 		return 1;
@@ -241,13 +245,13 @@ public:
 			res[2] = '\0'; res[1] = '\n';
 			return res;
 		}
-		if (!ret.first->sale) {
+		/*if (!ret.first->sale) {
 			delete ret.first;
 			char *res = new char[3];
 			res[0] = '0';
 			res[2] = '\0'; res[1] = '\n';
 			return res;
-		}
+		}*/
 		string str;
 		str += (string)ret.first->id; str += ' ';
 		str += (string)ret.first->name; str += ' ';
@@ -376,10 +380,10 @@ public:
 		for (int i = 0; i < tvec.size(); i++) {
 			tstring<20> rid;
 			string tmp;
-                        rid.len = tvec[i].len - tl;
+            rid.len = tvec[i].len - tl;
 			for(int j = tl; j < tvec[i].len; j++) rid.m[j - tl] = tvec[i].m[j];
 			auto res = trainDB.find(rid);
-                        if (!res.second) continue;
+            if (!res.second) continue;
 			bool flag = false;
 			for(int j = 0; j < cata.len; j++) {
 				if (cata[j] == res.first->catalog) {
@@ -387,24 +391,27 @@ public:
 					break;
 				}
 			}
-			if (!flag) continue;
+			if (!flag) {
+				delete res.first;
+				continue;
+			}
 			tmp += (string)rid; tmp += ' ';
 			tmp += (string)loc1; tmp += ' ';
 			int tl, tr;
 			for (int j = 0; j < res.first->stationNum; j++) {
 				if (res.first->sta[j].name == loc1) {
-                                        tmp += (string)add_date(date, res.first->sta[j].ts.date); tmp += ' ';
+                    tmp += (string)add_date(date, res.first->sta[j].ts.date); tmp += ' ';
 					tmp += (string)res.first->sta[j].t_start; tmp += ' ';
 					tmp += (string)loc2; tmp += ' ';
 					tl = j;
 				}
 				if (res.first->sta[j].name == loc2) {
-                                        tmp += (string)add_date(date, res.first->sta[j].ts.date); tmp += ' ';
+                    tmp += (string)add_date(date, res.first->sta[j].ts.date); tmp += ' ';
 					tmp += (string)res.first->sta[j].t_arrive; tmp += ' ';
 					tr = j;
 					break;
 				}
-                        }
+            }
 			int minr = 2000;
 			for(int j = 0; j < res.first->priceNum; j++) {
 				tmp += (string)res.first->priceName[j]; tmp += ' ';
@@ -421,9 +428,10 @@ public:
 						if (res2.first->a[j][k] < rest_tic) rest_tic = res2.first->a[j][k];
 					}
 				}
+                                delete res2.first;
 				tmp += to_string(rest_tic); tmp += ' ';
 				double tp = 0;
-                                for(int k = tl + 1; k <= tr; k++) {
+                for(int k = tl + 1; k <= tr; k++) {
 					tp += res.first->sta[k].price[j];
 				}
 				tmp += to_string(tp); tmp += ' ';
@@ -482,12 +490,15 @@ public:
 					break;
 				}
 			}
-			if (!flag) continue;
+			if (!flag) {
+				delete res.first;
+				continue;
+			}
 			int tl, tr;
 			mytime tt; tt = mt;
 			for (int j = 0; j < res.first->stationNum; j++) {
 				if (res.first->sta[j].name == loc1) {
-                                        if (res.first->sta[j].ts < mt) {
+                        if (res.first->sta[j].ts < mt) {
 						tt.date++;
 					}
 				}
@@ -497,7 +508,7 @@ public:
 					tt.date += res.first->sta[j].ta.date;
 				}
 			}
-                        if (tt < ans) {
+            if (tt < ans) {
 				ans = mt;
 				ansid = rid;
 			}
@@ -553,13 +564,13 @@ public:
 		mytime foo;
 		for (int j = 0; j < res.first->stationNum; j++) {
 			if (res.first->sta[j].name == loc1) {
-                                tmp += (string)add_date(date, res.first->sta[j].ts.date); tmp += ' ';
+                tmp += (string)add_date(date, res.first->sta[j].ts.date); tmp += ' ';
 				tmp += (string)res.first->sta[j].t_start; tmp += ' ';
 				tmp += (string)tloc; tmp += ' ';
 				tl = j;
 			}
 			if (res.first->sta[j].name == tloc) {
-                                tmp += (string)add_date(date, res.first->sta[j].ts.date); tmp += ' ';
+                tmp += (string)add_date(date, res.first->sta[j].ts.date); tmp += ' ';
 				tmp += (string)res.first->sta[j].t_arrive; tmp += ' ';
 				foo = res.first->sta[j].ta;
 				tr = j;
@@ -643,6 +654,7 @@ public:
 		int len = tmp.length();
 		for(int i = 0; i < len; i++) ret[i] = tmp[i];
 		ret[len] = '\0';
+		delete res.first;
 		return ret;
 	}
 
@@ -718,6 +730,7 @@ public:
 		ticketDB.insert(tic_n, tic);
 		delete res2.first;
 		delete res.first;
+		delete bar.first;
 		return 1;
 	}
 
@@ -729,37 +742,41 @@ public:
 		uid = buffer.gets();
 		tstring<10> date;
 		date = buffer.gets();
-		char cata = buffer.getc();
-		tstring<40> tic1, tic2;
-		tic1 += uid; tic2 += uid;
-		tic1 += date; tic2 += date;
-		tic1 += cata; tic2 += cata;
-		tic1 += fill_to(to_string(0), 9); tic2 += fill_to(to_string(1e9-1), 9);
-		sjtu::vector<Ticket> tvec;
-		ticketDB.findRangeData(tic1, tic2, tvec);
+		string cata = buffer.gets();
 		string ans;
-		ans += to_string(tvec.size()); ans += '\n';
-		int sz = tvec.size();
-		for(int i = 0; i < sz; i++) {
-			auto res2 = trainDB.find(tvec[i].trainID);
-			ans += (string)tvec[i].trainID; ans += ' ';
-			ans += (string)res2.first->sta[tvec[i].start].name; ans += ' ';
-			ans += (string)tvec[i].date; ans += ' '; ans += (string)res2.first->sta[tvec[i].start].t_start; ans += ' ';
-			ans += (string)res2.first->sta[tvec[i].end].name; ans += ' ';
-			ans += (string)tvec[i].date; ans += ' '; ans += (string)res2.first->sta[tvec[i].end].t_arrive; ans += ' ';
-			for(int j = 0; j < res2.first->priceNum; j++) {
-				ans += (string)res2.first->priceName[j]; ans += ' ';
-				if (j == tvec[i].kind) ans += to_string(tvec[i].ticketNum); else ans += '0';
-				ans += ' ';
-				double tp = 0;
-                                for(int k = tvec[i].start + 1; k <= tvec[i].end; k++) {
-					tp += res2.first->sta[k].price[j];
+		int tot = 0;
+		for (int l = 0; l < cata.length(); l++){
+			tstring<40> tic1, tic2;
+			tic1 += uid; tic2 += uid;
+			tic1 += date; tic2 += date;
+			tic1 += cata[l]; tic2 += cata[l];
+			tic1 += fill_to(to_string(0), 9); tic2 += fill_to(to_string(1e9-1), 9);
+			sjtu::vector<Ticket> tvec;
+			ticketDB.findRangeData(tic1, tic2, tvec);
+			tot += tvec.size();
+			int sz = tvec.size();
+			for(int i = 0; i < sz; i++) {
+				auto res2 = trainDB.find(tvec[i].trainID);
+				ans += (string)tvec[i].trainID; ans += ' ';
+				ans += (string)res2.first->sta[tvec[i].start].name; ans += ' ';
+				ans += (string)tvec[i].date; ans += ' '; ans += (string)res2.first->sta[tvec[i].start].t_start; ans += ' ';
+				ans += (string)res2.first->sta[tvec[i].end].name; ans += ' ';
+				ans += (string)tvec[i].date; ans += ' '; ans += (string)res2.first->sta[tvec[i].end].t_arrive; ans += ' ';
+				for(int j = 0; j < res2.first->priceNum; j++) {
+					ans += (string)res2.first->priceName[j]; ans += ' ';
+					if (j == tvec[i].kind) ans += to_string(tvec[i].ticketNum); else ans += '0';
+					ans += ' ';
+					double tp = 0;
+	                for(int k = tvec[i].start + 1; k <= tvec[i].end; k++) {
+						tp += res2.first->sta[k].price[j];
+					}
+					ans += to_string(tp); ans += ' ';
 				}
-				ans += to_string(tp); ans += ' ';
+				ans += '\n';
+				delete res2.first;	
 			}
-			ans += '\n';
-			delete res2.first;	
 		}
+		ans = to_string(tot) + '\n' + ans;
 		char *ret = new char[ans.length() + 1];
 		int len = ans.length();
 		for(int i = 0; i < len; i++) ret[i] = ans[i];
@@ -816,6 +833,7 @@ public:
 					res3.first->a[tvec[i].kind][j] += num;
 				train_ticDB.modify(tc, *(res3.first));
 				num = 0;
+				delete res3.first;
 			}
 			else {
 				tstring<40> t_tic;
@@ -829,6 +847,7 @@ public:
 				for (int j = tvec[i].start + 1; j <= tvec[i].end; j++) 
 					res3.first->a[tvec[i].kind][j] += tvec[i].ticketNum;
 				train_ticDB.modify(tc, *(res3.first));
+				delete res3.first;
 			}
 			if (num == 0) break;
 		}

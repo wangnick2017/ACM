@@ -4,9 +4,12 @@
 
 class User {
 public:
-	tstring<20> password, email, phone;
-	tstring<40> name;
-	int privilege, id;
+        tstring<11> password;
+        tstring<19> email;
+        tstring<11> phone;
+        tstring<12> name;
+        char privilege;
+        unsigned int id;
 };
 
 #endif

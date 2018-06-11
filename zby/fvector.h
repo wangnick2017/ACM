@@ -1,72 +1,89 @@
 #ifndef FVECTOR_HPP
 #define FVECTOR_HPP
 #include <fstream>
-#include "string.h"
-using namespace std;
-template<class T>
+#include <string>
+#include "string.hpp"
+template<class K , class T>
 class fvector
 {
+    template<typename A, typename B>
+    struct MYPAIR{
+        A first;
+        B second;
+        MYPAIR(A st, B nd):first(st), second(nd){}
+    };
 private:
 
-	stl::string<20> fileName;
+        tstring<20> fileName;
+        int sz = 0;
 	fstream f;
+        fstream fsize;
 
 public:
-
+        ~fvector(){
+            f.close();
+        }
 	void init(const char *_fileName)
 	{
-		fileName = _fileName;
-		f.open(fileName + ".bin", fstream::in);
+                fileName = tstring<20>(_fileName);
+                fileName += ".bin";
+                f.open(fileName, ios_base::in);
 		if (!f) {
-			f.open(fileName + ".bin", fstream::out | fstream::trunc | fstream::binary);
-			int tot = 0;
-			f.write(reinterpret_cast<char*>(&tot), sizeof(int));
+                        f.close();
+                        f.open(fileName, ios_base::out | ios_base::binary);
+                        f.close();
+                        f.open(fileName, ios_base::in | ios_base::out | ios_base::binary);
+                        sz = 0;
 		}
-		f.close();
+                else{
+                    f.close();
+                    f.open(fileName, ios_base::in | ios_base::out | ios_base::binary);
+                    f.seekg(0, ios::end);
+                    sz = (f.tellg()) / (sizeof(T));
+                }
 	}
 
-	int size()
+        inline int size()
 	{
-		f.open(fileName + ".bin", fstream::in | fstream::binary);
-		f.seekg(0, ios::beg);
-		int tot;
-		f.read(reinterpret_cast<char*>(&tot), sizeof(int));
-		f.close();
-		return tot;
+                return sz;
 	}
 
-	void push_back(const T &x)
+        void insert(const K &key, const T &x)
 	{
-		f.open(fileName + ".bin", fstream::in | fstream::out | fstream::binary);
-		int tot;
-		f.seekg(0, ios::beg);
-		f.read(reinterpret_cast<char*>(&tot), sizeof(int));
-		f.seekp(sizeof(int) + sizeof(T) * tot, ios::beg);
-		T tmp = x;
-		f.write(reinterpret_cast<char*>(&tmp), sizeof(T));
-		f.seekp(0, ios::beg);
-		++tot;
-		f.write(reinterpret_cast<char*>(&tot), sizeof(int));
-		f.close();
+            if(f.fail()) f.close();
+            if(!f.is_open()) f.open(fileName, ios_base::in | ios_base::out | ios_base::binary);
+                f.seekp(sizeof(T) * sz, ios::beg);
+                f.write(reinterpret_cast<const char*>(&x), sizeof(T));
+                ++sz;
+                f.flush();
 	}
 
-	T operator[](int pos)
-	{
-		f.open(fileName + ".bin", fstream::in | fstream::binary);
-		T tmp;
-		f.seekg(sizeof(int) + sizeof(T) * pos, ios::beg);
-		f.read(reinterpret_cast<char*>(&tmp), sizeof(T));
-		f.close();
-		return tmp;
+        MYPAIR<T*, bool> find(const int &pos)
+        {
+            if(f.fail()) f.close();
+            if(!f.is_open()) f.open(fileName, ios_base::in | ios_base::out | ios_base::binary);
+                T *tmp = new T;
+                if(pos >= sz) return MYPAIR<T*, bool>(nullptr, 0);
+                f.seekg(sizeof(T) * pos, ios::beg);
+                f.read(reinterpret_cast<char*>(tmp), sizeof(T));
+                f.flush();
+                return MYPAIR<T*, bool>(tmp, 1);
 	}
 
 	void modify(int pos, const T &x)
 	{
-		f.open(fileName + ".bin", fstream::out | fstream::binary | fstream::in);
-		f.seekp(sizeof(int) + sizeof(T) * pos, ios::beg);
-		T tmp = x;
-		f.write(reinterpret_cast<char*>(&tmp), sizeof(T));
-		f.close();
+                if(f.fail()) f.close();
+                if(!f.is_open()) f.open(fileName, ios_base::out | ios_base::binary | ios_base::in);
+                f.seekp(sizeof(T) * pos, ios::beg);
+                f.write(reinterpret_cast<const char*>(&x), sizeof(T));
+                f.flush();
 	}
+
+        bool trunc(){
+            f.close();
+            f.open(fileName, ios_base::trunc |ios_base::in | ios_base::out | ios_base::binary);
+            sz = 0;
+            return 1;
+        }
 };
 #endif
