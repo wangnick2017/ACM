@@ -1,0 +1,226 @@
+﻿  ClrBackend.cpp
+c1xx : warning C4199: C++/CLI、C++/CX 或 OpenMP 不支持两阶段名称查找；请使用 /Zc:twoPhase-
+f:\documents\test - 副本\acm\clrbackend\backend.hpp(115): warning C4267: “初始化”: 从“size_t”转换到“int”，可能丢失数据
+f:\documents\test - 副本\acm\clrbackend\backend.hpp(202): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
+f:\documents\test - 副本\acm\clrbackend\backend.hpp(274): warning C4267: “初始化”: 从“size_t”转换到“int”，可能丢失数据
+f:\documents\test - 副本\acm\clrbackend\backend.hpp(327): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
+f:\documents\test - 副本\acm\clrbackend\backend.hpp(456): warning C4267: “初始化”: 从“size_t”转换到“int”，可能丢失数据
+f:\documents\test - 副本\acm\clrbackend\backend.hpp(498): warning C4101: “tr”: 未引用的局部变量
+f:\documents\test - 副本\acm\clrbackend\backend.hpp(498): warning C4101: “tl”: 未引用的局部变量
+f:\documents\test - 副本\acm\clrbackend\backend.hpp(655): warning C4267: “初始化”: 从“size_t”转换到“int”，可能丢失数据
+f:\documents\test - 副本\acm\clrbackend\backend.hpp(757): warning C4267: “+=”: 从“size_t”转换到“int”，可能丢失数据
+f:\documents\test - 副本\acm\clrbackend\backend.hpp(758): warning C4267: “初始化”: 从“size_t”转换到“int”，可能丢失数据
+f:\documents\test - 副本\acm\clrbackend\backend.hpp(782): warning C4267: “初始化”: 从“size_t”转换到“int”，可能丢失数据
+f:\documents\test - 副本\acm\clrbackend\string.hpp(100): warning C4267: “初始化”: 从“size_t”转换到“int”，可能丢失数据
+  f:\documents\test - 副本\acm\clrbackend\string.hpp(99): note: 编译 类 模板 成员函数 "tstring<80> &tstring<80>::operator +=(const std::string &)" 时
+  f:\documents\test - 副本\acm\clrbackend\backend.hpp(377): note: 参见对正在编译的函数 模板 实例化“tstring<80> &tstring<80>::operator +=(const std::string &)”的引用
+  f:\documents\test - 副本\acm\clrbackend\backend.hpp(376): note: 参见对正在编译的 类 模板 实例化 "tstring<80>" 的引用
+f:\documents\test - 副本\acm\clrbackend\fvector.h(45): warning C4267: “=”: 从“size_t”转换到“int”，可能丢失数据
+  f:\documents\test - 副本\acm\clrbackend\fvector.h(30): note: 编译 类 模板 成员函数 "void fvector<int,User>::init(const char *)" 时
+  f:\documents\test - 副本\acm\clrbackend\backend.hpp(34): note: 参见对正在编译的函数 模板 实例化“void fvector<int,User>::init(const char *)”的引用
+  f:\documents\test - 副本\acm\clrbackend\backend.hpp(19): note: 参见对正在编译的 类 模板 实例化 "fvector<int,User>" 的引用
+f:\documents\test - 副本\acm\clrbackend\BPTree.hpp(794): warning C4018: “<”: 有符号/无符号不匹配
+  f:\documents\test - 副本\acm\clrbackend\BPTree.hpp(779): note: 编译 类 模板 成员函数 "void BPTree<K,D,Compare>::treeFindRange(const Key &,const Key &,const BPTree<Key,D,Compare>::BPTNode *&,sjtu::vector<K> &)" 时
+          with
+          [
+              K=tstring<20>,
+              D=char,
+              Compare=cmp,
+              Key=tstring<20>
+          ]
+  f:\documents\test - 副本\acm\clrbackend\BPTree.hpp(1020): note: 参见对正在编译的函数 模板 实例化“void BPTree<K,D,Compare>::treeFindRange(const Key &,const Key &,const BPTree<Key,D,Compare>::BPTNode *&,sjtu::vector<K> &)”的引用
+          with
+          [
+              K=tstring<20>,
+              D=char,
+              Compare=cmp,
+              Key=tstring<20>
+          ]
+  f:\documents\test - 副本\acm\clrbackend\DB.hpp(51): note: 参见对正在编译的 类 模板 实例化 "BPTree<K,D,Compare>" 的引用
+          with
+          [
+              K=tstring<20>,
+              D=char,
+              Compare=cmp
+          ]
+  f:\documents\test - 副本\acm\clrbackend\DB.hpp(50): note: 编译 类 模板 成员函数 "void DB<tstring<20>,char,cmp>::trunc(void)" 时
+  f:\documents\test - 副本\acm\clrbackend\backend.hpp(58): note: 参见对正在编译的函数 模板 实例化“void DB<tstring<20>,char,cmp>::trunc(void)”的引用
+  f:\documents\test - 副本\acm\clrbackend\backend.hpp(24): note: 参见对正在编译的 类 模板 实例化 "DB<tstring<20>,char,cmp>" 的引用
+f:\documents\test - 副本\acm\clrbackend\BPTree.hpp(560): warning C4018: “<=”: 有符号/无符号不匹配
+  f:\documents\test - 副本\acm\clrbackend\BPTree.hpp(548): note: 编译 类 模板 成员函数 "BPTree<K,D,Compare>::retVal BPTree<K,D,Compare>::treeInsertFirst(const Key &,const T &,BPTree<Key,T,Compare>::BPTNode *&)" 时
+          with
+          [
+              K=tstring<20>,
+              D=char,
+              Compare=cmp,
+              Key=tstring<20>,
+              T=char
+          ]
+  f:\documents\test - 副本\acm\clrbackend\BPTree.hpp(968): note: 参见对正在编译的函数 模板 实例化“BPTree<K,D,Compare>::retVal BPTree<K,D,Compare>::treeInsertFirst(const Key &,const T &,BPTree<Key,T,Compare>::BPTNode *&)”的引用
+          with
+          [
+              K=tstring<20>,
+              D=char,
+              Compare=cmp,
+              Key=tstring<20>,
+              T=char
+          ]
+f:\documents\test - 副本\acm\clrbackend\BPTree.hpp(583): warning C4018: “<=”: 有符号/无符号不匹配
+f:\documents\test - 副本\acm\clrbackend\BPTree.hpp(480): warning C4018: “<=”: 有符号/无符号不匹配
+  f:\documents\test - 副本\acm\clrbackend\BPTree.hpp(458): note: 编译 类 模板 成员函数 "BPTree<K,D,Compare>::retVal BPTree<K,D,Compare>::treeInsert(const Key &,const T &,BPTree<Key,T,Compare>::BPTNode *&)" 时
+          with
+          [
+              K=tstring<20>,
+              D=char,
+              Compare=cmp,
+              Key=tstring<20>,
+              T=char
+          ]
+  f:\documents\test - 副本\acm\clrbackend\BPTree.hpp(961): note: 参见对正在编译的函数 模板 实例化“BPTree<K,D,Compare>::retVal BPTree<K,D,Compare>::treeInsert(const Key &,const T &,BPTree<Key,T,Compare>::BPTNode *&)”的引用
+          with
+          [
+              K=tstring<20>,
+              D=char,
+              Compare=cmp,
+              Key=tstring<20>,
+              T=char
+          ]
+f:\documents\test - 副本\acm\clrbackend\BPTree.hpp(517): warning C4018: “<=”: 有符号/无符号不匹配
+f:\documents\test - 副本\acm\clrbackend\BPTree.hpp(835): warning C4018: “<”: 有符号/无符号不匹配
+  f:\documents\test - 副本\acm\clrbackend\BPTree.hpp(820): note: 编译 类 模板 成员函数 "void BPTree<K,D,Compare>::treeFindRangeForData(const Key &,const Key &,const BPTree<Key,D,Compare>::BPTNode *&,sjtu::vector<D> &)" 时
+          with
+          [
+              K=tstring<40>,
+              D=Ticket,
+              Compare=cmp,
+              Key=tstring<40>
+          ]
+  f:\documents\test - 副本\acm\clrbackend\BPTree.hpp(1028): note: 参见对正在编译的函数 模板 实例化“void BPTree<K,D,Compare>::treeFindRangeForData(const Key &,const Key &,const BPTree<Key,D,Compare>::BPTNode *&,sjtu::vector<D> &)”的引用
+          with
+          [
+              K=tstring<40>,
+              D=Ticket,
+              Compare=cmp,
+              Key=tstring<40>
+          ]
+  f:\documents\test - 副本\acm\clrbackend\DB.hpp(51): note: 参见对正在编译的 类 模板 实例化 "BPTree<K,D,Compare>" 的引用
+          with
+          [
+              K=tstring<40>,
+              D=Ticket,
+              Compare=cmp
+          ]
+  f:\documents\test - 副本\acm\clrbackend\DB.hpp(50): note: 编译 类 模板 成员函数 "void DB<tstring<40>,Ticket,cmp>::trunc(void)" 时
+  f:\documents\test - 副本\acm\clrbackend\backend.hpp(55): note: 参见对正在编译的函数 模板 实例化“void DB<tstring<40>,Ticket,cmp>::trunc(void)”的引用
+  f:\documents\test - 副本\acm\clrbackend\backend.hpp(22): note: 参见对正在编译的 类 模板 实例化 "DB<tstring<40>,Ticket,cmp>" 的引用
+f:\documents\test - 副本\acm\clrbackend\BPTree.hpp(633): warning C4018: “<”: 有符号/无符号不匹配
+  f:\documents\test - 副本\acm\clrbackend\BPTree.hpp(615): note: 编译 类 模板 成员函数 "BPTree<K,D,Compare>::retVal BPTree<K,D,Compare>::treeRemove(const Key &,BPTree<Key,D,Compare>::BPTNode *)" 时
+          with
+          [
+              K=tstring<40>,
+              D=Ticket,
+              Compare=cmp,
+              Key=tstring<40>
+          ]
+  f:\documents\test - 副本\acm\clrbackend\BPTree.hpp(985): note: 参见对正在编译的函数 模板 实例化“BPTree<K,D,Compare>::retVal BPTree<K,D,Compare>::treeRemove(const Key &,BPTree<Key,D,Compare>::BPTNode *)”的引用
+          with
+          [
+              K=tstring<40>,
+              D=Ticket,
+              Compare=cmp,
+              Key=tstring<40>
+          ]
+f:\documents\test - 副本\acm\clrbackend\BPTree.hpp(657): warning C4018: “<”: 有符号/无符号不匹配
+f:\documents\test - 副本\acm\clrbackend\BPTree.hpp(675): warning C4018: “<=”: 有符号/无符号不匹配
+f:\documents\test - 副本\acm\clrbackend\BPTree.hpp(676): warning C4018: “<=”: 有符号/无符号不匹配
+f:\documents\test - 副本\acm\clrbackend\BPTree.hpp(690): warning C4018: “<”: 有符号/无符号不匹配
+f:\documents\test - 副本\acm\clrbackend\BPTree.hpp(704): warning C4018: “<”: 有符号/无符号不匹配
+f:\documents\test - 副本\acm\clrbackend\BPTree.hpp(272): warning C4244: “=”: 从“std::streamoff”转换到“unsigned long”，可能丢失数据
+  f:\documents\test - 副本\acm\clrbackend\BPTree.hpp(260): note: 编译 类 模板 成员函数 "unsigned long BPTree<K,D,Compare>::writeData(const T *)" 时
+          with
+          [
+              K=tstring<20>,
+              D=char,
+              Compare=cmp,
+              T=char
+          ]
+  f:\documents\test - 副本\acm\clrbackend\BPTree.hpp(552): note: 参见对正在编译的函数 模板 实例化“unsigned long BPTree<K,D,Compare>::writeData(const T *)”的引用
+          with
+          [
+              K=tstring<20>,
+              D=char,
+              Compare=cmp,
+              T=char
+          ]
+f:\documents\test - 副本\acm\clrbackend\BPTree.hpp(227): warning C4244: “=”: 从“std::streamoff”转换到“unsigned long”，可能丢失数据
+  f:\documents\test - 副本\acm\clrbackend\BPTree.hpp(222): note: 编译 类 模板 成员函数 "bool BPTree<K,D,Compare>::writeNode(BPTree<K,D,Compare>::BPTNode *,unsigned long)" 时
+          with
+          [
+              K=tstring<20>,
+              D=char,
+              Compare=cmp
+          ]
+  f:\documents\test - 副本\acm\clrbackend\BPTree.hpp(554): note: 参见对正在编译的函数 模板 实例化“bool BPTree<K,D,Compare>::writeNode(BPTree<K,D,Compare>::BPTNode *,unsigned long)”的引用
+          with
+          [
+              K=tstring<20>,
+              D=char,
+              Compare=cmp
+          ]
+f:\documents\test - 副本\acm\clrbackend\BPTree.hpp(376): warning C4018: “<=”: 有符号/无符号不匹配
+  f:\documents\test - 副本\acm\clrbackend\BPTree.hpp(371): note: 编译 类 模板 成员函数 "BPTree<K,D,Compare>::retVal BPTree<K,D,Compare>::borrowFromLeft(BPTree<K,D,Compare>::BPTNode *,BPTree<K,D,Compare>::BPTNode *)" 时
+          with
+          [
+              K=tstring<40>,
+              D=Ticket,
+              Compare=cmp
+          ]
+  f:\documents\test - 副本\acm\clrbackend\BPTree.hpp(684): note: 参见对正在编译的函数 模板 实例化“BPTree<K,D,Compare>::retVal BPTree<K,D,Compare>::borrowFromLeft(BPTree<K,D,Compare>::BPTNode *,BPTree<K,D,Compare>::BPTNode *)”的引用
+          with
+          [
+              K=tstring<40>,
+              D=Ticket,
+              Compare=cmp
+          ]
+f:\documents\test - 副本\acm\clrbackend\BPTree.hpp(361): warning C4018: “<”: 有符号/无符号不匹配
+  f:\documents\test - 副本\acm\clrbackend\BPTree.hpp(354): note: 编译 类 模板 成员函数 "BPTree<K,D,Compare>::retVal BPTree<K,D,Compare>::borrowFromRight(BPTree<K,D,Compare>::BPTNode *,BPTree<K,D,Compare>::BPTNode *)" 时
+          with
+          [
+              K=tstring<40>,
+              D=Ticket,
+              Compare=cmp
+          ]
+  f:\documents\test - 副本\acm\clrbackend\BPTree.hpp(679): note: 参见对正在编译的函数 模板 实例化“BPTree<K,D,Compare>::retVal BPTree<K,D,Compare>::borrowFromRight(BPTree<K,D,Compare>::BPTNode *,BPTree<K,D,Compare>::BPTNode *)”的引用
+          with
+          [
+              K=tstring<40>,
+              D=Ticket,
+              Compare=cmp
+          ]
+f:\documents\test - 副本\acm\clrbackend\BPTree.hpp(338): warning C4018: “<”: 有符号/无符号不匹配
+  f:\documents\test - 副本\acm\clrbackend\BPTree.hpp(337): note: 编译 类 模板 成员函数 "bool BPTree<K,D,Compare>::mergeNode(BPTree<K,D,Compare>::BPTNode *,BPTree<K,D,Compare>::BPTNode *)" 时
+          with
+          [
+              K=tstring<40>,
+              D=Ticket,
+              Compare=cmp
+          ]
+  f:\documents\test - 副本\acm\clrbackend\BPTree.hpp(689): note: 参见对正在编译的函数 模板 实例化“bool BPTree<K,D,Compare>::mergeNode(BPTree<K,D,Compare>::BPTNode *,BPTree<K,D,Compare>::BPTNode *)”的引用
+          with
+          [
+              K=tstring<40>,
+              D=Ticket,
+              Compare=cmp
+          ]
+f:\documents\test - 副本\acm\clrbackend\bptree.hpp(613): warning C4715: “BPTree<tstring<20>,char,cmp>::treeInsertFirst”: 不是所有的控件路径都返回值
+f:\documents\test - 副本\acm\clrbackend\bptree.hpp(546): warning C4715: “BPTree<tstring<20>,char,cmp>::treeInsert”: 不是所有的控件路径都返回值
+f:\documents\test - 副本\acm\clrbackend\bptree.hpp(613): warning C4715: “BPTree<tstring<30>,tic,cmp>::treeInsertFirst”: 不是所有的控件路径都返回值
+f:\documents\test - 副本\acm\clrbackend\bptree.hpp(546): warning C4715: “BPTree<tstring<30>,tic,cmp>::treeInsert”: 不是所有的控件路径都返回值
+f:\documents\test - 副本\acm\clrbackend\bptree.hpp(613): warning C4715: “BPTree<tstring<40>,Ticket,cmp>::treeInsertFirst”: 不是所有的控件路径都返回值
+f:\documents\test - 副本\acm\clrbackend\bptree.hpp(546): warning C4715: “BPTree<tstring<40>,Ticket,cmp>::treeInsert”: 不是所有的控件路径都返回值
+f:\documents\test - 副本\acm\clrbackend\bptree.hpp(613): warning C4715: “BPTree<tstring<60>,char,cmp>::treeInsertFirst”: 不是所有的控件路径都返回值
+f:\documents\test - 副本\acm\clrbackend\bptree.hpp(546): warning C4715: “BPTree<tstring<60>,char,cmp>::treeInsert”: 不是所有的控件路径都返回值
+f:\documents\test - 副本\acm\clrbackend\bptree.hpp(613): warning C4715: “BPTree<tstring<20>,Train,cmp>::treeInsertFirst”: 不是所有的控件路径都返回值
+f:\documents\test - 副本\acm\clrbackend\bptree.hpp(546): warning C4715: “BPTree<tstring<20>,Train,cmp>::treeInsert”: 不是所有的控件路径都返回值
+  LINK : 已指定 /LTCG，但不需要生成代码；从链接命令行中移除 /LTCG 以提高链接器性能
+  ClrBackend.vcxproj -> F:\Documents\test - 副本\ACM\x64\Release\ClrBackend.dll

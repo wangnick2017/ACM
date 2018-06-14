@@ -1,0 +1,25 @@
+﻿<Window x:Class="ACM.Dialogs.DgAbout"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ACM"
+        mc:Ignorable="d"
+        Title="ACM" Height="373" Width="379" Style="{StaticResource ACMDialogStyle}" WindowStartupLocation="CenterScreen" Loaded="Window_Loaded" ResizeMode="NoResize">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="200*"/>
+            <RowDefinition Height="110*"/>
+        </Grid.RowDefinitions>
+        <Image Source="/ACM;component/Images/test6.ico" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,20"/>
+        <TextBlock HorizontalAlignment="Center" Grid.Row="1" VerticalAlignment="Top" FontSize="12" Margin="0,5,0,0">
+            奇妙的火车膜法师<LineBreak/>
+            Amazing Choochoo Mogician<LineBreak/>
+            ACM团队   版本1.0<LineBreak/>
+            ACM Team   Version 1.0
+        </TextBlock>
+        <Button IsDefault="True" Style="{StaticResource PageButtonStyle}" Margin="0,5" Padding="30,8" Content="{DynamicResource ok}" HorizontalAlignment="Center" Grid.Row="1" VerticalAlignment="Bottom" Click="Button_Click" />
+        <Rectangle Fill="#FF674AB7" Height="5" Width="220"  VerticalAlignment="Bottom" HorizontalAlignment="Center" />
+
+    </Grid>
+</Window>

@@ -1,0 +1,118 @@
+F:\Documents\Visual Studio 2017\Projects\ACM\ACM\bin\Debug\ACM.exe
+F:\Documents\Visual Studio 2017\Projects\ACM\ACM\bin\Debug\ACM.pdb
+F:\Documents\Visual Studio 2017\Projects\ACM\ACM\bin\Debug\ClrBackend.dll
+F:\Documents\Visual Studio 2017\Projects\ACM\ACM\bin\Debug\ClrBackend.pdb
+F:\Documents\Visual Studio 2017\Projects\ACM\ACM\obj\Debug\ACM.csprojResolveAssemblyReference.cache
+F:\Documents\Visual Studio 2017\Projects\ACM\ACM\obj\Debug\MainWindow.g.cs
+F:\Documents\Visual Studio 2017\Projects\ACM\ACM\obj\Debug\App.g.cs
+F:\Documents\Visual Studio 2017\Projects\ACM\ACM\obj\Debug\ACM_MarkupCompile.cache
+F:\Documents\Visual Studio 2017\Projects\ACM\ACM\obj\Debug\ACM_MarkupCompile.lref
+F:\Documents\Visual Studio 2017\Projects\ACM\ACM\obj\Debug\MainWindow.baml
+F:\Documents\Visual Studio 2017\Projects\ACM\ACM\obj\Debug\ACM.g.resources
+F:\Documents\Visual Studio 2017\Projects\ACM\ACM\obj\Debug\ACM.Properties.Resources.resources
+F:\Documents\Visual Studio 2017\Projects\ACM\ACM\obj\Debug\ACM.csproj.GenerateResource.Cache
+F:\Documents\Visual Studio 2017\Projects\ACM\ACM\obj\Debug\ACM.csproj.CoreCompileInputs.cache
+F:\Documents\Visual Studio 2017\Projects\ACM\ACM\obj\Debug\ACM.exe
+F:\Documents\Visual Studio 2017\Projects\ACM\ACM\obj\Debug\ACM.pdb
+F:\Documents\Visual Studio 2017\Projects\ACM\ACM\obj\Debug\Pages\PgUser.g.cs
+F:\Documents\Visual Studio 2017\Projects\ACM\ACM\obj\Debug\Pages\PgUser.baml
+F:\Documents\Visual Studio 2017\Projects\ACM\ACM\obj\Debug\Pages\PgLogin.g.cs
+F:\Documents\Visual Studio 2017\Projects\ACM\ACM\obj\Debug\Pages\PgRegister.g.cs
+F:\Documents\Visual Studio 2017\Projects\ACM\ACM\obj\Debug\Pages\PgLogin.baml
+F:\Documents\Visual Studio 2017\Projects\ACM\ACM\obj\Debug\Pages\PgRegister.baml
+F:\Documents\Visual Studio 2017\Projects\ACM\ACM\obj\Debug\Pages\PgAdmin.g.cs
+F:\Documents\Visual Studio 2017\Projects\ACM\ACM\obj\Debug\Pages\PgAdmin.baml
+F:\Documents\Visual Studio 2017\Projects\ACM\ACM\obj\Debug\Pages\PgMyTicket.g.cs
+F:\Documents\Visual Studio 2017\Projects\ACM\ACM\obj\Debug\Pages\PgProfile.g.cs
+F:\Documents\Visual Studio 2017\Projects\ACM\ACM\obj\Debug\Pages\PgQuery.g.cs
+F:\Documents\Visual Studio 2017\Projects\ACM\ACM\obj\Debug\Pages\PgTrains.g.cs
+F:\Documents\Visual Studio 2017\Projects\ACM\ACM\obj\Debug\Pages\PgUsers.g.cs
+F:\Documents\Visual Studio 2017\Projects\ACM\ACM\obj\Debug\Pages\PgMyTicket.baml
+F:\Documents\Visual Studio 2017\Projects\ACM\ACM\obj\Debug\Pages\PgProfile.baml
+F:\Documents\Visual Studio 2017\Projects\ACM\ACM\obj\Debug\Pages\PgQuery.baml
+F:\Documents\Visual Studio 2017\Projects\ACM\ACM\obj\Debug\Pages\PgTrains.baml
+F:\Documents\Visual Studio 2017\Projects\ACM\ACM\obj\Debug\Pages\PgUsers.baml
+F:\Documents\Visual Studio 2017\Projects\ACM\ACM\obj\Debug\PageTransitions\PageTransition.g.cs
+F:\Documents\Visual Studio 2017\Projects\ACM\ACM\obj\Debug\GeneratedInternalTypeHelper.g.cs
+F:\Documents\Visual Studio 2017\Projects\ACM\ACM\obj\Debug\PageTransitions\PageTransition.baml
+F:\Documents\Visual Studio 2017\Projects\ACM\ACM\obj\Debug\App.baml
+F:\Documents\Visual Studio 2017\Projects\ACM\ACM\bin\Debug\ACM.exe.config
+F:\Documents\Visual Studio 2017\Projects\ACM\ACM\obj\Debug\WindowsStyles.baml
+F:\Documents\Visual Studio 2017\Projects\ACM\ACM\obj\Debug\PagesStyles.baml
+F:\Documents\Visual Studio 2017\Projects\ACM\ACM\bin\Debug\Microsoft.Maps.MapControl.WPF.dll
+F:\Documents\Visual Studio 2017\Projects\ACM\ACM\bin\Debug\Microsoft.Maps.MapControl.WPF.xml
+F:\Documents\Visual Studio 2017\Projects\ACM\ACM\obj\Debug\Simple Styles.baml
+F:\Documents\Visual Studio 2017\Projects\ACM\ACM\obj\Debug\ListItem.g.cs
+F:\Documents\Visual Studio 2017\Projects\ACM\ACM\obj\Debug\ListItem.baml
+F:\Documents\Visual Studio 2017\Projects\ACM\ACM\obj\Debug\Pages\PgTrain.g.cs
+F:\Documents\Visual Studio 2017\Projects\ACM\ACM\obj\Debug\Pages\PgTrain.baml
+F:\Documents\Visual Studio 2017\Projects\ACM\ACM\obj\Debug\Dialogs\DgAbout.g.cs
+F:\Documents\Visual Studio 2017\Projects\ACM\ACM\obj\Debug\Dialogs\Dialog.g.cs
+F:\Documents\Visual Studio 2017\Projects\ACM\ACM\obj\Debug\Dialogs\DgAbout.baml
+F:\Documents\Visual Studio 2017\Projects\ACM\ACM\obj\Debug\Dialogs\Dialog.baml
+F:\Documents\Visual Studio 2017\Projects\ACM\ACM\obj\Debug\Dialogs\DgTicket.g.cs
+F:\Documents\Visual Studio 2017\Projects\ACM\ACM\obj\Debug\Dialogs\DgTicket.baml
+F:\Documents\Visual Studio 2017\Projects\ACM\ACM\obj\Debug\Dialogs\DgMap.g.cs
+F:\Documents\Visual Studio 2017\Projects\ACM\ACM\obj\Debug\Dialogs\DgMap.baml
+F:\Documents\Visual Studio 2017\Projects\ACM\ACM\obj\Debug\Dialogs\DgReg.g.cs
+F:\Documents\Visual Studio 2017\Projects\ACM\ACM\obj\Debug\Dialogs\DgReg.baml
+F:\Documents\test\ACM\ACM\bin\Debug\ACM.exe.config
+F:\Documents\test\ACM\ACM\bin\Debug\ACM.exe
+F:\Documents\test\ACM\ACM\bin\Debug\ACM.pdb
+F:\Documents\test\ACM\ACM\bin\Debug\ClrBackend.dll
+F:\Documents\test\ACM\ACM\bin\Debug\Microsoft.Maps.MapControl.WPF.dll
+F:\Documents\test\ACM\ACM\bin\Debug\ClrBackend.pdb
+F:\Documents\test\ACM\ACM\bin\Debug\Microsoft.Maps.MapControl.WPF.xml
+F:\Documents\test\ACM\ACM\obj\Debug\ACM.csprojResolveAssemblyReference.cache
+F:\Documents\test\ACM\ACM\obj\Debug\Simple Styles.baml
+F:\Documents\test\ACM\ACM\obj\Debug\Dialogs\DgAbout.g.cs
+F:\Documents\test\ACM\ACM\obj\Debug\Dialogs\DgTicket.g.cs
+F:\Documents\test\ACM\ACM\obj\Debug\Dialogs\DgReg.g.cs
+F:\Documents\test\ACM\ACM\obj\Debug\Dialogs\Dialog.g.cs
+F:\Documents\test\ACM\ACM\obj\Debug\ListItem.g.cs
+F:\Documents\test\ACM\ACM\obj\Debug\MainWindow.g.cs
+F:\Documents\test\ACM\ACM\obj\Debug\Pages\PgTrain.g.cs
+F:\Documents\test\ACM\ACM\obj\Debug\Pages\PgAdmin.g.cs
+F:\Documents\test\ACM\ACM\obj\Debug\Pages\PgLogin.g.cs
+F:\Documents\test\ACM\ACM\obj\Debug\Pages\PgMyTicket.g.cs
+F:\Documents\test\ACM\ACM\obj\Debug\Pages\PgProfile.g.cs
+F:\Documents\test\ACM\ACM\obj\Debug\Pages\PgQuery.g.cs
+F:\Documents\test\ACM\ACM\obj\Debug\Pages\PgRegister.g.cs
+F:\Documents\test\ACM\ACM\obj\Debug\Pages\PgTrains.g.cs
+F:\Documents\test\ACM\ACM\obj\Debug\Pages\PgUser.g.cs
+F:\Documents\test\ACM\ACM\obj\Debug\Pages\PgUsers.g.cs
+F:\Documents\test\ACM\ACM\obj\Debug\PageTransitions\PageTransition.g.cs
+F:\Documents\test\ACM\ACM\obj\Debug\Dialogs\DgMap.g.cs
+F:\Documents\test\ACM\ACM\obj\Debug\App.g.cs
+F:\Documents\test\ACM\ACM\obj\Debug\GeneratedInternalTypeHelper.g.cs
+F:\Documents\test\ACM\ACM\obj\Debug\ACM_MarkupCompile.cache
+F:\Documents\test\ACM\ACM\obj\Debug\ACM_MarkupCompile.lref
+F:\Documents\test\ACM\ACM\obj\Debug\App.baml
+F:\Documents\test\ACM\ACM\obj\Debug\Dialogs\DgAbout.baml
+F:\Documents\test\ACM\ACM\obj\Debug\Dialogs\DgTicket.baml
+F:\Documents\test\ACM\ACM\obj\Debug\Dialogs\DgReg.baml
+F:\Documents\test\ACM\ACM\obj\Debug\Dialogs\Dialog.baml
+F:\Documents\test\ACM\ACM\obj\Debug\Languages\EN.baml
+F:\Documents\test\ACM\ACM\obj\Debug\Languages\ZH.baml
+F:\Documents\test\ACM\ACM\obj\Debug\ListItem.baml
+F:\Documents\test\ACM\ACM\obj\Debug\MainWindow.baml
+F:\Documents\test\ACM\ACM\obj\Debug\Pages\PgTrain.baml
+F:\Documents\test\ACM\ACM\obj\Debug\Pages\PgAdmin.baml
+F:\Documents\test\ACM\ACM\obj\Debug\Pages\PgLogin.baml
+F:\Documents\test\ACM\ACM\obj\Debug\Pages\PgMyTicket.baml
+F:\Documents\test\ACM\ACM\obj\Debug\Pages\PgProfile.baml
+F:\Documents\test\ACM\ACM\obj\Debug\Pages\PgQuery.baml
+F:\Documents\test\ACM\ACM\obj\Debug\Pages\PgRegister.baml
+F:\Documents\test\ACM\ACM\obj\Debug\Pages\PgTrains.baml
+F:\Documents\test\ACM\ACM\obj\Debug\Pages\PgUser.baml
+F:\Documents\test\ACM\ACM\obj\Debug\Pages\PgUsers.baml
+F:\Documents\test\ACM\ACM\obj\Debug\PageTransitions\PageTransition.baml
+F:\Documents\test\ACM\ACM\obj\Debug\PagesStyles.baml
+F:\Documents\test\ACM\ACM\obj\Debug\Dialogs\DgMap.baml
+F:\Documents\test\ACM\ACM\obj\Debug\WindowsStyles.baml
+F:\Documents\test\ACM\ACM\obj\Debug\ACM.g.resources
+F:\Documents\test\ACM\ACM\obj\Debug\ACM.Properties.Resources.resources
+F:\Documents\test\ACM\ACM\obj\Debug\ACM.csproj.GenerateResource.Cache
+F:\Documents\test\ACM\ACM\obj\Debug\ACM.csproj.CoreCompileInputs.cache
+F:\Documents\test\ACM\ACM\obj\Debug\ACM.exe
+F:\Documents\test\ACM\ACM\obj\Debug\ACM.pdb

@@ -1,0 +1,70 @@
+﻿<UserControl x:Class="ACM.Pages.PgTrains"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:ACM.Pages"
+      mc:Ignorable="d" 
+      MinHeight="558" MinWidth="872">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Button Style="{StaticResource ButtonBackStyle}" HorizontalAlignment="Left" Margin="20" Click="btnBack_Click"/>
+        <Grid Margin="40" Grid.Row="1" Background="#FF8188CE">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="2*"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="1*"/>
+            </Grid.RowDefinitions>
+            <Grid.Effect>
+                <DropShadowEffect Color="#FFC4C7E8" BlurRadius="15" ShadowDepth="10"/>
+            </Grid.Effect>
+            <TextBox x:Name="txtID" Style="{StaticResource PageTextBoxStyle}" Width="150" TextWrapping="Wrap" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" MaxLength="10" FontSize="20" Height="37" Margin="0,10"/>
+            <Button x:Name="btnQuery" Style="{StaticResource PageButtonSimpleBig}" Content="{DynamicResource pgtrains.btnquery}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="44" Grid.Row="3" Foreground="White" Click="btnQuery_Click">
+                <Button.Effect>
+                    <DropShadowEffect Color="#FFAEAEAE"/>
+                </Button.Effect>
+            </Button>
+            <TextBlock Text="{DynamicResource pgtrains.txtid}" VerticalAlignment="Center" Grid.Row="1" HorizontalAlignment="Center" FontSize="20" Foreground="White" Margin="0,5">
+                <TextBlock.Effect>
+                    <DropShadowEffect Color="#FFAAA6A6" BlurRadius="3" ShadowDepth="3"/>
+                </TextBlock.Effect>
+            </TextBlock>
+            <Image Source="/ACM;component/Images/big.png" Width="200" >
+                <Image.Effect>
+                    <DropShadowEffect Color="#FFB2B2B2" BlurRadius="10" ShadowDepth="10"/>
+                </Image.Effect>
+            </Image>
+        </Grid>
+        <Grid Grid.Column="1" Margin="40" Grid.Row="1" Background="#FF8188CE">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="12*"/>
+                <RowDefinition Height="27*"/>
+            </Grid.RowDefinitions>
+            <Grid.Effect>
+                <DropShadowEffect Color="#FFC4C7E8" BlurRadius="15" ShadowDepth="10"/>
+            </Grid.Effect>
+            <Button x:Name="btnNew" Style="{StaticResource PageButtonSimpleBig}" Content="{DynamicResource pgtrains.btnnew}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="44" Foreground="White" Click="btnNew_Click">
+                <Button.Effect>
+                    <DropShadowEffect Color="#FFAEAEAE" BlurRadius="10"/>
+                </Button.Effect>
+            </Button>
+            <Image Grid.Row="1" Source="/ACM;component/Images/cc.png" Width="200">
+                <Image.Effect>
+                    <DropShadowEffect Color="#FFB2B2B2" BlurRadius="10" ShadowDepth="10"/>
+                </Image.Effect>
+            </Image>
+
+        </Grid>
+        <Label Content="{DynamicResource pgtrains.labmanage}" Grid.ColumnSpan="2" FontSize="36" FontWeight="Light" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+    </Grid>
+</UserControl>

@@ -1,0 +1,198 @@
+﻿<Window x:Class="ACM.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ACM"
+        xmlns:pageTransitions="clr-namespace:ACM.PageTransitions"
+        mc:Ignorable="d"
+        Style="{StaticResource ACMWindowStyle}"
+        Title="{DynamicResource main.title}"
+        Height="700" Width="900" MinWidth="900" MinHeight="700" WindowStartupLocation="CenterScreen" Loaded="Window_Loaded" SizeChanged="Window_SizeChanged" Closed="Window_Closed">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="77*"/>
+            <RowDefinition Height="66"/>
+            <RowDefinition Height="100*"/>
+            <RowDefinition Height="66"/>
+            <RowDefinition Height="100*"/>
+            <RowDefinition Height="66"/>
+            <RowDefinition Height="100*"/>
+            <RowDefinition Height="56"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        
+        <Rectangle Fill="#FF23D392" Grid.Row="7" Grid.ColumnSpan="6" Height="4" VerticalAlignment="Center" Margin="0,30,0,32"/>
+
+        <Rectangle Fill="#FFA7FBDC" Margin="5,5,5,15" Grid.Row="7" StrokeThickness="2" Stroke="#FF23D392"/>
+        <Rectangle Fill="#FFA7FBDC" Margin="5,5,5,15" Grid.Row="7" StrokeThickness="2" Grid.Column="1" Stroke="#FF23D392"/>
+        <Rectangle Fill="#FFA7FBDC" Margin="5,5,5,15" Grid.Row="7" StrokeThickness="2" Grid.Column="2" Stroke="#FF23D392"/>
+        <Rectangle Fill="#FFA7FBDC" Margin="5,5,5,15" Grid.Row="7" StrokeThickness="2" Grid.Column="3" Stroke="#FF23D392"/>
+        <Rectangle Fill="#FFA7FBDC" Margin="5,5,5,15" Grid.Row="7" StrokeThickness="2" Grid.Column="4" Stroke="#FF23D392"/>
+        <Rectangle Fill="#FFA7FBDC" Margin="5,5,5,15" Grid.Row="7" StrokeThickness="2" Grid.Column="5" Stroke="#FF23D392"/>
+        <Grid Grid.Row="7" VerticalAlignment="Bottom" Height="16">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+            <Ellipse Fill="#FFA7FBDC" Width="16" Height="16" Stroke="#FF5AECB6" StrokeThickness="5" Grid.Column="1"/>
+            <Ellipse Fill="#FFA7FBDC" Grid.Column="3" Width="16" Height="16" Stroke="#FF5AECB6" StrokeThickness="5"/>
+        </Grid>
+        <Grid Grid.Row="7" Grid.Column="1" VerticalAlignment="Bottom" Height="16">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+            <Ellipse Fill="#FFA7FBDC" Width="16" Height="16" Stroke="#FF5AECB6" StrokeThickness="5" Grid.Column="1"/>
+            <Ellipse Fill="#FFA7FBDC" Grid.Column="3" Width="16" Height="16" Stroke="#FF5AECB6" StrokeThickness="5"/>
+        </Grid>
+        <Grid Grid.Row="7" Grid.Column="2" VerticalAlignment="Bottom" Height="16">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+            <Ellipse Fill="#FFA7FBDC" Width="16" Height="16" Stroke="#FF5AECB6" StrokeThickness="5" Grid.Column="1"/>
+            <Ellipse Fill="#FFA7FBDC" Grid.Column="3" Width="16" Height="16" Stroke="#FF5AECB6" StrokeThickness="5"/>
+        </Grid>
+        <Grid Grid.Row="7" Grid.Column="3" VerticalAlignment="Bottom" Height="16">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+            <Ellipse Fill="#FFA7FBDC" Width="16" Height="16" Stroke="#FF5AECB6" StrokeThickness="5" Grid.Column="1"/>
+            <Ellipse Fill="#FFA7FBDC" Grid.Column="3" Width="16" Height="16" Stroke="#FF5AECB6" StrokeThickness="5"/>
+        </Grid>
+        <Grid Grid.Row="7" Grid.Column="4" VerticalAlignment="Bottom" Height="16">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+            <Ellipse Fill="#FFA7FBDC" Width="16" Height="16" Stroke="#FF5AECB6" StrokeThickness="5" Grid.Column="1"/>
+            <Ellipse Fill="#FFA7FBDC" Grid.Column="3" Width="16" Height="16" Stroke="#FF5AECB6" StrokeThickness="5"/>
+        </Grid>
+        <Grid Grid.Row="7" Grid.Column="5" VerticalAlignment="Bottom" Height="16">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+            <Ellipse Fill="#FFA7FBDC" Width="16" Height="16" Stroke="#FF5AECB6" StrokeThickness="5" Grid.Column="1"/>
+            <Ellipse Fill="#FFA7FBDC" Grid.Column="3" Width="16" Height="16" Stroke="#FF5AECB6" StrokeThickness="5"/>
+        </Grid>
+
+        <Rectangle x:Name="pan" Fill="#FFA7ECFB" Grid.Row="1" Grid.ColumnSpan="6" Height="4" VerticalAlignment="Bottom"/>
+        <Grid x:Name="stk" VerticalAlignment="Bottom" Grid.Row="1" Grid.ColumnSpan="6" Height="16">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+            <Ellipse Fill="#FFA7ECFB" Width="16" Height="16" Stroke="#FF6FD3EA" StrokeThickness="5" HorizontalAlignment="Left" Grid.Column="1"/>
+            <Ellipse Fill="#FFA7ECFB" Width="16" Height="16" Stroke="#FF6FD3EA" StrokeThickness="5" HorizontalAlignment="Right" Grid.Column="3"/>
+        </Grid>
+        <Rectangle x:Name="rec" Fill="#FFA7ECFB" Margin="5,5,5,15" Grid.ColumnSpan="6" StrokeThickness="2" Grid.Row="1" Stroke="#FF80ABF5"/>
+
+        <Rectangle x:Name="pan2" Fill="#FFA7ECFB" Grid.Row="3" Grid.ColumnSpan="6" Height="4" VerticalAlignment="Bottom"/>
+        <Grid x:Name="stk2" VerticalAlignment="Bottom" Grid.Row="3" Grid.ColumnSpan="6" Height="16">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+            <Ellipse Fill="#FFA7ECFB" Width="16" Height="16" Stroke="#FF6FD3EA" StrokeThickness="5" HorizontalAlignment="Left" Grid.Column="1"/>
+            <Ellipse Fill="#FFA7ECFB" Width="16" Height="16" Stroke="#FF6FD3EA" StrokeThickness="5" HorizontalAlignment="Right" Grid.Column="3"/>
+        </Grid>
+        <Rectangle x:Name="rec2" Fill="#FFA7ECFB" Margin="5,5,5,15" Grid.ColumnSpan="6" StrokeThickness="2" Grid.Row="3" Stroke="#FF80ABF5"/>
+
+        <Rectangle x:Name="pan3" Fill="#FFA7ECFB" Grid.Row="5" Grid.ColumnSpan="6" Height="4" VerticalAlignment="Bottom"/>
+        <Grid x:Name="stk3" VerticalAlignment="Bottom" Grid.Row="5" Grid.ColumnSpan="6" Height="16">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+            <Ellipse Fill="#FFA7ECFB" Width="16" Height="16" Stroke="#FF6FD3EA" StrokeThickness="5" HorizontalAlignment="Left" Grid.Column="1"/>
+            <Ellipse Fill="#FFA7ECFB" Width="16" Height="16" Stroke="#FF6FD3EA" StrokeThickness="5" HorizontalAlignment="Right" Grid.Column="3"/>
+        </Grid>
+        <Rectangle x:Name="rec3" Fill="#FFA7ECFB" Margin="5,5,5,15" Grid.ColumnSpan="6" StrokeThickness="2" Grid.Row="5" Stroke="#FF80ABF5"/>
+
+        <pageTransitions:PageTransition x:Name="pageTransition" Grid.ColumnSpan="6" Grid.RowSpan="7"/>
+        <StackPanel Grid.Row="8" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,0" Grid.ColumnSpan="2" Grid.Column="2" >
+            <Label x:Name="labAbout" Cursor="Hand" Content="{DynamicResource main.about}" Foreground="#FF1EA7F7" Padding="5,5" Margin="3,0" MouseDown="LabAbout_MouseDown">
+                <Label.Style>
+                    <Style TargetType="{x:Type Label}">
+                        <Style.Triggers>
+                            <EventTrigger RoutedEvent="MouseEnter">
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <ColorAnimation Storyboard.TargetProperty="Foreground.Color" To="#FF674AB7" Duration="0:0:0.05"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger>
+                            <EventTrigger RoutedEvent="MouseLeave">
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <ColorAnimation Storyboard.TargetProperty="Foreground.Color"  Duration="0:0:0.05"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Label.Style>
+            </Label>
+        </StackPanel>
+        <Label Content="Label" Cursor="Hand" x:Name="lang" HorizontalAlignment="Left" Foreground="#FF1EA7F7" Margin="5,0,0,5" Grid.Row="8" VerticalAlignment="Bottom" MouseUp="Lang_MouseUp">
+            <Label.Style>
+                <Style TargetType="{x:Type Label}">
+                    <Style.Triggers>
+                        <EventTrigger RoutedEvent="MouseEnter">
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <ColorAnimation Storyboard.TargetProperty="Foreground.Color" To="#FF674AB7" Duration="0:0:0.05"/>
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+                        <EventTrigger RoutedEvent="MouseLeave">
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <ColorAnimation Storyboard.TargetProperty="Foreground.Color"  Duration="0:0:0.05"/>
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Label.Style>
+        </Label>
+    </Grid>
+</Window>

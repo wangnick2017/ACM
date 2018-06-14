@@ -1,0 +1,79 @@
+﻿<ListBoxItem x:Class="ACM.ListItem"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ACM"
+             mc:Ignorable="d" 
+             MinHeight="80" MinWidth="630" Cursor="Hand" Style="{StaticResource PageListBoxItemStyle}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" MouseDoubleClick="ListBoxItem_MouseDoubleClick">
+    <Grid Margin="2">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="41*"/>
+            <RowDefinition Height="43*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="98*"/>
+            <ColumnDefinition Width="36*"/>
+            <ColumnDefinition Width="84*"/>
+            <ColumnDefinition Width="155*"/>
+            <ColumnDefinition Width="70*"/>
+            <ColumnDefinition Width="70*"/>
+            <ColumnDefinition Width="70*"/>
+            <ColumnDefinition Width="70*"/>
+            <ColumnDefinition Width="70*"/>
+            <ColumnDefinition Width="70*"/>
+            <ColumnDefinition Width="70*"/>
+            <ColumnDefinition Width="70*"/>
+            <ColumnDefinition Width="70*"/>
+            <ColumnDefinition Width="70*"/>
+        </Grid.ColumnDefinitions>
+        <TextBlock x:Name="ID" Grid.RowSpan="2" Margin="10,0" TextWrapping="Wrap" Text="trainID" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="18"/>
+        <TextBlock Grid.Column="1" Text="{DynamicResource item.start}" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="#FFEE1D1D" FontSize="16" Margin="10,0"/>
+        <TextBlock Grid.Column="1" Text="{DynamicResource item.end}" VerticalAlignment="Center" Grid.Row="1" HorizontalAlignment="Center" Foreground="#FF12B21A" FontSize="16" Margin="10,0"/>
+        <TextBlock x:Name="locFrom" Grid.Column="2" Text="上海虹桥" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="16" Margin="10,0"/>
+        <TextBlock x:Name="locTo" Grid.Column="2" Text="安庆" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="16" Margin="10,0"/>
+        <TextBlock x:Name="timeFrom" Grid.Column="3" Text="2018-06-30 12:00" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="16" Margin="10,0"/>
+        <TextBlock x:Name="timeTo" Grid.Column="3" Grid.Row="1" Text="2018-06-30 16:00" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="16" Margin="10,0"/>
+        <StackPanel x:Name="stk1" Grid.Column="4" Orientation="Vertical" Grid.RowSpan="2" Margin="10,0">
+            <TextBlock x:Name="nm1" Text="一等" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,10"/>
+            <TextBlock x:Name="cnt1" HorizontalAlignment="Center" VerticalAlignment="Center"><Run Text="0张"/><LineBreak/><Run Text="¥200.0"/></TextBlock>
+        </StackPanel>
+        <StackPanel x:Name="stk2" Grid.Column="5" Orientation="Vertical" Grid.RowSpan="2" Margin="10,0">
+            <TextBlock x:Name="nm2" Text="二等" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,10"/>
+            <TextBlock x:Name="cnt2" HorizontalAlignment="Center" VerticalAlignment="Center"><Run Text="0张"/><LineBreak/><Run Text="¥200.0"/></TextBlock>
+        </StackPanel>
+        <StackPanel x:Name="stk3" Grid.Column="6" Orientation="Vertical" Grid.RowSpan="2" Margin="10,0">
+            <TextBlock x:Name="nm3" Text="特等" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,10"/>
+            <TextBlock x:Name="cnt3" HorizontalAlignment="Center" VerticalAlignment="Center"><Run Text="0张"/><LineBreak/><Run Text="¥200.0"/></TextBlock>
+        </StackPanel>
+        <StackPanel x:Name="stk4" Grid.Column="7" Orientation="Vertical" Grid.RowSpan="2" Margin="10,0">
+            <TextBlock x:Name="nm4" Text="商务" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,10"/>
+            <TextBlock x:Name="cnt4" HorizontalAlignment="Center" VerticalAlignment="Center"><Run Text="0张"/><LineBreak/><Run Text="¥200.0"/></TextBlock>
+        </StackPanel>
+        <StackPanel x:Name="stk5" Grid.Column="8" Orientation="Vertical" Grid.RowSpan="2" Margin="10,0">
+            <TextBlock x:Name="nm5" Text="软卧" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,10"/>
+            <TextBlock x:Name="cnt5" HorizontalAlignment="Center" VerticalAlignment="Center"><Run Text="0张"/><LineBreak/><Run Text="¥200.0"/></TextBlock>
+        </StackPanel>
+        <StackPanel x:Name="stk6" Grid.Column="9" Orientation="Vertical" Grid.RowSpan="2" Margin="10,0">
+            <TextBlock x:Name="nm6" Text="硬卧" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,10"/>
+            <TextBlock x:Name="cnt6" HorizontalAlignment="Center" VerticalAlignment="Center"><Run Text="0张"/><LineBreak/><Run Text="¥200.0"/></TextBlock>
+        </StackPanel>
+        <StackPanel x:Name="stk7" Grid.Column="10" Orientation="Vertical" Grid.RowSpan="2" Margin="10,0">
+            <TextBlock x:Name="nm7" Text="高级软卧" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,10"/>
+            <TextBlock x:Name="cnt7" HorizontalAlignment="Center" VerticalAlignment="Center"><Run Text="0张"/><LineBreak/><Run Text="¥200.0"/></TextBlock>
+        </StackPanel>
+        <StackPanel x:Name="stk8" Grid.Column="11" Orientation="Vertical" Grid.RowSpan="2" Margin="10,0">
+            <TextBlock x:Name="nm8" Text="无座" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,10"/>
+            <TextBlock x:Name="cnt8" HorizontalAlignment="Center" VerticalAlignment="Center"><Run Text="0张"/><LineBreak/><Run Text="¥200.0"/></TextBlock>
+        </StackPanel>
+        <StackPanel x:Name="stk9" Grid.Column="12" Orientation="Vertical" Grid.RowSpan="2" Margin="10,0">
+            <TextBlock x:Name="nm9" Text="软座" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,10"/>
+            <TextBlock x:Name="cnt9" HorizontalAlignment="Center" VerticalAlignment="Center"><Run Text="0张"/><LineBreak/><Run Text="¥200.0"/></TextBlock>
+        </StackPanel>
+        <StackPanel x:Name="stk10" Grid.Column="13" Orientation="Vertical" Grid.RowSpan="2" Margin="10,0">
+            <TextBlock x:Name="nm10" Text="硬座" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,10"/>
+            <TextBlock x:Name="cnt10" HorizontalAlignment="Center" VerticalAlignment="Center"><Run Text="0张"/><LineBreak/><Run Text="¥200.0"/></TextBlock>
+        </StackPanel>
+
+    </Grid>
+</ListBoxItem>

@@ -1,0 +1,120 @@
+﻿<UserControl x:Class="ACM.Pages.PgTrain"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:ACM.Pages"
+      mc:Ignorable="d" 
+      MinHeight="558" MinWidth="872">
+    <UserControl.Resources>
+        <Style x:Key="DataGridStyle" TargetType="{x:Type DataGrid}">
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+            <Setter Property="BorderBrush" Value="#FF674AB7"/>
+            <Setter Property="BorderThickness" Value="2"/>
+            <Setter Property="RowDetailsVisibilityMode" Value="VisibleWhenSelected"/>
+            <Setter Property="ScrollViewer.CanContentScroll" Value="true"/>
+            <Setter Property="ScrollViewer.PanningMode" Value="Both"/>
+            <Setter Property="Stylus.IsFlicksEnabled" Value="False"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type DataGrid}">
+                        <Border CornerRadius="8" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" Padding="{TemplateBinding Padding}" SnapsToDevicePixels="True">
+                            <ScrollViewer Margin="4" x:Name="DG_ScrollViewer" Focusable="false">
+                                <ScrollViewer.Template>
+                                    <ControlTemplate TargetType="{x:Type ScrollViewer}">
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="Auto"/>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="Auto"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="Auto"/>
+                                                <RowDefinition Height="*"/>
+                                                <RowDefinition Height="Auto"/>
+                                            </Grid.RowDefinitions>
+                                            <Button Command="{x:Static DataGrid.SelectAllCommand}" Focusable="false" Style="{DynamicResource {ComponentResourceKey ResourceId=DataGridSelectAllButtonStyle, TypeInTargetAssembly={x:Type DataGrid}}}" Visibility="{Binding HeadersVisibility, ConverterParameter={x:Static DataGridHeadersVisibility.All}, Converter={x:Static DataGrid.HeadersVisibilityConverter}, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}" Width="{Binding CellsPanelHorizontalOffset, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"/>
+                                            <DataGridColumnHeadersPresenter x:Name="PART_ColumnHeadersPresenter" Grid.Column="1" Visibility="{Binding HeadersVisibility, ConverterParameter={x:Static DataGridHeadersVisibility.Column}, Converter={x:Static DataGrid.HeadersVisibilityConverter}, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"/>
+                                            <ScrollContentPresenter x:Name="PART_ScrollContentPresenter" CanContentScroll="{TemplateBinding CanContentScroll}" Grid.ColumnSpan="2" Grid.Row="1"/>
+                                            <ScrollBar Style="{StaticResource SimpleScrollBar}" x:Name="PART_VerticalScrollBar" Grid.Column="2" Maximum="{TemplateBinding ScrollableHeight}" Orientation="Vertical" Grid.Row="1" Visibility="{TemplateBinding ComputedVerticalScrollBarVisibility}" Value="{Binding VerticalOffset, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}" ViewportSize="{TemplateBinding ViewportHeight}"/>
+                                            <Grid Grid.Column="1" Grid.Row="2">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="{Binding NonFrozenColumnsViewportHorizontalOffset, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"/>
+                                                    <ColumnDefinition Width="*"/>
+                                                </Grid.ColumnDefinitions>
+                                                <ScrollBar Style="{StaticResource SimpleScrollBar}" x:Name="PART_HorizontalScrollBar" Grid.Column="1" Maximum="{TemplateBinding ScrollableWidth}" Orientation="Horizontal" Visibility="{TemplateBinding ComputedHorizontalScrollBarVisibility}" Value="{Binding HorizontalOffset, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}" ViewportSize="{TemplateBinding ViewportWidth}"/>
+                                            </Grid>
+                                        </Grid>
+                                    </ControlTemplate>
+                                </ScrollViewer.Template>
+                                <ItemsPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                            </ScrollViewer>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <MultiTrigger>
+                    <MultiTrigger.Conditions>
+                        <Condition Property="IsGrouping" Value="true"/>
+                        <Condition Property="VirtualizingPanel.IsVirtualizingWhenGrouping" Value="false"/>
+                    </MultiTrigger.Conditions>
+                    <Setter Property="ScrollViewer.CanContentScroll" Value="false"/>
+                </MultiTrigger>
+            </Style.Triggers>
+        </Style>
+    </UserControl.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Button Style="{StaticResource ButtonBackStyle}" x:Name="btnBack" HorizontalAlignment="Left" Margin="20,20,0,20" VerticalAlignment="Center" Click="btnBack_Click"/>
+        <StackPanel Orientation="Horizontal" Grid.Row="1" Margin="0,10" HorizontalAlignment="Center">
+            <Label Content="{DynamicResource pgtrain.labid}" FontSize="20" FontWeight="Light" Margin="10,0"/>
+            <TextBox Style="{StaticResource PageTextBoxStyle}" x:Name="txtID" MaxLength="10" Width="120" Height="35" FontSize="16"/>
+            <Label Content="{DynamicResource pgtrain.labname}" FontSize="20" FontWeight="Light" Margin="20,0,10,0"/>
+            <TextBox Style="{StaticResource PageTextBoxStyle}" x:Name="txtName" MaxLength="10" Width="120" Height="35" FontSize="16"/>
+        </StackPanel>
+        <DataGrid x:Name="grid" Margin="30,30,30,10" Grid.Row="4" FontSize="18" CanUserReorderColumns="False" CanUserSortColumns="False" CanUserResizeRows="False" CanUserAddRows="False" CanUserDeleteRows="False" Style="{DynamicResource DataGridStyle}" HorizontalGridLinesBrush="#FF674AB7" VerticalGridLinesBrush="#FF674AB7"/>
+        <StackPanel x:Name="stack" HorizontalAlignment="Center" Orientation="Horizontal" Margin="0,10" Grid.Row="2">
+            <RadioButton Content="G" Margin="3,0" Style="{DynamicResource PageRadioButton}"/>
+            <RadioButton Content="D" Margin="3,0" Style="{DynamicResource PageRadioButton}"/>
+            <RadioButton Content="C" Margin="3,0" Style="{DynamicResource PageRadioButton}"/>
+            <RadioButton Content="Z" Margin="3,0" Style="{DynamicResource PageRadioButton}"/>
+            <RadioButton Content="T" Margin="3,0" Style="{DynamicResource PageRadioButton}"/>
+            <RadioButton Content="K" Margin="3,0" Style="{DynamicResource PageRadioButton}"/>
+            <RadioButton Content="O" Margin="3,0" Style="{DynamicResource PageRadioButton}"/>
+        </StackPanel>
+        <WrapPanel x:Name="stack2" HorizontalAlignment="Center" Orientation="Horizontal" Grid.Row="3">
+            <CheckBox Content="{DynamicResource all}" Margin="5,0" Style="{StaticResource PageCheckBoxStyle}" Checked="CheckBox2_Checked" FontSize="18" VerticalContentAlignment="Center"/>
+            <CheckBox Content="一等座" Margin="2,0" Style="{StaticResource PageCheckBoxStyle}" Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked" FontSize="17" VerticalContentAlignment="Center"/>
+            <CheckBox Content="二等座" Margin="2,0" Style="{StaticResource PageCheckBoxStyle}" Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked" FontSize="17" VerticalContentAlignment="Center"/>
+            <CheckBox Content="特等座" Margin="2,0" Style="{StaticResource PageCheckBoxStyle}" Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked" FontSize="17" VerticalContentAlignment="Center"/>
+            <CheckBox Content="商务座" Margin="2,0" Style="{StaticResource PageCheckBoxStyle}" Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked" FontSize="17" VerticalContentAlignment="Center"/>
+            <CheckBox Content="软卧" Margin="2,0" Style="{StaticResource PageCheckBoxStyle}" Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked" FontSize="17" VerticalContentAlignment="Center"/>
+            <CheckBox Content="硬卧" Margin="2,0" Style="{StaticResource PageCheckBoxStyle}" Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked" FontSize="17" VerticalContentAlignment="Center"/>
+            <CheckBox Content="高级软卧" Margin="2,0" Style="{StaticResource PageCheckBoxStyle}" Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked" FontSize="17" VerticalContentAlignment="Center"/>
+            <CheckBox Content="无座" Margin="2,0" Style="{StaticResource PageCheckBoxStyle}" Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked" FontSize="17" VerticalContentAlignment="Center"/>
+            <CheckBox Content="软座" Margin="2,0" Style="{StaticResource PageCheckBoxStyle}" Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked" FontSize="17" VerticalContentAlignment="Center"/>
+            <CheckBox Content="硬座" Margin="2,0" Style="{StaticResource PageCheckBoxStyle}" Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked" FontSize="17" VerticalContentAlignment="Center"/>
+        </WrapPanel>
+        <Label x:Name="title" HorizontalAlignment="Center" Content="{DynamicResource pgtrain.title}" VerticalAlignment="Center" FontSize="36" FontWeight="Light"/>
+        <StackPanel Grid.Row="5" Orientation="Horizontal" Margin="0,0,30,20" HorizontalAlignment="Right">
+            <Button x:Name="btnModify" Style="{StaticResource PageButtonStyle}" Content="{DynamicResource pgtrain.btnmodify1}" Margin="10,0" Padding="20,8" FontSize="16" Click="btnModify_Click"/>
+            <Button x:Name="btnSale" Style="{StaticResource PageButtonStyle}" Content="{DynamicResource pgtrain.btnsale}" Margin="10,0" Padding="20,8" FontSize="16" Click="btnSale_Click"/>
+            <Button x:Name="btnSubmit" Style="{StaticResource PageButtonStyle}" Content="{DynamicResource pgtrain.btnsubmit}" Margin="10,0" Padding="20,8" FontSize="16" Click="btnSubmit_Click"/>
+            <Button x:Name="btnDelete" Style="{StaticResource PageButtonStyle}" Content="{DynamicResource pgtrain.btndelete}" Margin="10,0" Padding="20,8" FontSize="16" Click="btnDelete_Click"/>
+        </StackPanel>
+        <StackPanel Margin="30,0,0,20" Orientation="Horizontal" Grid.Row="5" HorizontalAlignment="Left">
+            <Button x:Name="btnAdd" Style="{StaticResource ResourceKey=ButtonBackStyle}" Content="+" HorizontalAlignment="Left" Click="btnAdd_Click" FontFamily="Microsoft YaHei UI" FontSize="24"/>
+            <Button x:Name="btnRemove" Style="{StaticResource ResourceKey=ButtonBackStyle}" Content="-"  HorizontalAlignment="Left" Click="btnRemove_Click" FontFamily="Microsoft YaHei UI" FontSize="24"/>
+        </StackPanel>
+    </Grid>
+</UserControl>

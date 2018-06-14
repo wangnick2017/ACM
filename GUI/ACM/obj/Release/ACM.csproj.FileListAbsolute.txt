@@ -1,0 +1,165 @@
+F:\Documents\Visual Studio 2017\Projects\ACM\ACM\obj\Release\MainWindow.g.cs
+F:\Documents\Visual Studio 2017\Projects\ACM\ACM\obj\Release\Pages\PgAdmin.g.cs
+F:\Documents\Visual Studio 2017\Projects\ACM\ACM\obj\Release\Pages\PgLogin.g.cs
+F:\Documents\Visual Studio 2017\Projects\ACM\ACM\obj\Release\Pages\PgMyTicket.g.cs
+F:\Documents\Visual Studio 2017\Projects\ACM\ACM\obj\Release\Pages\PgProfile.g.cs
+F:\Documents\Visual Studio 2017\Projects\ACM\ACM\obj\Release\Pages\PgQuery.g.cs
+F:\Documents\Visual Studio 2017\Projects\ACM\ACM\obj\Release\Pages\PgRegister.g.cs
+F:\Documents\Visual Studio 2017\Projects\ACM\ACM\obj\Release\Pages\PgTrains.g.cs
+F:\Documents\Visual Studio 2017\Projects\ACM\ACM\obj\Release\Pages\PgUser.g.cs
+F:\Documents\Visual Studio 2017\Projects\ACM\ACM\obj\Release\Pages\PgUsers.g.cs
+F:\Documents\Visual Studio 2017\Projects\ACM\ACM\obj\Release\PageTransitions\PageTransition.g.cs
+F:\Documents\Visual Studio 2017\Projects\ACM\ACM\obj\Release\App.g.cs
+F:\Documents\Visual Studio 2017\Projects\ACM\ACM\obj\Release\GeneratedInternalTypeHelper.g.cs
+F:\Documents\Visual Studio 2017\Projects\ACM\ACM\obj\Release\ACM_MarkupCompile.cache
+F:\Documents\Visual Studio 2017\Projects\ACM\ACM\obj\Release\ACM_MarkupCompile.lref
+F:\Documents\Visual Studio 2017\Projects\ACM\ACM\bin\Release\ACM.exe.config
+F:\Documents\Visual Studio 2017\Projects\ACM\ACM\bin\Release\ACM.exe
+F:\Documents\Visual Studio 2017\Projects\ACM\ACM\bin\Release\ACM.pdb
+F:\Documents\Visual Studio 2017\Projects\ACM\ACM\bin\Release\ClrBackend.dll
+F:\Documents\Visual Studio 2017\Projects\ACM\ACM\bin\Release\ClrBackend.pdb
+F:\Documents\Visual Studio 2017\Projects\ACM\ACM\obj\Release\ACM.csprojResolveAssemblyReference.cache
+F:\Documents\Visual Studio 2017\Projects\ACM\ACM\obj\Release\App.baml
+F:\Documents\Visual Studio 2017\Projects\ACM\ACM\obj\Release\MainWindow.baml
+F:\Documents\Visual Studio 2017\Projects\ACM\ACM\obj\Release\Pages\PgAdmin.baml
+F:\Documents\Visual Studio 2017\Projects\ACM\ACM\obj\Release\Pages\PgLogin.baml
+F:\Documents\Visual Studio 2017\Projects\ACM\ACM\obj\Release\Pages\PgMyTicket.baml
+F:\Documents\Visual Studio 2017\Projects\ACM\ACM\obj\Release\Pages\PgProfile.baml
+F:\Documents\Visual Studio 2017\Projects\ACM\ACM\obj\Release\Pages\PgQuery.baml
+F:\Documents\Visual Studio 2017\Projects\ACM\ACM\obj\Release\Pages\PgRegister.baml
+F:\Documents\Visual Studio 2017\Projects\ACM\ACM\obj\Release\Pages\PgTrains.baml
+F:\Documents\Visual Studio 2017\Projects\ACM\ACM\obj\Release\Pages\PgUser.baml
+F:\Documents\Visual Studio 2017\Projects\ACM\ACM\obj\Release\Pages\PgUsers.baml
+F:\Documents\Visual Studio 2017\Projects\ACM\ACM\obj\Release\PageTransitions\PageTransition.baml
+F:\Documents\Visual Studio 2017\Projects\ACM\ACM\obj\Release\PagesStyles.baml
+F:\Documents\Visual Studio 2017\Projects\ACM\ACM\obj\Release\WindowsStyles.baml
+F:\Documents\Visual Studio 2017\Projects\ACM\ACM\obj\Release\ACM.g.resources
+F:\Documents\Visual Studio 2017\Projects\ACM\ACM\obj\Release\ACM.Properties.Resources.resources
+F:\Documents\Visual Studio 2017\Projects\ACM\ACM\obj\Release\ACM.csproj.GenerateResource.Cache
+F:\Documents\Visual Studio 2017\Projects\ACM\ACM\obj\Release\ACM.csproj.CoreCompileInputs.cache
+F:\Documents\Visual Studio 2017\Projects\ACM\ACM\obj\Release\ACM.exe
+F:\Documents\Visual Studio 2017\Projects\ACM\ACM\obj\Release\ACM.pdb
+F:\Documents\test\ACM\ACM\bin\Release\ACM.exe.config
+F:\Documents\test\ACM\ACM\bin\Release\ACM.exe
+F:\Documents\test\ACM\ACM\bin\Release\ACM.pdb
+F:\Documents\test\ACM\ACM\bin\Release\ClrBackend.dll
+F:\Documents\test\ACM\ACM\bin\Release\Microsoft.Maps.MapControl.WPF.dll
+F:\Documents\test\ACM\ACM\bin\Release\ClrBackend.pdb
+F:\Documents\test\ACM\ACM\bin\Release\Microsoft.Maps.MapControl.WPF.xml
+F:\Documents\test\ACM\ACM\obj\Release\ACM.csprojResolveAssemblyReference.cache
+F:\Documents\test\ACM\ACM\obj\Release\Languages\EN.baml
+F:\Documents\test\ACM\ACM\obj\Release\Languages\ZH.baml
+F:\Documents\test\ACM\ACM\obj\Release\Simple Styles.baml
+F:\Documents\test\ACM\ACM\obj\Release\Dialogs\DgAbout.g.cs
+F:\Documents\test\ACM\ACM\obj\Release\Dialogs\DgTicket.g.cs
+F:\Documents\test\ACM\ACM\obj\Release\Dialogs\DgReg.g.cs
+F:\Documents\test\ACM\ACM\obj\Release\Dialogs\Dialog.g.cs
+F:\Documents\test\ACM\ACM\obj\Release\ListItem.g.cs
+F:\Documents\test\ACM\ACM\obj\Release\MainWindow.g.cs
+F:\Documents\test\ACM\ACM\obj\Release\Pages\PgTrain.g.cs
+F:\Documents\test\ACM\ACM\obj\Release\Pages\PgAdmin.g.cs
+F:\Documents\test\ACM\ACM\obj\Release\Pages\PgLogin.g.cs
+F:\Documents\test\ACM\ACM\obj\Release\Pages\PgMyTicket.g.cs
+F:\Documents\test\ACM\ACM\obj\Release\Pages\PgProfile.g.cs
+F:\Documents\test\ACM\ACM\obj\Release\Pages\PgQuery.g.cs
+F:\Documents\test\ACM\ACM\obj\Release\Pages\PgRegister.g.cs
+F:\Documents\test\ACM\ACM\obj\Release\Pages\PgTrains.g.cs
+F:\Documents\test\ACM\ACM\obj\Release\Pages\PgUser.g.cs
+F:\Documents\test\ACM\ACM\obj\Release\Pages\PgUsers.g.cs
+F:\Documents\test\ACM\ACM\obj\Release\PageTransitions\PageTransition.g.cs
+F:\Documents\test\ACM\ACM\obj\Release\Dialogs\DgMap.g.cs
+F:\Documents\test\ACM\ACM\obj\Release\App.g.cs
+F:\Documents\test\ACM\ACM\obj\Release\GeneratedInternalTypeHelper.g.cs
+F:\Documents\test\ACM\ACM\obj\Release\ACM_MarkupCompile.cache
+F:\Documents\test\ACM\ACM\obj\Release\ACM_MarkupCompile.lref
+F:\Documents\test\ACM\ACM\obj\Release\App.baml
+F:\Documents\test\ACM\ACM\obj\Release\Dialogs\DgAbout.baml
+F:\Documents\test\ACM\ACM\obj\Release\Dialogs\DgTicket.baml
+F:\Documents\test\ACM\ACM\obj\Release\Dialogs\DgReg.baml
+F:\Documents\test\ACM\ACM\obj\Release\Dialogs\Dialog.baml
+F:\Documents\test\ACM\ACM\obj\Release\ListItem.baml
+F:\Documents\test\ACM\ACM\obj\Release\MainWindow.baml
+F:\Documents\test\ACM\ACM\obj\Release\Pages\PgTrain.baml
+F:\Documents\test\ACM\ACM\obj\Release\Pages\PgAdmin.baml
+F:\Documents\test\ACM\ACM\obj\Release\Pages\PgLogin.baml
+F:\Documents\test\ACM\ACM\obj\Release\Pages\PgMyTicket.baml
+F:\Documents\test\ACM\ACM\obj\Release\Pages\PgProfile.baml
+F:\Documents\test\ACM\ACM\obj\Release\Pages\PgQuery.baml
+F:\Documents\test\ACM\ACM\obj\Release\Pages\PgRegister.baml
+F:\Documents\test\ACM\ACM\obj\Release\Pages\PgTrains.baml
+F:\Documents\test\ACM\ACM\obj\Release\Pages\PgUser.baml
+F:\Documents\test\ACM\ACM\obj\Release\Pages\PgUsers.baml
+F:\Documents\test\ACM\ACM\obj\Release\PageTransitions\PageTransition.baml
+F:\Documents\test\ACM\ACM\obj\Release\PagesStyles.baml
+F:\Documents\test\ACM\ACM\obj\Release\Dialogs\DgMap.baml
+F:\Documents\test\ACM\ACM\obj\Release\WindowsStyles.baml
+F:\Documents\test\ACM\ACM\obj\Release\ACM.g.resources
+F:\Documents\test\ACM\ACM\obj\Release\ACM.Properties.Resources.resources
+F:\Documents\test\ACM\ACM\obj\Release\ACM.csproj.GenerateResource.Cache
+F:\Documents\test\ACM\ACM\obj\Release\ACM.csproj.CoreCompileInputs.cache
+F:\Documents\test\ACM\ACM\obj\Release\ACM.exe
+F:\Documents\test\ACM\ACM\obj\Release\ACM.pdb
+F:\Documents\test - 副本\ACM\ACM\obj\Release\ACM.csprojResolveAssemblyReference.cache
+F:\Documents\test - 副本\ACM\ACM\obj\Release\Languages\EN.baml
+F:\Documents\test - 副本\ACM\ACM\obj\Release\Languages\ZH.baml
+F:\Documents\test - 副本\ACM\ACM\obj\Release\Simple Styles.baml
+F:\Documents\test - 副本\ACM\ACM\obj\Release\Dialogs\DgAbout.g.cs
+F:\Documents\test - 副本\ACM\ACM\obj\Release\Dialogs\DgTicket.g.cs
+F:\Documents\test - 副本\ACM\ACM\obj\Release\Dialogs\DgReg.g.cs
+F:\Documents\test - 副本\ACM\ACM\obj\Release\Dialogs\Dialog.g.cs
+F:\Documents\test - 副本\ACM\ACM\obj\Release\ListItem.g.cs
+F:\Documents\test - 副本\ACM\ACM\obj\Release\MainWindow.g.cs
+F:\Documents\test - 副本\ACM\ACM\obj\Release\Pages\PgTrain.g.cs
+F:\Documents\test - 副本\ACM\ACM\obj\Release\Pages\PgAdmin.g.cs
+F:\Documents\test - 副本\ACM\ACM\obj\Release\Pages\PgLogin.g.cs
+F:\Documents\test - 副本\ACM\ACM\obj\Release\Pages\PgMyTicket.g.cs
+F:\Documents\test - 副本\ACM\ACM\obj\Release\Pages\PgProfile.g.cs
+F:\Documents\test - 副本\ACM\ACM\obj\Release\Pages\PgQuery.g.cs
+F:\Documents\test - 副本\ACM\ACM\obj\Release\Pages\PgRegister.g.cs
+F:\Documents\test - 副本\ACM\ACM\obj\Release\Pages\PgTrains.g.cs
+F:\Documents\test - 副本\ACM\ACM\obj\Release\Pages\PgUser.g.cs
+F:\Documents\test - 副本\ACM\ACM\obj\Release\Pages\PgUsers.g.cs
+F:\Documents\test - 副本\ACM\ACM\obj\Release\PageTransitions\PageTransition.g.cs
+F:\Documents\test - 副本\ACM\ACM\obj\Release\Dialogs\DgMap.g.cs
+F:\Documents\test - 副本\ACM\ACM\obj\Release\App.g.cs
+F:\Documents\test - 副本\ACM\ACM\obj\Release\GeneratedInternalTypeHelper.g.cs
+F:\Documents\test - 副本\ACM\ACM\obj\Release\ACM_MarkupCompile.cache
+F:\Documents\test - 副本\ACM\ACM\obj\Release\ACM_MarkupCompile.lref
+F:\Documents\test - 副本\ACM\ACM\obj\Release\App.baml
+F:\Documents\test - 副本\ACM\ACM\obj\Release\Dialogs\DgAbout.baml
+F:\Documents\test - 副本\ACM\ACM\obj\Release\Dialogs\DgTicket.baml
+F:\Documents\test - 副本\ACM\ACM\obj\Release\Dialogs\DgReg.baml
+F:\Documents\test - 副本\ACM\ACM\obj\Release\Dialogs\Dialog.baml
+F:\Documents\test - 副本\ACM\ACM\obj\Release\ListItem.baml
+F:\Documents\test - 副本\ACM\ACM\obj\Release\MainWindow.baml
+F:\Documents\test - 副本\ACM\ACM\obj\Release\Pages\PgTrain.baml
+F:\Documents\test - 副本\ACM\ACM\obj\Release\Pages\PgAdmin.baml
+F:\Documents\test - 副本\ACM\ACM\obj\Release\Pages\PgLogin.baml
+F:\Documents\test - 副本\ACM\ACM\obj\Release\Pages\PgMyTicket.baml
+F:\Documents\test - 副本\ACM\ACM\obj\Release\Pages\PgProfile.baml
+F:\Documents\test - 副本\ACM\ACM\obj\Release\Pages\PgQuery.baml
+F:\Documents\test - 副本\ACM\ACM\obj\Release\Pages\PgRegister.baml
+F:\Documents\test - 副本\ACM\ACM\obj\Release\Pages\PgTrains.baml
+F:\Documents\test - 副本\ACM\ACM\obj\Release\Pages\PgUser.baml
+F:\Documents\test - 副本\ACM\ACM\obj\Release\Pages\PgUsers.baml
+F:\Documents\test - 副本\ACM\ACM\obj\Release\PageTransitions\PageTransition.baml
+F:\Documents\test - 副本\ACM\ACM\obj\Release\PagesStyles.baml
+F:\Documents\test - 副本\ACM\ACM\obj\Release\Dialogs\DgMap.baml
+F:\Documents\test - 副本\ACM\ACM\obj\Release\WindowsStyles.baml
+F:\Documents\test - 副本\ACM\ACM\obj\Release\ACM.g.resources
+F:\Documents\test - 副本\ACM\ACM\obj\Release\ACM.Properties.Resources.resources
+F:\Documents\test - 副本\ACM\ACM\obj\Release\ACM.csproj.GenerateResource.Cache
+F:\Documents\test - 副本\ACM\ACM\obj\Release\ACM.csproj.CoreCompileInputs.cache
+F:\Documents\test - 副本\ACM\ACM\obj\Release\ACM.exe.manifest
+F:\Documents\test - 副本\ACM\ACM\obj\Release\ACM.exe
+F:\Documents\test - 副本\ACM\ACM\obj\Release\ACM.pdb
+F:\Documents\test - 副本\ACM\ACM\bin\Release\ACM.exe.config
+F:\Documents\test - 副本\ACM\ACM\bin\Release\ACM.exe.manifest
+F:\Documents\test - 副本\ACM\ACM\bin\Release\ACM.application
+F:\Documents\test - 副本\ACM\ACM\bin\Release\ACM.exe
+F:\Documents\test - 副本\ACM\ACM\bin\Release\ACM.pdb
+F:\Documents\test - 副本\ACM\ACM\bin\Release\ClrBackend.dll
+F:\Documents\test - 副本\ACM\ACM\bin\Release\Microsoft.Maps.MapControl.WPF.dll
+F:\Documents\test - 副本\ACM\ACM\bin\Release\ClrBackend.pdb
+F:\Documents\test - 副本\ACM\ACM\bin\Release\Microsoft.Maps.MapControl.WPF.xml
+F:\Documents\test - 副本\ACM\ACM\obj\Release\ACM.application

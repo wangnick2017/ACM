@@ -1,0 +1,91 @@
+﻿  ClrBackend.cpp
+f:\documents\visual studio 2017\projects\acm\clrbackend\clrbackend.h(3): error C2871: “System”: 具有该名称的命名空间不存在
+f:\documents\visual studio 2017\projects\acm\clrbackend\clrbackend.h(4): error C2653: “System”: 不是类或命名空间名称
+f:\documents\visual studio 2017\projects\acm\clrbackend\clrbackend.h(4): error C2871: “Generic”: 具有该名称的命名空间不存在
+f:\documents\visual studio 2017\projects\acm\clrbackend\clrbackend.h(6): error C2059: 语法错误:“public”
+f:\documents\visual studio 2017\projects\acm\clrbackend\clrbackend.h(7): error C2143: 语法错误: 缺少“;”(在“{”的前面)
+f:\documents\visual studio 2017\projects\acm\clrbackend\clrbackend.h(7): error C2447: “{”: 缺少函数标题(是否是老式的形式表?)
+f:\documents\visual studio 2017\projects\acm\clrbackend\clrbackend.h(16): error C2059: 语法错误:“public”
+f:\documents\visual studio 2017\projects\acm\clrbackend\clrbackend.h(17): error C2143: 语法错误: 缺少“;”(在“{”的前面)
+f:\documents\visual studio 2017\projects\acm\clrbackend\clrbackend.h(17): error C2447: “{”: 缺少函数标题(是否是老式的形式表?)
+f:\documents\visual studio 2017\projects\acm\clrbackend\clrbackend.h(28): error C2059: 语法错误:“public”
+f:\documents\visual studio 2017\projects\acm\clrbackend\clrbackend.h(29): error C2143: 语法错误: 缺少“;”(在“{”的前面)
+f:\documents\visual studio 2017\projects\acm\clrbackend\clrbackend.h(29): error C2447: “{”: 缺少函数标题(是否是老式的形式表?)
+f:\documents\visual studio 2017\projects\acm\clrbackend\clrbackend.h(38): error C2059: 语法错误:“public”
+f:\documents\visual studio 2017\projects\acm\clrbackend\clrbackend.h(39): error C2143: 语法错误: 缺少“;”(在“{”的前面)
+f:\documents\visual studio 2017\projects\acm\clrbackend\clrbackend.h(39): error C2447: “{”: 缺少函数标题(是否是老式的形式表?)
+f:\documents\visual studio 2017\projects\acm\clrbackend\clrbackend.h(52): error C2059: 语法错误:“public”
+f:\documents\visual studio 2017\projects\acm\clrbackend\clrbackend.h(53): error C2143: 语法错误: 缺少“;”(在“{”的前面)
+f:\documents\visual studio 2017\projects\acm\clrbackend\clrbackend.h(53): error C2447: “{”: 缺少函数标题(是否是老式的形式表?)
+f:\documents\visual studio 2017\projects\acm\clrbackend\clrbackend.cpp(36): error C2143: 语法错误: 缺少“;”(在“^”的前面)
+f:\documents\visual studio 2017\projects\acm\clrbackend\clrbackend.cpp(36): error C4430: 缺少类型说明符 - 假定为 int。注意: C++ 不支持默认 int
+f:\documents\visual studio 2017\projects\acm\clrbackend\clrbackend.cpp(36): error C3193: “^”: 需要“/clr”或“/ZW”命令行选项
+f:\documents\visual studio 2017\projects\acm\clrbackend\clrbackend.cpp(37): error C4430: 缺少类型说明符 - 假定为 int。注意: C++ 不支持默认 int
+f:\documents\visual studio 2017\projects\acm\clrbackend\clrbackend.cpp(37): error C2059: 语法错误:“{”
+f:\documents\visual studio 2017\projects\acm\clrbackend\clrbackend.cpp(37): error C2143: 语法错误: 缺少“;”(在“{”的前面)
+f:\documents\visual studio 2017\projects\acm\clrbackend\clrbackend.cpp(37): error C2447: “{”: 缺少函数标题(是否是老式的形式表?)
+f:\documents\visual studio 2017\projects\acm\clrbackend\clrbackend.cpp(47): error C2143: 语法错误: 缺少“;”(在“^”的前面)
+f:\documents\visual studio 2017\projects\acm\clrbackend\clrbackend.cpp(47): error C4430: 缺少类型说明符 - 假定为 int。注意: C++ 不支持默认 int
+f:\documents\visual studio 2017\projects\acm\clrbackend\clrbackend.cpp(47): error C3193: “^”: 需要“/clr”或“/ZW”命令行选项
+f:\documents\visual studio 2017\projects\acm\clrbackend\clrbackend.cpp(48): error C4430: 缺少类型说明符 - 假定为 int。注意: C++ 不支持默认 int
+f:\documents\visual studio 2017\projects\acm\clrbackend\clrbackend.cpp(48): error C2059: 语法错误:“{”
+f:\documents\visual studio 2017\projects\acm\clrbackend\clrbackend.cpp(48): error C2143: 语法错误: 缺少“;”(在“{”的前面)
+f:\documents\visual studio 2017\projects\acm\clrbackend\clrbackend.cpp(48): error C2447: “{”: 缺少函数标题(是否是老式的形式表?)
+f:\documents\visual studio 2017\projects\acm\clrbackend\clrbackend.cpp(71): error C2143: 语法错误: 缺少“;”(在“^”的前面)
+f:\documents\visual studio 2017\projects\acm\clrbackend\clrbackend.cpp(71): error C4430: 缺少类型说明符 - 假定为 int。注意: C++ 不支持默认 int
+f:\documents\visual studio 2017\projects\acm\clrbackend\clrbackend.cpp(71): error C3193: “^”: 需要“/clr”或“/ZW”命令行选项
+f:\documents\visual studio 2017\projects\acm\clrbackend\clrbackend.cpp(72): error C4430: 缺少类型说明符 - 假定为 int。注意: C++ 不支持默认 int
+f:\documents\visual studio 2017\projects\acm\clrbackend\clrbackend.cpp(72): error C2059: 语法错误:“{”
+f:\documents\visual studio 2017\projects\acm\clrbackend\clrbackend.cpp(72): error C2143: 语法错误: 缺少“;”(在“{”的前面)
+f:\documents\visual studio 2017\projects\acm\clrbackend\clrbackend.cpp(72): error C2447: “{”: 缺少函数标题(是否是老式的形式表?)
+f:\documents\visual studio 2017\projects\acm\clrbackend\clrbackend.cpp(87): error C2065: “s”: 未声明的标识符
+f:\documents\visual studio 2017\projects\acm\clrbackend\clrbackend.cpp(88): error C2448: “GetChars”: 函数样式初始值设定项类似函数定义
+f:\documents\visual studio 2017\projects\acm\clrbackend\clrbackend.cpp(97): error C2653: “User”: 不是类或命名空间名称
+f:\documents\visual studio 2017\projects\acm\clrbackend\clrbackend.cpp(98): error C4430: 缺少类型说明符 - 假定为 int。注意: C++ 不支持默认 int
+f:\documents\visual studio 2017\projects\acm\clrbackend\clrbackend.cpp(99): warning C4508: “User”: 函数应返回一个值；假定“void”返回类型
+f:\documents\visual studio 2017\projects\acm\clrbackend\clrbackend.cpp(101): error C2510: “User”:“::”的左边必须是类/结构/联合
+f:\documents\visual studio 2017\projects\acm\clrbackend\clrbackend.cpp(101): error C2065: “Int32”: 未声明的标识符
+f:\documents\visual studio 2017\projects\acm\clrbackend\clrbackend.cpp(101): error C2146: 语法错误: 缺少“)”(在标识符“id”的前面)
+f:\documents\visual studio 2017\projects\acm\clrbackend\clrbackend.cpp(102): error C2143: 语法错误: 缺少“;”(在“{”的前面)
+f:\documents\visual studio 2017\projects\acm\clrbackend\clrbackend.cpp(102): error C2447: “{”: 缺少函数标题(是否是老式的形式表?)
+f:\documents\visual studio 2017\projects\acm\clrbackend\clrbackend.cpp(112): error C2825: 'Ticket': 当后面跟“::”时必须为类或命名空间
+f:\documents\visual studio 2017\projects\acm\clrbackend\clrbackend.cpp(112): error C2510: “Ticket”:“::”的左边必须是类/结构/联合
+f:\documents\visual studio 2017\projects\acm\clrbackend\clrbackend.cpp(113): error C4430: 缺少类型说明符 - 假定为 int。注意: C++ 不支持默认 int
+f:\documents\visual studio 2017\projects\acm\clrbackend\clrbackend.cpp(113): error C2365: “Ticket”: 重定义；以前的定义是“数据变量”
+  f:\documents\visual studio 2017\projects\acm\clrbackend\clrbackend.cpp(47): note: 参见“Ticket”的声明
+f:\documents\visual studio 2017\projects\acm\clrbackend\clrbackend.cpp(116): error C2825: 'Station': 当后面跟“::”时必须为类或命名空间
+f:\documents\visual studio 2017\projects\acm\clrbackend\clrbackend.cpp(116): error C2510: “Station”:“::”的左边必须是类/结构/联合
+f:\documents\visual studio 2017\projects\acm\clrbackend\clrbackend.cpp(117): error C4430: 缺少类型说明符 - 假定为 int。注意: C++ 不支持默认 int
+f:\documents\visual studio 2017\projects\acm\clrbackend\clrbackend.cpp(117): error C2365: “Station”: 重定义；以前的定义是“数据变量”
+  f:\documents\visual studio 2017\projects\acm\clrbackend\clrbackend.cpp(71): note: 参见“Station”的声明
+f:\documents\visual studio 2017\projects\acm\clrbackend\clrbackend.cpp(120): error C2653: “Train”: 不是类或命名空间名称
+f:\documents\visual studio 2017\projects\acm\clrbackend\clrbackend.cpp(121): error C4430: 缺少类型说明符 - 假定为 int。注意: C++ 不支持默认 int
+f:\documents\visual studio 2017\projects\acm\clrbackend\clrbackend.cpp(122): warning C4508: “Train”: 函数应返回一个值；假定“void”返回类型
+f:\documents\visual studio 2017\projects\acm\clrbackend\clrbackend.cpp(124): error C2510: “Train”:“::”的左边必须是类/结构/联合
+f:\documents\visual studio 2017\projects\acm\clrbackend\clrbackend.cpp(125): error C4430: 缺少类型说明符 - 假定为 int。注意: C++ 不支持默认 int
+f:\documents\visual studio 2017\projects\acm\clrbackend\clrbackend.cpp(127): error C2065: “trainID”: 未声明的标识符
+f:\documents\visual studio 2017\projects\acm\clrbackend\clrbackend.cpp(128): error C2065: “name”: 未声明的标识符
+f:\documents\visual studio 2017\projects\acm\clrbackend\clrbackend.cpp(129): error C2065: “catalog”: 未声明的标识符
+f:\documents\visual studio 2017\projects\acm\clrbackend\clrbackend.cpp(130): error C2065: “numStation”: 未声明的标识符
+f:\documents\visual studio 2017\projects\acm\clrbackend\clrbackend.cpp(131): error C2065: “numPrice”: 未声明的标识符
+f:\documents\visual studio 2017\projects\acm\clrbackend\clrbackend.cpp(132): error C2065: “namePrice”: 未声明的标识符
+f:\documents\visual studio 2017\projects\acm\clrbackend\clrbackend.cpp(132): error C2065: “gcnew”: 未声明的标识符
+f:\documents\visual studio 2017\projects\acm\clrbackend\clrbackend.cpp(132): error C2146: 语法错误: 缺少“;”(在标识符“array”的前面)
+f:\documents\visual studio 2017\projects\acm\clrbackend\clrbackend.cpp(132): error C2065: “array”: 未声明的标识符
+f:\documents\visual studio 2017\projects\acm\clrbackend\clrbackend.cpp(132): error C2059: 语法错误:“>”
+f:\documents\visual studio 2017\projects\acm\clrbackend\clrbackend.cpp(133): error C2065: “numPrice”: 未声明的标识符
+f:\documents\visual studio 2017\projects\acm\clrbackend\clrbackend.cpp(135): error C2065: “namePrice”: 未声明的标识符
+f:\documents\visual studio 2017\projects\acm\clrbackend\clrbackend.cpp(137): error C2065: “stations”: 未声明的标识符
+f:\documents\visual studio 2017\projects\acm\clrbackend\clrbackend.cpp(137): error C2065: “gcnew”: 未声明的标识符
+f:\documents\visual studio 2017\projects\acm\clrbackend\clrbackend.cpp(137): error C2146: 语法错误: 缺少“;”(在标识符“List”的前面)
+f:\documents\visual studio 2017\projects\acm\clrbackend\clrbackend.cpp(137): error C2065: “List”: 未声明的标识符
+f:\documents\visual studio 2017\projects\acm\clrbackend\clrbackend.cpp(137): error C2059: 语法错误:“>”
+f:\documents\visual studio 2017\projects\acm\clrbackend\clrbackend.cpp(138): error C2065: “numStation”: 未声明的标识符
+f:\documents\visual studio 2017\projects\acm\clrbackend\clrbackend.cpp(140): error C2065: “stations”: 未声明的标识符
+f:\documents\visual studio 2017\projects\acm\clrbackend\clrbackend.cpp(140): error C2227: “->Add”的左边必须指向类/结构/联合/泛型类型
+  f:\documents\visual studio 2017\projects\acm\clrbackend\clrbackend.cpp(140): note: 类型是“unknown-type”
+f:\documents\visual studio 2017\projects\acm\clrbackend\clrbackend.cpp(140): error C2065: “numPrice”: 未声明的标识符
+f:\documents\visual studio 2017\projects\acm\clrbackend\clrbackend.cpp(143): warning C4508: “Train”: 函数应返回一个值；假定“void”返回类型
+f:\documents\visual studio 2017\projects\acm\clrbackend\clrbackend.cpp(146): fatal error C1903: 无法从以前的错误中恢复；正在停止编译
+  Backend.cpp
+  正在生成代码...
