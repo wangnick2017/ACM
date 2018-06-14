@@ -49,7 +49,7 @@ B+树的实现思路大同小异，本次实现主要是使用了WIkipedia的实
 
 ---
 
-![img](/home/kstarxin/Documents/90938166.jpg)
+![img](90938166.jpg)
 
 ​											一棵五阶B+树
 
