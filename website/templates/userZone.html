@@ -1,0 +1,475 @@
+{% extends "layout.html" %}
+
+{% block css_files %}
+<link href="{{ url_for('static', filename='userZone.css') }}" rel="stylesheet">
+{% endblock %}
+
+{% block navbar_left %}
+<ul class="nav navbar-nav">
+  <li><a href="{{ url_for('home') }}">首页</a></li>
+  <li><a href="{{url_for('queryRes')}}">余票查询</a></li>
+  <li><a href="https://github.com/KSXGroup/stupidTrainTicketingWebsite">源码</a></li>
+  {% if user_name %}
+  <li class="dropdown">
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">我的车票<span class="caret"></span></a>
+    <ul class="dropdown-menu">
+    <li><a href="{{url_for('queryRes')}}">车票查询预订</a></li>
+    <li><a href="{{url_for('userZone')}}?status=openQueryOrder">订单操作</a></li>
+    <li role="separator" class="divider"></li>
+    <li class="dropdown-header"></li>
+    <li><a href="{{url_for('userZone')}}">个人空间</a></li>
+    </ul>
+  </li>
+  {% endif %}
+</ul>
+{% endblock %}
+
+{% block navbar_right %}
+{% if not user_name %}
+<ul class="nav navbar-nav navbar-right">
+  <li><a href="{{ url_for('signin') }}">登录</a></li>
+  <li><a href="{{ url_for('signup') }}">注册</a></li>
+</ul>
+{% else %}
+<ul class="nav navbar-nav navbar-right">
+  <li class="dropdown">
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ user_name }}<span class="caret"></span></a>
+    <ul class="dropdown-menu">
+    <li><a href="{{ url_for('userZone')}}">个人空间</a></li>
+    <li><a href="{{ url_for('userZone')}}?status=userInfo">用户信息</a></li>
+      <li role="separator" class="divider"></li>
+      <li><a href="{{url_for('userZone')}}?status=editUserInfo">修改信息</a></li>
+      <li><a href="{{ url_for('signout')}}">注销</a></li>
+    </ul>
+  </li>
+</ul>
+{% endif %}
+{% endblock %}
+
+
+{% block body %}
+{% if user_name and user_id %}
+<div class="row-fluid" style="margin-left:-15px;">
+    <div class="col-md-2 col-sm-3 col-lg-2 visible-sm visible-md visible-lg" style="margin-left:-15px;">
+        <div class="sidebar-nav">
+            <ul class="nav nav-list">
+                <li class="nav-header" style="font-weight:bold">车票操作</li>
+                <li class="active" style="margin-bottom:3%;margin-top:3%;">
+                    <a href="javascript:void(0)" onclick="openQueryOrder()">订单查询/退订</a></li>
+                <li class="nav-header" style="font-weight:bold">用户操作</li>
+                <li style="margin-top:3%;">
+                    <a href="javascript:void(0)" onclick="loadUserInfo()">个人信息</a></li>
+                <li>
+                    <a href="javascript:void(0)" onclick="loadChangePassword()">修改密码</a></li>
+            </ul>
+        </div>
+    </div>
+    <div name = "main-content">
+    </div>
+</div>
+{% else %}
+<div class = "container-fluid text-center" style="background-color:rgba(0,0,0,0.2);width:80%;margin-top:15%;padding:2.5%">
+    <div class="row">
+        <i class="glyphicon glyphicon-remove-circle col-md-4" style="margin-top:2%;font-size:600%;color:white;margin-left:10%"></i>
+        <h1 style="color:white; margin-top:4%;font-size:350%; margin-left:-10%;" class="col-md-5">请先登录</h1>
+    </div>
+</div>
+{% endif %}
+
+
+<div name="welcome-msg-template" class="hidden">
+     <div class="col-md-10 col-lg-10 col-sm-9" style="margin-left:-15px;">
+         <div class="container-fluid user-container">
+             <h1 style="color:white">欢迎回来,{{user_name}}</h1>
+             <div class = "row-fluid" style = "margin-top:5%">
+                 <li class = "glyphicon glyphicon-info-sign col-md-1" style="color:white;font-size:450%;margin-right:4%;"></li>
+                 <h3 class="row-fluid col-md-offset-1" style = "color:white">今天是<strong>{{current_time}}</strong></h3>
+                 <h3 class="row-fluid col-md-offset-1" style = "color:white">您可以购买<strong>{{final_time}}</strong>以内的车票</h3>
+             </div>
+         </div>
+     </div>
+ </div>
+
+<div name = "order-info-template" class = "hidden">
+    <div class="col-md-10 col-sm-9 col-lg-10" style="margin-left:-15px;">
+        <div class = "container-fluid user-container">
+           <h2 style="color:white" name="order_num">您的订单信息共有[ORDER_NUM]条</h2>
+        </div>
+        <div name="all-order" style="margin-top:1%" class = "panel-group">
+        </div>
+    </div>
+</div>
+
+<div class="hidden" name="panel-template">
+    <div class="panel panel-transparent" id="1-gpos">
+        <div class="panel-heading center-block">
+            <div class = "row center-block text-center" data-toggle="collapse" data-parent="#accordion" href="#gpos">
+                <h2 class="col-lg-2 col-md-2 col-sm-2"><strong>[train-name]</strong></h2>
+                <h3 class="col-lg-5 col-md-5 col-sm-5">
+                    [order-loc1] [order-date1] [order-time1]
+                </h3>
+                <h3 class="col-lg-5 col-md-5 col-sm-5">
+                    [order-loc2] [order-date2] [order-time2]
+                </h3>
+            </div>
+        </div>
+        <div id="gpos" class="panel-collapse collapse in">
+            <div class="panel-body">
+                <div class="row text-center center-block">
+                    <h4 class = "col-md-2 col-md-offset-2 col-lg-2 col-lg-offset-2 col-sm-2 col-sm-offset-2" style="font-size:150%">[tic-type]</h4>
+                    <h4 class = "col-md-2 col-lg-2 col-sm-2" style="font-size:150%">[order-num]张</h4>
+                    <h4 class = "col-md-4 col-lg-4 col-sm-4" style="font-size:150%">¥[tot-price]</h4>
+                    <button class="btn btn-normal btn-refund" id="gpos-tictypepos" onclick="refundTic(this)">退订</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class = "hidden" name = "userInfo-template">
+    <div class = "col-md-10 col-lg-10 col-sm-9 container-fluid userinfo">
+        <h1 style="color:white">用户信息</h1>
+        <form role="form" name = "userInfoForm">
+            <div class="row" style="margin-top:4%;">
+                <label class = "col-md-offset-3 col-md-2 col-sm-offset-3 col-sm-3">用户ID:</label>
+                <label class = "col-md-4 col-sm-4 col-lg-4" name="userIDLabel">{{user_id}}</label>
+            </div>
+            <div class="row" style="margin-top:2%;">
+                <label class = "col-md-offset-3 col-md-2  col-sm-offset-3 col-sm-3">用户名:</label>
+                <label class = "col-md-4  col-sm-4 col-lg-4" name="userNameLabel">{{user_name}}</label>
+                <input class = "col-md-4 hidden form-control" name="userNameText" value="{{user_name}}">
+            </div>
+            <div class="row" style="margin-top:2%;">
+                <label class = "col-md-offset-3 col-md-2  col-sm-offset-3 col-sm-3">邮箱:</label>
+                <label class = "col-md-4  col-sm-4 col-lg-4" name="userEmailLabel">user-mail</label>
+                <input class = "col-md-4 hidden form-control" name="userEmailText" value="user-mail">
+            </div>
+            <div class="row" style="margin-top:2%;">
+                <label class = "col-md-offset-3 col-md-2  col-sm-offset-3 col-sm-3">手机号:</label>
+                <label class = "col-md-4  col-sm-4 col-lg-4" name="userPhoneLabel">user-phone</label>
+                <input class = "col-md-4 hidden form-control" name="userPhoneText" pattern="[0-9]+" value="user-phone">
+            </div>
+            <div class="row hidden" name="rowPassword" style="margin-top:2%;">
+                <label class = "col-md-offset-3 col-md-2  col-sm-offset-3 col-sm-3">密码验证:</label>
+                <input class = "col-md-4 form-control  col-sm-4 col-lg-4" name="userPasswordText" type="password">
+            </div>
+            <div class="row" name="editButtonRow" style="margin-bottom:4%;margin-top:4%;">
+                <button class="btn btn-block center-block btn-pay" name="editButton" style="width:40%" type="button" onclick="showEditUserInfo()">修改信息</button>
+            </div>
+            <div class="row hidden" style="margin-top:4%" name="confirmOrCancel">
+                <div class="col-md-6 center-block">
+                    <button class="btn btn-block btn-pay center-block" name="btnConfirm" type="button" onclick="submitUserInfo()" style="width:80%">确认</button>
+                </div>
+                <div class="col-md-6" style="margin-bottom:4%">
+                    <button class="btn btn-block btn-pay center-block" name="btnCancel" type="button" onclick="hideEditUserInfo()" style="width:80%">取消</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class = "hidden" name = "userChangePassword-template">
+    <div class = "col-md-10 col-lg-10 col-sm-9 container-fluid userinfo">
+        <h1 style="color:white">修改密码</h1>
+        <form role="form" name = "changePasswordForm">
+            <div class="row" name="rowPassword" style="margin-top:2%;">
+                <label class = "col-md-offset-3 col-md-2  col-sm-offset-3 col-sm-3">原密码:</label>
+                <input class = "col-md-4 form-control  col-sm-4 col-lg-4" name="userOldPasswordText" type="password">
+            </div>
+            <div class="row" name="rowPassword" style="margin-top:2%;">
+                <label class = "col-md-offset-3 col-md-2  col-sm-offset-3 col-sm-3">新密码:</label>
+                <input class = "col-md-4 form-control  col-sm-4 col-lg-4" name="userNewPasswordText" type="password">
+            </div>
+            <div class="row" name="rowPassword" style="margin-top:2%;">
+                <label class = "col-md-offset-2 col-md-3  col-sm-offset-3 col-sm-3">再次输入新密码:</label>
+                <input class = "col-md-4 form-control  col-sm-4 col-lg-4" name="userNewRepasswordText" type="password">
+            </div>
+            <div class="row text-center" style="margin-top:2%;">
+                <label class = "small" style="background-color:rgba(0,0,0,0.4); color:white; text-align:center"  name="changePasswordWarning"></label>
+            </div>
+            <div class="row" name="editButtonRow" style="margin-bottom:4%;margin-top:4%;">
+                <button class="btn btn-block center-block btn-pay" name="editButton" style="width:40%" type="button" onclick="submitChangePassword()">修改密码</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div name="refund-template" class="hidden">
+    <form class="hidden" action="{{url_for('refundTic')}}" method="POST" name="refundForm">
+        <input name="form-name" value="refundForm">
+        <input name="refundTrainId" value="[refundTrainId]">
+        <input name="refundLoc1" value="[refundLoc1]">
+        <input name="refundLoc2" value="[refundLoc2]">
+        <input name="refundNum" value="[refundNum]">
+        <input name="refundTicType" value="[refundTicType]">
+        <input name="refundDate" value="[refundDate]">
+        <input name="refundTotPrice" value="[refundTotPrice]">
+    </form>
+</div>
+
+<script type="text/javascript">
+    var orderData;
+    function openQueryOrder(){
+        var uid = '{{user_id}}';
+        $.ajax({
+          type: 'POST',
+          url: '{{url_for("userZone")}}',
+          data: "{{user_id}}",
+          success: function(data){
+            orderData = data;
+            addOrdersInfoToPage();
+          },
+          dataType: 'json',
+          processData: false,
+          contentType: false
+        });
+    }
+
+    function addOrdersInfoToPage(){
+        $(document.getElementsByName("main-content")[0]).empty()
+        orderCount = orderData[0];
+        var orderTrainId, orderType, orderLoc1, orderLoc2, orderTime1, orderTime2, orderTrainName, orderDate1, orderDate2, orderNum, orderTotPrice, currentOrderData;
+        var innerIndex;
+        document.getElementsByName("order_num")[0].innerHTML = '您的订单信息共有' + orderCount + '条' + ',点击可以查看详情';
+        var myobj = document.getElementsByName("order-info-template")[0].innerHTML;
+        myobj = myobj.replace('all-order', {{user_id}});
+        $(document.getElementsByName("main-content")[0]).append(myobj);
+        for(var i = 1; i < orderData.length; ++i){
+            currentOrderData = orderData[i];
+            orderTrainId = currentOrderData[0];
+            orderTrainName = trainIdToName(orderTrainId);
+            orderLoc1 = currentOrderData[1];
+            orderLoc2 = currentOrderData[4];
+            orderDate1 = currentOrderData[2];
+            orderDate2 = currentOrderData[5];
+            orderTime1 = currentOrderData[3];
+            orderTime2 = currentOrderData[6];
+            for(var j = 7; j < currentOrderData.length - 1; j += 3){
+                orderType = currentOrderData[j];
+                if(currentOrderData[j + 1] != "0"){
+                    innerIndex = j;
+                    orderNum = parseInt(currentOrderData[j + 1]);
+                    orderTotPrice = (orderNum * parseFloat(currentOrderData[j + 2])).toFixed(2);
+                    break;
+                }
+            }
+            targetHTML = document.getElementsByName("panel-template")[0].innerHTML;
+            targetHTML = targetHTML.replace(/gpos/g, i.toString());
+            targetHTML = targetHTML.replace('tictypepos', innerIndex);
+            targetHTML = targetHTML.replace('[tic-type]', orderType)
+            targetHTML = targetHTML.replace('[train-name]', orderTrainName);
+            targetHTML = targetHTML.replace('[order-loc1]', orderLoc1);
+            targetHTML = targetHTML.replace('[order-loc2]', orderLoc2);
+            targetHTML = targetHTML.replace('[order-time1]', orderTime1);
+            targetHTML = targetHTML.replace('[order-time2]', orderTime2);
+            targetHTML = targetHTML.replace('[order-date1]', orderDate1);
+            targetHTML = targetHTML.replace('[order-date2]', orderDate2);
+            targetHTML = targetHTML.replace('[order-num]', orderNum);
+            targetHTML = targetHTML.replace('[tot-price]', orderTotPrice);
+            $(document.getElementsByName("{{user_id}}")[0]).append(targetHTML);
+            $('#' + i.toString()).collapse('hide');
+        }
+    }
+
+    function trainIdToName(trainId){
+        var pattern = /[CDGKTZ][0-9A-Z]*/;
+        var st = trainId.search(pattern);
+        var trainNameTmp = "";
+        for(var i = st; i < trainId.length - 2; ++i) trainNameTmp += trainId[i];
+        return trainNameTmp;
+    }
+
+    function loadWelcome(){
+        $(document.getElementsByName("main-content")[0]).empty();
+        $(document.getElementsByName("main-content")[0]).append(document.getElementsByName("welcome-msg-template")[0].innerHTML);
+    }
+
+    function loadUserInfo(){
+        $(document.getElementsByName("main-content")[0]).empty();
+        var userQueryRequest= {
+            data: JSON.stringify({
+                'requestName':'query_profile',
+                'userId':'{{user_id}}'
+            }),
+            }
+        var htmlToInsert="";
+        var QuserName, QuserEmail, QuserPhone;
+        $.ajax({
+                url:'{{url_for("userOperator")}}',
+                type:'POST',
+                data: userQueryRequest,
+                dataType: 'json',
+                success:function(data){
+                    QuserName = data[0];
+                    QuserEmail = data[1];
+                    QuserPhone = data[2];
+                    htmlToInsert = document.getElementsByName("userInfo-template")[0].innerHTML;
+                    htmlToInsert = htmlToInsert.replace(/user-mail/g, QuserEmail);
+                    htmlToInsert = htmlToInsert.replace(/user-phone/g, QuserPhone);
+                    $(document.getElementsByName("main-content")[0]).append(htmlToInsert);
+                },
+                error:function(e){
+                }
+        });
+    }
+
+    function showEditUserInfo(){
+       var objArrShow = [];
+       var objArrHide = [];
+       objArrHide.push(document.getElementsByName("userNameLabel")[0]);
+       objArrShow.push(document.getElementsByName("userNameText")[0]);
+       objArrHide.push(document.getElementsByName("userEmailLabel")[0]);
+       objArrShow.push(document.getElementsByName("userEmailText")[0]);
+       objArrHide.push(document.getElementsByName("userPhoneLabel")[0]);
+       objArrShow.push(document.getElementsByName("userPhoneText")[0]);
+       objArrHide.push(document.getElementsByName("editButtonRow")[0]);
+       objArrShow.push(document.getElementsByName("confirmOrCancel")[0]);
+       objArrShow.push(document.getElementsByName("rowPassword")[0]);
+       for(var i = 0; i < objArrShow.length; ++i) $(objArrShow[i]).removeClass("hidden");
+       for(var i = 0; i < objArrHide.length; ++i) $(objArrHide[i]).addClass("hidden");
+    }
+
+    function hideEditUserInfo(){
+        var objArrShow = [];
+        var objArrHide = [];
+        objArrShow.push(document.getElementsByName("userNameLabel")[0]);
+        objArrHide.push(document.getElementsByName("userNameText")[0]);
+        objArrShow.push(document.getElementsByName("userEmailLabel")[0]);
+        objArrHide.push(document.getElementsByName("userEmailText")[0]);
+        objArrShow.push(document.getElementsByName("userPhoneLabel")[0]);
+        objArrHide.push(document.getElementsByName("userPhoneText")[0]);
+        objArrShow.push(document.getElementsByName("editButtonRow")[0]);
+        objArrHide.push(document.getElementsByName("confirmOrCancel")[0]);
+        objArrHide.push(document.getElementsByName("rowPassword")[0]);
+        for(var i = 0; i < objArrShow.length; ++i) $(objArrShow[i]).removeClass("hidden");
+        for(var i = 0; i < objArrHide.length; ++i) $(objArrHide[i]).addClass("hidden");
+    }
+
+    function submitUserInfo(){
+        var form = new FormData(document.getElementsByName("userInfoForm")[0])
+        $.ajax({
+          type: 'POST',
+          url: '{{url_for("userOperator")}}',
+          data: form,
+          success: function(data){
+            if(parseInt(data[0]) == 1) window.location.reload();
+          },
+          dataType: 'json',
+          processData: false,
+          contentType: false,
+          cache : false
+        });
+    }
+
+    function loadChangePassword(){
+        $(document.getElementsByName("main-content")[0]).empty();
+        $(document.getElementsByName("main-content")[0]).append(document.getElementsByName("userChangePassword-template")[0].innerHTML);
+    }
+
+    function submitChangePassword(){
+        oldpwd = document.getElementsByName("userOldPasswordText")[0].value;
+        newpwd = document.getElementsByName("userNewPasswordText")[0].value;
+        newrpwd = document.getElementsByName("userNewRepasswordText")[0].value;
+        warningHandle = document.getElementsByName("changePasswordWarning")[0];
+        if(oldpwd== "" || newpwd == "" || newrpwd == ""){
+            warningHandle.innerHTML = "提示:请完整输入";
+            return;
+        }
+        if(newpwd != newrpwd){
+            warningHandle.innerHTML = "提示:两次输入不一致";
+            return;
+        }
+
+        form = new FormData(document.getElementsByName("changePasswordForm")[0])
+
+        $.ajax({
+          type: 'POST',
+          url: '{{url_for("userOperator")}}',
+          data: form,
+          success: function(data){
+                /*$(document.getElementsByName("userOldPasswordText")[1]).value="";
+                $(document.getElementsByName("userNewPasswordText")[1]).value="";
+                $(document.getElementsByName("userNewRepasswordText")[1]).value="";*/
+                warningHandle = document.getElementsByName("changePasswordWarning")[0];
+                if(parseInt(data[0]) == 1){
+                    warningHandle.innerHTML = "修改成功";
+                }
+                else{
+                    warningHandle.innerHTML = "修改失败，请你自己找原因";
+                }
+          },
+          dataType: 'json',
+          processData: false,
+          contentType: false,
+          cache : false
+        });
+
+    }
+
+    function refundTic(btn){
+        var tmpList = btn.id.split('-');
+        var trainPos = parseInt(tmpList[0]);
+        var typePos = parseInt(tmpList[1]);
+        currentOrderData = orderData[trainPos];
+        orderTrainId = currentOrderData[0];
+        orderLoc1 = currentOrderData[1];
+        orderLoc2 = currentOrderData[4];
+        orderDepartDate = currentOrderData[2];
+        orderTicType = currentOrderData[typePos];
+        orderNum = currentOrderData[typePos + 1];
+        orderTotPrice = (parseInt(orderNum) * parseFloat(currentOrderData[typePos + 2])).toFixed(2);
+        document.getElementsByName("refundTrainId")[0].setAttribute('value', orderTrainId);
+        document.getElementsByName("refundLoc1")[0].setAttribute('value', orderLoc1);
+        document.getElementsByName("refundLoc2")[0].setAttribute('value', orderLoc2);
+        document.getElementsByName("refundTicType")[0].setAttribute('value', orderTicType);
+        document.getElementsByName("refundDate")[0].setAttribute('value', orderDepartDate);
+        document.getElementsByName("refundTotPrice")[0].setAttribute('value', orderTotPrice);
+        document.getElementsByName("refundNum")[0].setAttribute('value', orderNum);
+        $(document.getElementsByName("refundForm")[0]).submit();
+    }
+
+    {% if status == "userInfo" %}
+    $(document).ready(function(){
+        loadUserInfo();
+    });
+    {% endif %}
+
+    {% if status == "editUserInfo" %}
+    $(document).ready(function(){
+        loadUserInfo();
+        showEditUserInfo();
+    });
+    {% endif %}
+
+    {% if status == "welcome" %}
+    $(document).ready(function(){
+        loadWelcome();
+        }
+    );
+    {% endif %}
+
+    {% if status == "openQueryOrder" %}
+    $(document).ready(function(){
+        openQueryOrder();
+        }
+    );
+    {% endif %}
+</script>
+
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

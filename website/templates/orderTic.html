@@ -1,0 +1,191 @@
+{% extends "layout.html" %}
+
+{% block css_files %}
+<link href="{{ url_for('static', filename='orderTic.css') }}" rel="stylesheet">
+{% endblock %}
+
+{% block navbar_left %}
+<ul class="nav navbar-nav">
+  <li><a href="{{ url_for('home') }}">首页</a></li>
+  <li><a href="{{url_for('queryRes')}}">余票查询</a></li>
+  <li><a href="https://github.com/KSXGroup/stupidTrainTicketingWebsite">源码</a></li>
+  {% if user_name %}
+  <li class="dropdown">
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">我的车票<span class="caret"></span></a>
+    <ul class="dropdown-menu">
+        <li><a href="{{url_for('queryRes')}}">车票查询预订</a></li>
+        <li><a href="{{url_for('userZone')}}?status=openQueryOrder">订单操作</a></li>
+        <li role="separator" class="divider"></li>
+        <li class="dropdown-header"></li>
+        <li><a href="{{url_for('userZone')}}">个人空间</a></li>
+    </ul>
+  </li>
+  {% endif %}
+</ul>
+{% endblock %}
+
+{% block navbar_right %}
+{% if not user_name %}
+<ul class="nav navbar-nav navbar-right">
+  <li><a href="{{ url_for('signin') }}">登录</a></li>
+  <li><a href="{{ url_for('signup') }}">注册</a></li>
+</ul>
+{% else %}
+<ul class="nav navbar-nav navbar-right">
+  <li class="dropdown">
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ user_name }}<span class="caret"></span></a>
+    <ul class="dropdown-menu">
+    <li><a href="{{ url_for('userZone')}}">个人空间</a></li>
+    <li><a href="{{ url_for('userZone')}}?status=userInfo">用户信息</a></li>
+      <li role="separator" class="divider"></li>
+      <li><a href="{{url_for('userZone')}}?status=editUserInfo">修改信息</a></li>
+      <li><a href="{{ url_for('signout')}}">注销</a></li>
+    </ul>
+  </li>
+</ul>
+{% endif %}
+{% endblock %}
+
+{% block body %}
+{% if err_info %}
+<div class = "container-fluid text-center" style="background-color:rgba(0,0,0,0.2);width:80%;">
+    <div class="row">
+        <i class="glyphicon glyphicon-remove-circle col-md-4" style="margin-top:3%;font-size:600%;color:white;margin-left:10%"></i>
+        <h1 style="color:white; margin-top:6%;font-size:350%; margin-left:-10%;" class="col-md-5">{{err_info}}</h1>
+    </div>
+</div>
+{% else %}
+{% if train_id and tic_type and tic_date and tic_loc1 and tic_loc2 and tic_time1 and tic_time2 and tic_left and tic_price %}
+<div class= "container-fluid" name="order-container">
+   <h1 class = "row text-center" style = "color:white; font-szie:200%; margin-left:1%;"> 订单信息 </h1>
+   <label class = "row" style="color:white; margin-left:1%;">列车编号:{{train_id}}</label>
+   <div class = "row"  style="margin-left:1%;color:white">
+        <label>出发:{{tic_loc1}}</label>
+        <label class="small">{{tic_time1}}</label>
+   </div>
+   <div class="row" style="margin-left:1%;color:white">
+        <label>到达:{{tic_loc2}}</label>
+        <label class="small">{{tic_time2}}</label>
+   </div>
+   <div class="row" style="color:white;margin-left:1%">
+        <label style="">类型:{{tic_type}}</label>
+   </div>
+   <div class="row" style="color:white;margin-left:-2.4%">
+        <label class="col-md-3">数量:</label>
+        <input value = "1" class="form-control col-md-1 mytext" style="margin-left:-10%;" name = "ticAmount"></input>
+        <label name = "warning" style = "color:red"></label>
+   </div>
+   <div class="row" style="margin-left:1%;color:white"><label>单价:{{tic_price}}元</label></div>
+   <div class="row" style="margin-left:1%;color:white"><label>余票:{{tic_left}}</label></div>
+   <button class="btn btn-block btn-pay " onclick="buyTicket()">提交订单</button>
+   <button class="btn btn-block btn-pay " onclick="javascript:history.go(-1)">返回</button>
+</div>
+{% else %}
+<div class = "container-fluid text-center" style="background-color:rgba(0,0,0,0.2);">
+    <div class="row">
+        <i class="glyphicon glyphicon-remove-circle col-md-4" style="margin-top:3%;font-size:600%;color:white;margin-left:10%"></i>
+        <h1 style="color:white; margin-top:6%;font-size:350%; margin-left:-10%;" class="col-md-5">错误的参数</h1>
+    </div>
+</div>
+{% endif %}
+{% endif %}
+
+<div class="hidden" name="successTemplate">
+    <div class="row">
+        <i class="glyphicon glyphicon-ok-circle col-md-4" style="margin-top:3%;font-size:400%;color:white;margin-left:10%"></i>
+        <h1 name = "successMsg" style="color:white; margin-top:7%;font-size:200%; margin-left:-5%;" class="col-md-5">订购成功</h1>
+    </div>
+    <div class="row" style="margin-top:10%;">
+        <button class="btn btn-normal btn-pay col-md-3 col-md-offset-2" onclick="javascript:history.go(-1)">返回</button>
+        <button class="btn btn-normal btn-pay col-md-3 col-md-offset-2"  type="button" onclick = "toUserZoneWithOrder()">查看订单</button>
+    </div>
+<div>
+
+<div class="hidden" name="failTemplate">
+    <div class="row">
+        <i class="glyphicon glyphicon-remove-circle col-md-4" style="margin-top:3%;font-size:400%;color:white;margin-left:10%"></i>
+        <h1 name = "successMsg" style="color:white; margin-top:7%;font-size:200%; margin-left:-5%;" class="col-md-5">订购失败，请重试</h1>
+    </div>
+    <div class="row" style="margin-top:2%;">
+    <button class="btn btn-block btn-pay" onclick="javascript:history.go(-1)">返回</button>
+    </div>
+<div>
+
+<form class="hidden" name = "order_form">
+    <input name = "form-name" value = "corder">
+    <input name = "corder-train-id" value = "{{train_id}}">
+    <input name = "corder-type" value = "{{tic_type}}">
+    <input name = "corder-date" value = "{{tic_date}}">
+    <input name = "corder-loc1" value = "{{tic_loc1}}">
+    <input name = "corder-loc2" value = "{{tic_loc2}}">
+    <input name = "corder-num" value = "1">
+</form>
+
+<script type="text/javascript">
+function buyTicket(){
+    var reg=/^[0-9]+.?[0-9]*$/;
+    var num = document.getElementsByName("ticAmount")[0].value;
+    if(!reg.test(num)){
+        document.getElementsByName("warning")[0].innerHTML="请输入数字";
+        return;
+    }
+    if(parseInt(num) > parseInt("{{tic_left}}")){
+        document.getElementsByName("warning")[0].innerHTML="余票不足";
+        return;
+    }
+    document.getElementsByName("corder-num")[0].setAttribute('value',document.getElementsByName("ticAmount")[0].value);
+    var form = new FormData(document.getElementsByName("order_form")[0]);
+    $.ajax({
+            url:'{{url_for("orderTic")}}',
+            type:'POST',
+            data:form,
+            dataType: 'json',
+            processData: false,
+            contentType: false,
+            cache : false,
+            success:function(data){
+                ret = parseInt(data[0]);
+                if(ret) orderSuccess();
+                else orderFail();
+            },
+            error:function(e){
+            }
+    });
+}
+
+function orderSuccess(){
+       var containerHandle = document.getElementsByName("order-container")[0];
+       $(containerHandle).empty();
+       $(containerHandle).append (document.getElementsByName("successTemplate")[0].innerHTML);
+       $('.dropdown-toggle').dropdown();
+       return;
+}
+function orderFail(){
+       var containerHandle = document.getElementsByName("order-container")[0];
+       $(containerHandle).empty();
+       $(containerHandle).append(document.getElementsByName("failTemplate")[0].innerHTML);
+       $('.dropdown-toggle').dropdown();
+       return;
+}
+
+function toUserZoneWithOrder(){
+    window.location="{{url_for('userZone')}}?status=openQueryOrder";
+}
+
+</script>
+
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+

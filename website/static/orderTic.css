@@ -1,0 +1,38 @@
+.container-fluid{
+    vertical-align: middle !important;
+    background-color: rgba(0,0,0,0.2);
+    font-size: 20px;
+    padding: 1%;
+    margin-top: 15%;
+    width:40%;
+    height:50%;
+}
+
+.form-control{
+    width:20%;
+    margin-top:-1%;
+}
+
+.mytext{
+    text-align:center;
+    vertical-align: middle;
+    color: white !important;
+    background-color:rgba(0,0,0,0);
+    border-width:2px;
+    border-color:white;
+    font-size:100%;
+}
+
+.btn-pay{
+    border-width: 2px;
+    border-color: rgba(255,255,255,1);
+    background-color: rgba(255,255,255,0);
+    color:white;
+    font-size:100%;
+}
+
+.btn-pay:hover,
+.btn-pay:focus{
+    background-color: rgba(255,255,255,1);
+    color:black;
+}

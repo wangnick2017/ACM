@@ -1,0 +1,134 @@
+.container-fluid{
+    vertical-align: middle !important;
+    background-color: rgba(0,0,0,0.2);
+    font-size: 20px;
+    padding: 1%;
+    position:relative;
+}
+
+.container-fluid-special{
+    background-color: rgba(0,0,0,0.2);
+    font-size: 20px;
+    padding: 1%;
+    margin-top: 0.5%;
+    position:relative;
+}
+
+.checkbox-inline,
+.row{
+color:white;
+font-size:30px;
+}
+
+.row {
+    vertical-align: middle !important;
+}
+
+.btn-fliter{
+    background-color:rgba(0,0,0,0);
+    border-width:2px;
+    border-color:white;
+    font-size:60%;
+    font-weight:bold;
+    margin-left:2%;
+    color:white;
+}
+
+.btn-fliter:hover{
+    background-color:rgba(255,255,255,1);
+}
+
+.btn-fliter-onclick{
+    background-color:rgba(255,255,255,1);
+    color:black;
+}
+
+.btn-pay{
+    margin-right: 5%;
+    border-width: 2px;
+    border-color: rgba(255,255,255,1);
+    background-color: rgba(255,255,255,0);
+    font-weight:bold;
+}
+
+.btn-pay:hover,
+.btn-pay:focus{
+    background-color: rgba(255,255,255,1);
+}
+
+.btn-search{
+    border-width: 2px;
+    border-color: rgba(255,255,255,0);
+    border-radius: 0px;
+    background: rgba(255,255,255,0);
+    font-size: 30px;
+    margin-left:2%;
+    margin-top:-0.8%;
+}
+
+.glyphicon-search{
+    color:white;
+    size: 5%;
+}
+
+.glyphicon-search:hover,
+.glyphicon-search:focus{
+    color: #d9d9d9;
+    size: 5%;
+}
+
+.glyphicon-arrow-right{
+    color:white;
+}
+
+.form-control{
+    margin-left: 5%;
+    width: 20%;
+    border-color: rgba(255,255,255,1);
+    border-width: 2px;
+    border-radius: 0px;
+    background: rgba(255,255,255,0);
+}
+
+.input-md{
+    text-align:center;
+    vertical-align: middle;
+    font-size:20px;
+    height: 50px;
+    line-height: 70px;
+    color: white !important;
+}
+
+.label{
+    color:white !important;
+    margin-left:2% !important;
+}
+
+input::input-placeholder{
+    color:  #d9d9d9 !important;
+}
+
+::-webkit-input-placeholder{
+       color:#d9d9d9 !important;
+   }
+ :-moz-placeholder {/* Firefox 18- */
+       color:#d9d9d9 !important;
+   }
+
+
+ ::-moz-placeholder{/* Firefox 19+ */
+       color:#d9d9d9  !important;
+   }
+
+ :-ms-input-placeholder {
+       color:#d9d9d9 !important;
+  }
+
+
+
+
+
+
+
+
+

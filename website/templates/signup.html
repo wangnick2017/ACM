@@ -1,0 +1,99 @@
+{% extends "layout.html" %}
+
+{% block css_files %}
+<link href="{{ url_for('static', filename='signup.css') }}" rel="stylesheet">
+{% endblock %}
+
+{% block navbar_left %}
+<ul class="nav navbar-nav">
+  <li><a href="{{ url_for('home') }}">首页</a></li>
+  <li><a href="{{url_for('queryRes')}}">余票查询</a></li>
+  <li><a href="https://github.com/KSXGroup/stupidTrainTicketingWebsite">源码</a></li>
+  {% if user_name %}
+  <li class="dropdown">
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">我的车票<span class="caret"></span></a>
+    <ul class="dropdown-menu">
+      <li><a href="{{url_for('queryRes')}}">车票查询预订</a></li>
+      <li><a href="{{url_for('userZone')}}?status=openQueryOrder">订单操作</a></li>
+      <li role="separator" class="divider"></li>
+      <li class="dropdown-header"></li>
+      <li><a href="{{url_for('userZone')}}">个人空间</a></li>
+    </ul>
+  </li>
+  {% endif %}
+</ul>
+{% endblock %}
+
+{% block navbar_right %}
+<ul class="nav navbar-nav navbar-right">
+  <li><a href="{{ url_for('signin') }}">登录</a></li>
+  <li><a href="{{ url_for('signup') }}">注册</a></li>
+</ul>
+{% endblock %}
+{% block body %}
+{% if not register_success_info and not register_error_info %}
+<div name = "signup-area" class="container-fluid-signup">
+    <div class="row" style="margin-left:5%;">
+        <label style="color:white;margin-top:5%;margin-left:2%;font-size:300%">用户注册</label>
+    </div>
+    <div class="form-container" name="registerArea">
+      <form class="form-signup"  name="registerForm" action="{{url_for('signup')}}" method='POST'>
+        <input type="text" id="inputName" name="name" class="form-control" placeholder="姓名" required autofocus>
+        <input type="text" id="inputEmail" name="email" class="form-control" placeholder="邮箱地址" pattern="^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$" title="邮箱地址" required autofocus>
+        <input type="text" id="inputPhone" name="phone" class="form-control" placeholder="手机号" pattern="[0-9]+" title="非法的号码"  required autofocus>
+        <input type="password" id="inputPassword" name="password" class="form-control" placeholder="密码" pattern="[0-9A-z]+" title="非法的字符" required>
+        <input type="password" id="repeatPassword" name="repassword" class="form-control" placeholder="再次输入密码" pattern="^[a-zA-Z0-9!@#^]{6,12}$" title="非法的字符" required>
+        <button class="btn btn-lg btn-primary btn-block" type="submit" style="margin-top:10%;font-size:150%;font-weight:bold;">注册</button>
+      </form>
+    </div>
+ </div>
+{% else %}
+{% if register_success_info %}
+<div name = "signup-area" class="container-fluid-signup">
+    <div class="row" style="margin-left:5%;">
+        <label style="color:white;margin-top:5%;margin-left:2%;font-size:300%">用户注册</label>
+    </div>
+    <div class="form-container" name="registerArea">
+        <div class="row center-block">
+            <h1 class="text-center" style="color:white">注册成功</h1>
+            <h2 class="text-center" style="color:white">您的用户ID是: <strong>{{user_id}}</strong></h2>
+        </div>
+        <div class="row center-block">
+            <h4 style="color:white;" class="text-center">请牢记您的登录ID，这将是您登录的唯一凭据</h4>
+        </div>
+        <button class="btn btn-block center-block" style="width:60%;margin-top:5%;height:300%;font-size:150%;font-weight:bold;" onclick="toUserSignIn()">登录</button>
+    </div>
+</div>
+{% endif %}
+{% if register_error_info %}
+<div name = "signup-area" class="container-fluid-signup">
+    <div class="row" style="margin-left:5%;">
+        <label style="color:white;margin-top:5%;margin-left:2%;font-size:300%">用户注册</label>
+    </div>
+    <div class="form-container" name="registerArea">
+        <div class="row center-block">
+            <h1 class="text-center" style="color:white">注册发生错误</h1>
+        </div>
+        <div class="row center-block">
+            <h2 style="color:white;" class="text-center">请点击下方按钮重试</h2>
+        </div>
+        <button class="btn btn-block center-block" style="width:60%;margin-top:5%;height:300%;font-size:150%;font-weight:bold;" onclick="toUserSignUp()">重试</button>
+    </div>
+</div>
+{% endif %}
+{% endif %}
+<script type="text/javascript">
+function toUserSignIn(){
+    window.location="{{url_for('signin')}}";
+}
+
+function toUserSignUp(){
+    window.location="{{url_for('signup')}}";
+}
+</script>
+{% endblock %}
+
+
+
+
+

@@ -1,0 +1,115 @@
+.sidebar-nav {
+    padding: 20px 0px;
+    background-color:rgba(0,0,0,0.2);
+ }
+
+.nav-header{
+    margin-left:5%;
+    color:white;
+    font-size:150%;
+    margin-left:15%;
+}
+.nav-list > li > a{
+    color:white;
+    font-size:120%;
+}
+
+.nav-list > li > a:hover,
+.nav-list > li > a:focus{
+    background-color: rgba(0,0,0,0.3);
+}
+
+.li-focus{
+    background-color: rgba(0,0,0,0.3);
+}
+
+.user-container{
+    background-color:rgba(0,0,0,0.2);
+}
+
+.btn-refund{
+    height:40px;
+    width:60px;
+    background-color: rgba(0,0,0,0);
+    border-radius:0px;
+    border-width:2px;
+    border-color:white;
+    color:white;
+    font-size:120%;
+}
+
+.btn-refund:hover,
+.btn-refund:focus{
+    background-color:rgba(255,255,255,1);
+    color:black;
+}
+
+.panel-group > .panel{
+    background:none !important;
+}
+
+.panel-group > .panel-transparent {
+    background-color:none !important;
+    border-radius:0px !important;
+    border:0px;
+}
+
+.panel-group > .panel-transparent > .panel-heading{
+    background:rgba(0,0,0,0.4) !important;
+    border-radius: 0px;
+    border:0px;
+}
+
+.panel-group > .panel-transparent > .panel-collapse > .panel-body {
+    background:rgba(0,0,0,0.2) !important;
+    border:0px;
+}
+
+.panel-heading .row > h2,
+.panel-heading .row > h3{
+    color:white !important;
+}
+.panel-body .row > h4{
+    color:white !important;
+}
+
+.userinfo{
+    background-color: rgba(0,0,0,0.2);
+    font-size:150%;
+}
+
+.userinfo .row label{
+    color:white;
+    font-weight:normal !important;
+    font-size:120%;
+}
+
+.btn-pay{
+    border-width: 2px;
+    border-color: rgba(255,255,255,1);
+    background-color: rgba(255,255,255,0);
+    color:white;
+    font-size:90%;
+    font-weight:bold;
+    height:50px;
+}
+
+.btn-pay:hover,
+.btn-pay:focus{
+    background-color: rgba(255,255,255,1);
+    color:black;
+}
+
+.row input{
+    width:40%;
+    background-color:rgba(0,0,0,0);
+    border-color:white;
+    border-width:2px;
+    color:white;
+    font-size:80%;
+}
+
+
+
+
+

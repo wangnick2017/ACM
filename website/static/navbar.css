@@ -1,0 +1,29 @@
+.navbar .container {
+    background: rgba(0,0,0,0.2);
+}
+
+.navbar .navbar-brand{
+    font-size: 20px;
+    color:white;
+}
+
+.navbar .navbar-brand:hover,
+.navbar .navbar-brand:focus {
+    background-color: rgba(0,0,0,0.3);
+}
+
+.navbar .navbar-nav > li > a{
+    color: white;
+    font-size: 16px;
+}
+
+.navbar .navbar-nav > li > a:hover,
+.navbar .navbar-nav > li > a:focus {
+    background-color: rgba(0,0,0,0.3);
+}
+
+
+.navbar-static-top {
+    margin-bottom: 15px;
+}
+

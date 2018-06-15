@@ -1,0 +1,74 @@
+{% extends "layout.html" %}
+
+{% block css_files %}
+<link href="{{ url_for('static', filename='index.css') }}" rel="stylesheet">
+{% endblock %}
+
+{% block navbar_left %}
+<ul class="nav navbar-nav">
+  <li><a href="{{ url_for('home') }}">首页</a></li>
+  <li><a href="{{url_for('queryRes')}}">余票查询</a></li>
+  <li><a href="https://github.com/KSXGroup/stupidTrainTicketingWebsite">源码</a></li>
+  {% if user_name %}
+  <li class="dropdown">
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">我的车票<span class="caret"></span></a>
+    <ul class="dropdown-menu">
+      <li><a href="{{url_for('queryRes')}}">车票查询预订</a></li>
+      <li><a href="{{url_for('userZone')}}?status=openQueryOrder">订单操作</a></li>
+      <li role="separator" class="divider"></li>
+      <li class="dropdown-header"></li>
+      <li><a href="{{url_for('userZone')}}">个人空间</a></li>
+    </ul>
+  </li>
+  {% endif %}
+</ul>
+{% endblock %}
+
+{% block navbar_right %}
+{% if not user_name %}
+<ul class="nav navbar-nav navbar-right">
+  <li><a href="{{ url_for('signin') }}">登录</a></li>
+  <li><a href="{{ url_for('signup') }}">注册</a></li>
+</ul>
+{% else %}
+<ul class="nav navbar-nav navbar-right">
+  <li class="dropdown">
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ user_name }}<span class="caret"></span></a>
+    <ul class="dropdown-menu">
+    <li><a href="{{ url_for('userZone')}}">个人空间</a></li>
+    <li><a href="{{ url_for('userZone')}}?status=userInfo">用户信息</a></li>
+      <li role="separator" class="divider"></li>
+      <li><a href="{{url_for('userZone')}}?status=editUserInfo">修改信息</a></li>
+      <li><a href="{{ url_for('signout')}}">注销</a></li>
+    </ul>
+  </li>
+</ul>
+{% endif %}
+{% endblock %}
+
+{% block body %}
+<div class="container-fluid">
+    <h1 class="title">车票查询</h1>
+        <form action="{{url_for('queryRes')}}" method="POST">
+            <div class="row">
+                <input class="hidden" name="ifQueryTransfer" value="0" readonly>
+                <input class="col-md-1 col-sm-1 col-xs-1 input-xlarge form-control" name="loc1" placeholder="始发站" type="text" method = "post">
+                <input class="col-md-1 col-md-offset-1 col-sm-1 col-sm-offset-1 col-xs-1 col-xs-offset-1 input-xlarge form-control" name="loc2" placeholder="到达站" type="text">
+                <input class="col-md-1 col-md-offset-1 col-sm-1 col-sm-offset-1 col-xs-1 col-xs-offset-1  input-xlarge form-control date" name="ddate" id="mytimepicker" placeholder="日期" type="text">
+                <input class="hidden" type="text" value="mainpage" name = "id">
+                <button class="btn btn-lg glyphicon glyphicon-search col-md-1 col-md-offset-1 col-sm-1 col-sm-offset-1 col-xs-1 col-xs-offset-1" type="submit"></button>
+            </div>
+        </form>
+</div>
+<script type="text/javascript">
+    $(document.getElementById("mytimepicker")).datetimepicker({
+         format: "YYYY-MM-DD",
+         locale: 'zh-CN',
+         widgetPositioning:{
+             horizontal: 'right'
+         },
+         minDate:'{{min_date}}',
+         maxDate:'{{max_date}}'
+    });
+</script>
+{% endblock %}

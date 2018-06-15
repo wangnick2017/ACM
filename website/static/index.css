@@ -1,0 +1,127 @@
+body{
+    background: url("../static/tmpbg.jpg") no-repeat center center fixed;
+    background-size: auto auto;
+    /*animation-name:myfirst;
+    animation-duration:12s;
+    animation-delay:2s;
+    animation-iteration-count:infinite;
+    animation-play-state:running;
+    */
+}
+@keyframes myfirst
+{
+    0%   {
+    background:url("/static/bg4.jpg") no-repeat center center fixed;
+    background-size: 100% ;
+    }
+    34%  {
+    background:url("/static/bg3.jpg") no-repeat center center fixed;
+    background-size: 100%;
+    }
+    67%  {
+    background:url("/static/timg.jpg") no-repeat center center fixed;
+    background-size: 100% ;
+    }
+    100% {
+    background:url("/static/bg4.jpg")no-repeat center center fixed;
+    background-size: 100% ;
+    }
+}
+
+
+
+.form-control{
+    margin-left: 5%;
+    width: 20%;
+    border-color: rgba(255,255,255,1);
+    border-width: 2px;
+    border-radius: 0px;
+    background: rgba(255,255,255,0);
+}
+
+
+.container-fluid{
+    padding: 3%;
+    border-color: white;
+    border-width: 2px;
+    background: rgba(0,0,0,0.2);
+    margin-top: 20%;
+    position:relative;
+}
+.btn{
+    border-width: 2px;
+    border-color: rgba(255,255,255,0);
+    border-radius: 0px;
+    background: rgba(255,255,255,0);
+    font-size: 40px;
+    margin-left:8%;
+}
+
+.title{
+    color:white;
+    margin-bottom: 3%;
+    size: 2%;
+}
+
+.glyphicon-search{
+    color:white;
+    size: 5%;
+}
+
+.glyphicon-search:hover,
+.glyphicon-search:focus{
+    color: #d9d9d9;
+    size: 5%;
+}
+
+
+.input-xlarge{
+    text-align:center;
+    vertical-align: middle;
+    font-size:28px;
+    height: 70px;
+    line-height: 70px;
+    color: white !important;
+}
+
+input::input-placeholder{
+    color:  #d9d9d9 !important;
+}
+
+::-webkit-input-placeholder{
+       color:#d9d9d9 !important;
+   }
+ :-moz-placeholder {/* Firefox 18- */
+       color:#d9d9d9 !important;
+   }
+
+
+ ::-moz-placeholder{/* Firefox 19+ */
+       color:#d9d9d9  !important;
+   }
+
+ :-ms-input-placeholder {
+       color:#d9d9d9 !important;
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

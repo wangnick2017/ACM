@@ -1,0 +1,287 @@
+{% extends "layout.html" %}
+
+{% block css_files %}
+<link href="{{ url_for('static', filename='queryRes.css') }}" rel="stylesheet">
+{% endblock %}
+
+{% block navbar_left %}
+<ul class="nav navbar-nav">
+  <li><a href="{{ url_for('home') }}">首页</a></li>
+  <li><a href="{{url_for('queryRes')}}">余票查询</a></li>
+  <li><a href="https://github.com/KSXGroup/stupidTrainTicketingWebsite">源码</a></li>
+  {% if user_name %}
+  <li class="dropdown">
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">我的车票<span class="caret"></span></a>
+    <ul class="dropdown-menu">
+      <li><a href="{{url_for('queryRes')}}">车票查询预订</a></li>
+      <li><a href="{{url_for('userZone')}}?status=openQueryOrder">订单操作</a></li>
+      <li role="separator" class="divider"></li>
+      <li class="dropdown-header"></li>
+      <li><a href="{{url_for('userZone')}}">个人空间</a></li>
+    </ul>
+  </li>
+  {% endif %}
+</ul>
+{% endblock %}
+
+{% block navbar_right %}
+{% if not user_name %}
+<ul class="nav navbar-nav navbar-right">
+  <li><a href="{{ url_for('signin') }}">登录</a></li>
+  <li><a href="{{ url_for('signup') }}">注册</a></li>
+</ul>
+{% else %}
+<ul class="nav navbar-nav navbar-right">
+  <li class="dropdown">
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ user_name }}<span class="caret"></span></a>
+    <ul class="dropdown-menu">
+    <li><a href="{{ url_for('userZone')}}">个人空间</a></li>
+    <li><a href="{{ url_for('userZone')}}?status=userInfo">用户信息</a></li>
+      <li role="separator" class="divider"></li>
+      <li><a href="{{url_for('userZone')}}?status=editUserInfo">修改信息</a></li>
+      <li><a href="{{ url_for('signout')}}">注销</a></li>
+    </ul>
+  </li>
+</ul>
+{% endif %}
+{% endblock %}
+
+{% block body %}
+
+<div class="container-fluid" >
+     <form name="queryTicForm">
+        <div class="row" style="margin-left:2.5%; margin-top:2%;">
+            <label class="col-md-2 col-xs-2 col-sm-2 visible-md visible-lg" style="font-weight:normal">车次类型</label>
+            <button class="btn btn-fliter" id="C" name="catalogSelector" onclick="updateCatalogWhenSelected(this)" type = "button">C-城际</button>
+            <button class="btn btn-fliter" id="D" name="catalogSelector" onclick="updateCatalogWhenSelected(this)" type = "button">D-动车</button>
+            <button class="btn btn-fliter" id="G" name="catalogSelector" onclick="updateCatalogWhenSelected(this)" type = "button">G-高铁</button>
+            <button class="btn btn-fliter" id="K" name="catalogSelector" onclick="updateCatalogWhenSelected(this)" type = "button">K-快速</button>
+            <button class="btn btn-fliter" id="T" name="catalogSelector" onclick="updateCatalogWhenSelected(this)" type = "button">T-特快</button>
+            <button class="btn btn-fliter" id="Z" name="catalogSelector" onclick="updateCatalogWhenSelected(this)" type = "button">Z-直达</button>
+        </div>
+        <hr>
+        <div class="row">
+            <input class="hidden" name="ifQueryTransfer" value="0" type="text">
+            <input class="col-md-1 col-sm-1 col-xs-1 input-md form-control" name="loc1" placeholder="始发站" type="text">
+            <input class="col-md-1 col-md-offset-1 col-sm-1 col-sm-offset-1 col-xs-1 col-xs-offset-1 input-md form-control" name="loc2" placeholder="到达站" type="text">
+            <input class="col-md-1 col-md-offset-1 col-sm-1 col-sm-offset-1 col-xs-1 col-xs-offset-1 input-md form-control" id="mytimepicker" name="ddate" placeholder="日期" type="text">
+            <input class="hidden" type="text" value="queryRes" name = "id">
+            <input class="hidden" type="text" name="catalog" value="{{catalog}}">
+            <button class="btn-lg btn-search glyphicon glyphicon-search col-md-1 col-md-offset-1 col-sm-1 col-sm-offset-1 col-xs-1 col-xs-offset-1" type="button" onclick="queryTicket()"></button>
+            <button class="btn-fliter btn-normal btn" style="height:50px;" type = "button" onclick="useQueryTransfer()" name="queryTransferButton">中转查询</button>
+        </div>
+    </form>
+    <h4 style="color:white;margin-left:0.5%" class="glyphicon glyphicon-info-sign hidden" name="transferTips"> 您使用了中转查询,系统将自动为您分配最快的换乘方式</h4>
+</div>
+<div id="bryan">
+</div>
+
+<div name="block-template" class= "hidden">
+    <div class = "container-fluid-special">
+        <div class = "row">
+            <div class="text-center"><label class="col-lg-2 col-md-2 col-sm-2" style = "font-size:180%" id = "ID_TRAIN_ID">TRAIN-ID</label></div>
+            <div style="margin-top:1.4%">
+                <div class="col-lg-3 col-md-3 col-sm-3" >
+                    <label style = "font-size:100%; margin-left:5%" id = "lloc1">REPLACE-LOC1</label>
+                    <label class = "small">TIME-1</label>
+                </div>
+                <div class="col-lg-3 col-md-2 col-sm-3" >
+                    <label style = "font-size:100%;" id = "lloc2">REPLACE-LOC2</label>
+                    <label class = "small" >TIME-2</label>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-4" id="ID_TRAIN_ID_TIC">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div name="ticket_template"  class="hidden">
+    <div class="row" style="font-size:80%; margin-left:-5%">
+        <label style="font-size:80%">TIC_TYPE</label>
+        <label style="font-size:100%">TIC_PRICE</label>
+        <label style="font-size:60%">余票:TIC_LEFT</label>
+        <button class="btn btn-normal btn-pay pull-right" id = "BTN_TRAIN_ID_TYPE" onclick="startOrder(this)">订购</button>
+    </div>
+</div>
+
+<form name="order_template" class="hidden" action = "{{url_for('orderTic')}}" method = "POST">
+    <input name = "form-name" value = "sorder">
+    <input name = "order-train-id" type = "text" value = "ORDER_TRAIN_ID">
+    <input name = "order-loc1" type = "text" value = "ORDER_LOC1">
+    <input name = "order-loc2" type = "text" value = "ORDER_LOC2">
+    <input name = "order-date" type = "text" value = "ORDER_DATE">
+    <input name = "order-kind" type = "text" value = "ORDER_KIND">
+    <input name = "order-time1" type = "text" value = "ORDER_TIME1">
+    <input name = "order-time2" type = "text" value = "ORDER_TIME2">
+    <input name = "order-price" type = "text" value = "ORDER_PRICE">
+    <input name = "order-left" type = "text" value = "ORDER_LEFT">
+</form>
+
+
+<script type="text/javascript">
+   var trainData;
+   var currentDate;
+   var userid = "{{user_id}}";
+   function queryTicket(){
+        $("#bryan").empty();
+        currentDate = document.getElementsByName("ddate")[0].value;
+        var form = new FormData(document.getElementsByName("queryTicForm")[0]);
+        $.ajax({
+                url:'{{url_for("queryRes")}}',
+                type:'POST',
+                data:form,
+                dataType: 'json',
+                processData: false,
+                contentType: false,
+                cache : false,
+                success:function(data){
+                    trainData = data;
+                    var ticHandle = "";
+                    for(var i = 1; i < trainData.length; ++i){
+                        var myhtm = createTable(i);
+                        $("#bryan").append(myhtm);
+                        ticHandle = '#' + trainData[i][0] + 'T';
+                        $(ticHandle).empty();
+                        $(ticHandle).append(addBuyTicket(i));
+                    }
+                    $("#bryan").append("<h5>")
+                },
+                error:function(e){
+                }
+        });
+   }
+
+    function useQueryTransfer(){
+        var transferHandle = document.getElementsByName("transferTips")[0];
+        var btnHandle = document.getElementsByName("queryTransferButton")[0];
+        var iptHandle = document.getElementsByName("ifQueryTransfer")[0];
+        if($(transferHandle).hasClass("hidden")){
+            $(transferHandle).removeClass("hidden");
+            $(btnHandle).addClass("btn-fliter-onclick");
+            iptHandle.setAttribute('value', "1");
+        }
+        else{
+            $(transferHandle).addClass("hidden");
+            $(btnHandle).removeClass("btn-fliter-onclick");
+            iptHandle.setAttribute('value', "0");
+        }
+    }
+
+    function selectAllCatalog(){
+        selectorList = document.getElementsByName("catalogSelector");
+        for(var i = 0; i < selectorList.length; ++i){
+            if(!$(selectorList[i]).hasClass("btn-fliter-onclick")) $(selectorList[i]).addClass("btn-fliter-onclick");
+        }
+        updateCatalog();
+    }
+
+    function unselectAllCatalog(){
+        selectorList = document.getElementsByName("catalogSelector");
+        for(var i = 0; i < selectorList.length; ++i){
+            if($(selectorList[i]).hasClass("btn-fliter-onclick")) $(selectorList[i]).removeClass("btn-fliter-onclick");
+        }
+        updateCatalog();
+    }
+
+    function updateCatalogWhenSelected(btn){
+        if($(btn).hasClass("btn-fliter-onclick")) $(btn).removeClass("btn-fliter-onclick");
+        else $(btn).addClass("btn-fliter-onclick");
+        var catalogString = "";
+        selectorList = document.getElementsByName("catalogSelector");
+        for(var i = 0; i < selectorList.length; ++i) if($(selectorList[i]).hasClass("btn-fliter-onclick")) catalogString += selectorList[i].id;
+        document.getElementsByName("catalog")[0].setAttribute('value', catalogString);
+    }
+
+    function updateCatalog(){
+        var catalogString = "";
+        selectorList = document.getElementsByName("catalogSelector");
+        for(var i = 0; i < selectorList.length; ++i) if($(selectorList[i]).hasClass("btn-fliter-onclick")) catalogString += selectorList[i].id;
+        document.getElementsByName("catalog")[0].setAttribute('value', catalogString);
+    }
+
+    function createTable(dataId){
+       var currentTrainData = trainData[dataId];
+       var trainId = currentTrainData[0];
+       var trainIdtmp = "";
+       var loc1="", loc2="";
+       var time1="", time2="";
+       var pattern = /[CDGKTZ][0-9A-Z]*/;
+       var st = trainId.search(pattern);
+       for(var i = st; i < trainId.length - 2; ++i) trainIdtmp += trainId[i];
+       trainId = trainIdtmp;
+       loc1 = currentTrainData[1];
+       loc2 = currentTrainData[4];
+       time1 = currentTrainData[3];
+       time2 = currentTrainData[6];
+       var templateHtm = document.getElementsByName("block-template")[0].innerHTML;
+       templateHtm = templateHtm.replace("ID_TRAIN_ID", currentTrainData[0]);
+       templateHtm = templateHtm.replace("ID_TRAIN_ID_TIC", currentTrainData[0]+'T');
+       templateHtm = templateHtm.replace("TRAIN-ID", trainId);
+       templateHtm = templateHtm.replace("REPLACE-LOC1", loc1);
+       templateHtm = templateHtm.replace("REPLACE-LOC2", loc2);
+       templateHtm = templateHtm.replace("TIME-1", time1);
+       templateHtm = templateHtm.replace("TIME-2", time2);
+       return templateHtm;
+    }
+
+    function addBuyTicket(dataId){
+        var payTemplate = "";
+        var ret = "";
+        for(var i = 7; i < trainData[dataId].length - 1; ++i){
+            payTemplate = document.getElementsByName("ticket_template")[0].innerHTML;
+            payTemplate = payTemplate.replace("BTN_TRAIN_ID_TYPE", dataId + '-' + i);
+            payTemplate = payTemplate.replace("TIC_TYPE", trainData[dataId][i]);
+            ++i;
+            payTemplate = payTemplate.replace("TIC_LEFT", trainData[dataId][i]);
+            ++i;
+            payTemplate = payTemplate.replace("TIC_PRICE", '¥ ' + parseFloat(trainData[dataId][i]).toFixed(2));
+            ret += payTemplate;
+        }
+        return ret;
+    }
+
+    function startOrder(btn){
+        if(userid == "" || userid == "None"){
+            window.location = "{{url_for('signin')}}";
+            return;
+        }
+        var dataString = btn.id;
+        var dataList = dataString.split('-');
+        var dataId = dataList[0];
+        var ticType = dataList[1];
+        document.getElementsByName("order-train-id")[0].setAttribute('value', trainData[dataId][0]);
+        document.getElementsByName("order-loc1")[0].setAttribute('value', trainData[dataId][1]);
+        document.getElementsByName("order-loc2")[0].setAttribute('value', trainData[dataId][4]);
+        document.getElementsByName("order-date")[0].setAttribute('value', currentDate);
+        document.getElementsByName("order-kind")[0].setAttribute('value', trainData[dataId][ticType]);
+        document.getElementsByName("order-time1")[0].setAttribute('value', trainData[dataId][3]);
+        document.getElementsByName("order-time2")[0].setAttribute('value', trainData[dataId][6]);
+        document.getElementsByName("order-left")[0].setAttribute('value', trainData[dataId][Number(ticType) + 1]);
+        document.getElementsByName("order-price")[0].setAttribute('value', parseFloat(trainData[dataId][Number(ticType) + 2]).toFixed(2));
+        $(document.getElementsByName("order_template")[0]).submit();
+    }
+
+    $(document).ready(function(){
+        selectAllCatalog();
+        {% if postFrom == "mainpage" %}
+        document.getElementsByName("loc1")[0].setAttribute('value', '{{loc1}}');
+        document.getElementsByName("loc2")[0].setAttribute('value', '{{loc2}}');
+        document.getElementsByName("ddate")[0].setAttribute('value', '{{ddate}}');
+        queryTicket();
+        {% endif %}
+    });
+
+   $(document.getElementById("mytimepicker")).datetimepicker({
+        format: "YYYY-MM-DD",
+        locale: 'zh-CN',
+        widgetPositioning:{
+            horizontal: 'right'
+        },
+        minDate:'{{min_date}}',
+        maxDate:'{{max_date}}'
+   });
+
+</script>
+{% endblock %}
+

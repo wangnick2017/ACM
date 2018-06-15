@@ -1,0 +1,86 @@
+{% extends "layout.html" %}
+
+{% block css_files %}
+<link href="{{ url_for('static', filename='signin.css') }}" rel="stylesheet">
+{% endblock %}
+
+{% block navbar_left %}
+<ul class="nav navbar-nav">
+  <li><a href="{{ url_for('home') }}">首页</a></li>
+  <li><a href="{{url_for('queryRes')}}">余票查询</a></li>
+  <li><a href="https://github.com/KSXGroup/stupidTrainTicketingWebsite">源码</a></li>
+  {% if user_name %}
+  <li class="dropdown">
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">我的车票<span class="caret"></span></a>
+    <ul class="dropdown-menu">
+      <li><a href="{{url_for('queryRes')}}">车票查询预订</a></li>
+      <li><a href="{{url_for('userZone')}}?status=openQueryOrder">订单操作</a></li>
+      <li role="separator" class="divider"></li>
+      <li class="dropdown-header"></li>
+      <li><a href="{{url_for('userZone')}}">个人空间</a></li>
+    </ul>
+  </li>
+  {% endif %}
+</ul>
+{% endblock %}
+
+{% block navbar_right %}
+<ul class="nav navbar-nav navbar-right">
+  <li><a href="{{ url_for('signin') }}">登录</a></li>
+  <li><a href="{{ url_for('signup') }}">注册</a></li>
+</ul>
+{% endblock %}
+
+{% block body %}
+<div class="container-fluid container-fluid-signin">
+    <div class="row" style="margin-left:5%;">
+        <label style="color:white;margin-top:5%;margin-left:2%;font-size:300%">用户登录</label>
+    </div>
+    <div class="form-container">
+        <form class="form-signin" name = "formForSignIn">
+          <input type="userid" id="inputID" name="userid" class="form-control" placeholder="用户ID" pattern="[0-9]+" title="只能输入数字" required autofocus>
+          <input type="password" id="inputPassword" name="password" class="form-control" placeholder="密码" title="非法的字符" required>
+          <label style="margin-top:1%;margin-bottom:1%;font-size:120%;background-color:rgba(0,0,0,0.4);color:white" name="warningLabel"></label>
+          <button class="btn btn-lg btn-primary btn-block" style="margin-top:5%" type="button" onclick="userLogin()">登录</button>
+          <p class="signin-hint" style="font-size: 20px; color:white">如果还没有帐号，您可以在这里注册<a href="{{ url_for('signup') }}">注册</a></p>
+        </form>
+    </div>
+ </div>
+
+<script type="text/javascript">
+function userLogin(){
+    form = new FormData(document.getElementsByName("formForSignIn")[0]);
+    if(document.getElementsByName("userid")[0].value == '') {document.getElementsByName("warningLabel")[0].innerHTML = "请输入用户ID";return;}
+    if(document.getElementsByName("password")[0].value == '') {document.getElementsByName("warningLabel")[0].innerHTML = "请输入密码";return;}
+    var reg1 = /^[a-zA-Z0-9!@#^]{3,12}$/;
+    var reg2 = /^[0-9]*$/;
+    if(!reg2.test(document.getElementsByName("userid")[0].value)){
+            document.getElementsByName("warningLabel")[0].innerHTML = "请输入正确用户ID";return;
+    }
+    if(!reg1.test(document.getElementsByName("password")[0].value)){
+            document.getElementsByName("warningLabel")[0].innerHTML = "非法的密码";return;
+    }
+    $.ajax({
+            url:'{{url_for("signin")}}',
+            type:'POST',
+            data:form,
+            dataType: 'json',
+            processData: false,
+            contentType: false,
+            cache : false,
+            success:function(data){
+                if(parseInt(data) == 1){
+                    window.location = "{{url_for('userZone')}}";
+                    return;
+                }
+                else{
+                    document.getElementsByName("warningLabel")[0].innerHTML = "用户名或密码错误";
+                    return;
+                }
+            },
+            error:function(e){
+            }
+    });
+}
+</script>
+{% endblock %}
