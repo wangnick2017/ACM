@@ -1,0 +1,75 @@
+ImageRuntimeVersion: v4.0.30319
+Assembly ClrBackend, Version=0.0.*, Culture=固定语言(固定国家/地区): 
+	hash=SHA1, flags=PublicKey
+Assembly mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089: 
+	hash=None, flags=None
+Assembly System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089: 
+	hash=None, flags=None
+Class Clr.User: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+    Void .ctor(Int32, SByte*): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Fields:
+    System.String name : Public
+    System.String password : Public
+    System.String email : Public
+    System.String phone : Public
+    Int32 ID : Public
+    Int32 privilege : Public
+Class Clr.Ticket: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Fields:
+    System.String trainID : Public
+    System.String locFrom : Public
+    System.String locTo : Public
+    System.String dateFrom : Public
+    System.String dateTo : Public
+    System.String timeFrom : Public
+    System.String timeTo : Public
+    System.String[] ticketKind : Public
+    Int32[] num : Public
+    Double[] price : Public
+    Int32 cnt : Public
+  Methods:
+    ToString(): PrivateScope, Public, Virtual, HideBySig
+Class Clr.Station: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Fields:
+    System.String name : Public
+    System.String timeArrive : Public
+    System.String timeStart : Public
+    System.String timeStopover : Public
+    Double[] price : Public
+    Int32 numPrice : Public
+Class Clr.Train: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+    Void .ctor(SByte*): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Fields:
+    System.String trainID : Public
+    System.String name : Public
+    System.String catalog : Public
+    System.String[] namePrice : Public
+    Int32 numStation : Public
+    Int32 numPrice : Public
+    Boolean IsSaled : Public
+    System.Collections.Generic.List`1[Clr.Station] stations : Public
+  Methods:
+    ToStr(): PrivateScope, Public, HideBySig
+Class Clr.ClrBackend: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Fields:
+    System.String ErrorMessage : Public
+  Methods:
+    Register(User): PrivateScope, Public, HideBySig
+    Login(Int32, String): PrivateScope, Public, HideBySig
+    QueryProfile(Int32): PrivateScope, Public, HideBySig
+    ModifyProfile(User): PrivateScope, Public, HideBySig
+    ModifyPrivilege(Int32, Int32, Int32): PrivateScope, Public, HideBySig
+    QueryTicket(String, String, String, String, Boolean(HasFieldMarshal)): PrivateScope, Public, HideBySig
+    BuyTicket(Int32, Int32, String, String, String, String, String): PrivateScope, Public, HideBySig
+    QueryOrder(Int32, String, String): PrivateScope, Public, HideBySig
+    RefundTicket(Int32, Int32, String, String, String, String, String): PrivateScope, Public, HideBySig
+    AddTrain(Train): PrivateScope, Public, HideBySig
+    SaleTrain(String): PrivateScope, Public, HideBySig
+    QueryTrain(String): PrivateScope, Public, HideBySig
+    DeleteTrain(String): PrivateScope, Public, HideBySig
+    ModifyTrain(Train): PrivateScope, Public, HideBySig

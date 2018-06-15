@@ -1,0 +1,13 @@
+﻿<Window x:Class="ACM.Dialogs.DgMap"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:m="clr-namespace:Microsoft.Maps.MapControl.WPF;assembly=Microsoft.Maps.MapControl.WPF" 
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ACM"
+        Title="{DynamicResource dgmap.title}" Height="350" Width="500" Style="{StaticResource ACMDialogStyle}" WindowStartupLocation="CenterScreen" Loaded="Window_Loaded" ResizeMode="NoResize">
+
+    <Grid>
+        <m:Map CredentialsProvider="Ai953m8G_o979lvFjHaEHEdxyiIS1X5wA2vot78CCdxEpv7u5kTos2xXYQODRYat" Center="35,110" ZoomLevel="5">
+        </m:Map>
+    </Grid>
+</Window>
